@@ -1,0 +1,22 @@
+{
+  "__type__": "cc.SpriteFrame",
+  "content": {
+    "name": "newAnimation_3_08",
+    "texture": "5780b913-ebe6-42f9-9e60-d9fac8922ae4",
+    "atlas": "9a466e4f-d96d-4ec1-87ec-9563f6886c1e",
+    "rect": [
+      239,
+      308,
+      239,
+      308
+    ],
+    "offset": [
+      0,
+      0
+    ],
+    "originalSize": [
+      239,
+      308
+    ]
+  }
+}
