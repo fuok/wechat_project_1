@@ -5,7 +5,7 @@
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "ggg": {
+    "atlas": {
       "ver": "1.0.3",
       "uuid": "11a92551-9cdd-44c9-9000-68abfa27fa10",
       "rawTextureUuid": "5780b913-ebe6-42f9-9e60-d9fac8922ae4",

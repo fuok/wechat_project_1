@@ -310,7 +310,7 @@
     "relativePath": "Test Game\\font"
   },
   "e65726af-b59a-4206-b62e-9b146735f26d": {
-    "asset": 1529668534640,
+    "asset": 1529933443426,
     "meta": 1529655036904,
     "relativePath": "Test Game"
   },
@@ -325,24 +325,24 @@
     "relativePath": "Test Game\\scripts\\Player.js"
   },
   "5c43a056-f197-4225-8458-31e7d2173dba": {
-    "asset": 1529933457339,
+    "asset": 1529933604024,
     "meta": 1529933457341,
     "relativePath": "Some Test"
   },
   "3719c8c9-fcfd-49f5-843c-8a13c253b905": {
-    "asset": 1529933986639,
-    "meta": 1529933986651,
+    "asset": 1529934450557,
+    "meta": 1529934450579,
     "relativePath": "Some Test\\New Scene.fire"
   },
   "9a466e4f-d96d-4ec1-87ec-9563f6886c1e": {
     "asset": 1529933400608,
-    "meta": 1529933512272,
-    "relativePath": "Some Test\\ggg.plist"
+    "meta": 1529934438042,
+    "relativePath": "Some Test\\atlas.plist"
   },
   "5780b913-ebe6-42f9-9e60-d9fac8922ae4": {
     "asset": 1529933400606,
-    "meta": 1529933512246,
-    "relativePath": "Some Test\\ggg.png"
+    "meta": 1529934446500,
+    "relativePath": "Some Test\\atlas.png"
   },
   "e99fdc9d-a23a-40bf-9072-901b3034a1a9": {
     "asset": 1529934066773,
