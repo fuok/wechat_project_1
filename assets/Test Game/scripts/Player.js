@@ -21,6 +21,8 @@ cc.Class({
         maxMoveSpeed: 0,
         // 加速度
         accel: 0,
+        // 摩擦系数
+        friction: 0,
         // 跳跃音效资源
         jumpAudio: {
             default: null,
@@ -42,7 +44,7 @@ cc.Class({
     onLoad() {
         // 初始化跳跃动作
         this.jumpAction = this.setJumpAction();
-        this.node.runAction(this.jumpAction);
+        //this.node.runAction(this.jumpAction);
 
         // 加速度方向开关
         this.accLeft = false;
@@ -66,6 +68,15 @@ cc.Class({
         } else if (this.accRight) {
             this.xSpeed += this.accel * dt;
         }
+        // 应用摩擦系数
+        if (this.xSpeed > 0) {
+            this.xSpeed -= this.friction * dt
+            this.xSpeed = Math.max(0, this.xSpeed)
+        } else if (this.xSpeed < 0) {
+            this.xSpeed += this.friction * dt
+            this.xSpeed = Math.min(0, this.xSpeed)
+        }
+        
         // 限制主角的速度不能超过最大值
         if (Math.abs(this.xSpeed) > this.maxMoveSpeed) {
             // if speed reach limit, use max speed with current direction
@@ -124,12 +135,14 @@ cc.Class({
         //监听屏幕上两个按钮
         self.btnLeft.node.on(cc.Node.EventType.TOUCH_START, function (event) {
             self.accLeft = true;
+            console.log("left start!");
         });
         self.btnLeft.node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
             // self.accLeft = false;
         });
         self.btnLeft.node.on(cc.Node.EventType.TOUCH_END, function (event) {
             self.accLeft = false;
+            console.log("left end!");
         });
         self.btnRight.node.on(cc.Node.EventType.TOUCH_START, function (event) {
             self.accRight = true;
