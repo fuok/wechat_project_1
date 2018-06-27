@@ -135,14 +135,12 @@ cc.Class({
         //监听屏幕上两个按钮
         self.btnLeft.node.on(cc.Node.EventType.TOUCH_START, function (event) {
             self.accLeft = true;
-            console.log("left start!");
         });
         self.btnLeft.node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
             // self.accLeft = false;
         });
         self.btnLeft.node.on(cc.Node.EventType.TOUCH_END, function (event) {
             self.accLeft = false;
-            console.log("left end!");
         });
         self.btnRight.node.on(cc.Node.EventType.TOUCH_START, function (event) {
             self.accRight = true;

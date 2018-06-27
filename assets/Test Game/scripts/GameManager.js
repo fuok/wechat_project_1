@@ -17,7 +17,7 @@ let GameManager = cc.Class({
 
     properties: {
         // 这个属性引用了星星预制资源
-        starPrefab: {
+        enemyPrefab: {
             default: null,
             type: cc.Prefab
         },
@@ -51,6 +51,7 @@ let GameManager = cc.Class({
 
     onLoad: function () {
         GameManager.instance = this;
+        this.enemyPool = new cc.NodePool();
 
         // 获取地平面的 y 轴坐标
         this.groundY = this.ground.y + this.ground.height / 2;// + 418;
@@ -58,7 +59,7 @@ let GameManager = cc.Class({
         this.timer = 0;
         this.starDuration = 0;
         // 生成一个新的星星
-        this.spawnNewStar();
+        this.createNewEnemy();
         // 初始化计分
         this.score = 0;
 
@@ -68,7 +69,7 @@ let GameManager = cc.Class({
 
     start() {
         this.schedule(function() {
-            this.spawnNewStar();
+            this.createNewEnemy();
         }, 1);
     },
 
@@ -83,23 +84,21 @@ let GameManager = cc.Class({
     },
 
 
-    spawnNewStar () {
-        // 使用给定的模板在场景中生成一个新节点
-        var newStar = cc.instantiate(this.starPrefab);
+    createNewEnemy () {
+        let enemy = null;
+        if (this.enemyPool.size() > 0) {
+            enemy = this.enemyPool.get();
+        } else {
+            enemy = cc.instantiate(this.enemyPrefab);
+        }
         // 将新增的节点添加到 Canvas 节点下面
         // this.node.addChild(newStar);
-        this.node.getChildByName("background").addChild(newStar);
+        this.node.getChildByName("background").addChild(enemy);
+        enemy.getComponent('FallingStar').init();
     },
 
-    getNewStarPosition () {
-        var randX = 0;
-        // 根据地平面位置和主角跳跃高度，随机得到一个星星的 y 坐标
-        var randY = this.groundY + cc.random0To1() * this.player.getComponent('Player').jumpHeight + 50;
-        // 根据屏幕宽度，随机得到一个星星 x 坐标
-        var maxX = this.node.width / 2;
-        randX = cc.randomMinus1To1() * maxX;
-        // 返回星星坐标
-        return cc.p(randX, randY);
+    killEnemy (enemy) {
+        this.enemyPool.put(enemy);
     },
 
     gainScore () {

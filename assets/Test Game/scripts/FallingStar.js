@@ -29,6 +29,10 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        this.init();
+    },
+
+    init () {
         this.node.x = Math.random() * (this.xRangeMax - this.xRangeMin) + this.xRangeMin;
         this.node.y = 1200;
         this.fallingSpeed = Math.random() * (this.speedMax - this.speedMin) + this.speedMin;
@@ -39,11 +43,8 @@ cc.Class({
     },
     
     onCollisionEnter: function(other) {
-        console.log("发现碰撞, node_name=" + other.node.name)
         if (other.node.name == "Ground") {
-            //销毁此节点，将来用对象池代替
-            this.node.destroy();
-            GameManager.instance.spawnNewStar();
+            GameManager.instance.killEnemy(this.node);
         } else if (other.node.name == "Player") {
             GameManager.instance.gameOver();
         }
