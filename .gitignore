@@ -2,3 +2,5 @@ temp
 local
 library
 build
+*.meta
+settings/project.json
