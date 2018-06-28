@@ -1,12 +1,4 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+let GameManager = require('GameManager')
 
 cc.Class({
     extends: cc.Component,
@@ -37,6 +29,10 @@ cc.Class({
             default: null,
             type: cc.Button
         },
+        btnShoot: {
+            default: null,
+            type: cc.Button
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -51,6 +47,8 @@ cc.Class({
         this.accRight = false;
         // 主角当前水平方向速度
         this.xSpeed = 0;
+        // 方向, 0:左, 1:右
+        this.direction = 0;
 
         // 初始化键盘输入监听
         this.setInputControl();
@@ -88,6 +86,21 @@ cc.Class({
 
     },
 
+    shoot () {
+        let enemies = GameManager.instance.getAllEnemies();
+        for (let i = 0; i < enemies.length; i++) {
+            let enemy = enemies[i];
+            // 注意这里目前使用的是bounding box而不是collider，用世界坐标系判断
+            let a1 = this.node.parent.convertToWorldSpace(this.node.position);
+            let newX = this.direction == 0 ? this.node.x - 1000 : this.node.x + 1000;
+            let newY = this.node.y + 1000;
+            let a2 = this.node.parent.convertToWorldSpace(cc.v2(newX, newY));
+            let rect = enemy.getBoundingBoxToWorld();
+            if (cc.Intersection.lineRect(a1, a2, rect)) {
+                GameManager.instance.killEnemy(enemy);
+            }
+        }
+    },
 
     setJumpAction: function () {
         // 跳跃上升
@@ -107,34 +120,11 @@ cc.Class({
 
     setInputControl: function () {
         var self = this;
-        // 添加键盘事件监听
-        // 有按键按下时，判断是否是我们指定的方向控制键，并设置向对应方向加速
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, function (event) {
-            switch (event.keyCode) {
-                case cc.KEY.a:
-                    self.accLeft = true;
-                    break;
-                case cc.KEY.d:
-                    self.accRight = true;
-                    break;
-            }
-        });
-
-        // 松开按键时，停止向该方向的加速
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, function (event) {
-            switch (event.keyCode) {
-                case cc.KEY.a:
-                    self.accLeft = false;
-                    break;
-                case cc.KEY.d:
-                    self.accRight = false;
-                    break;
-            }
-        });
 
         //监听屏幕上两个按钮
         self.btnLeft.node.on(cc.Node.EventType.TOUCH_START, function (event) {
             self.accLeft = true;
+            self.direction = 0;
         });
         self.btnLeft.node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
             // self.accLeft = false;
@@ -144,12 +134,16 @@ cc.Class({
         });
         self.btnRight.node.on(cc.Node.EventType.TOUCH_START, function (event) {
             self.accRight = true;
+            self.direction = 1;
         });
         self.btnRight.node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
             // self.accRight = false;
         });
         self.btnRight.node.on(cc.Node.EventType.TOUCH_END, function (event) {
             self.accRight = false;
+        });
+        self.btnShoot.node.on(cc.Node.EventType.TOUCH_START, function (event) {
+            self.shoot();
         });
     },
 

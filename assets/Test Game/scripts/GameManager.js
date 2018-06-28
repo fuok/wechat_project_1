@@ -52,6 +52,7 @@ let GameManager = cc.Class({
     onLoad: function () {
         GameManager.instance = this;
         this.enemyPool = new cc.NodePool();
+        this.enemies = [];
 
         // 获取地平面的 y 轴坐标
         this.groundY = this.ground.y + this.ground.height / 2;// + 418;
@@ -70,7 +71,7 @@ let GameManager = cc.Class({
     start() {
         this.schedule(function() {
             this.createNewEnemy();
-        }, 1);
+        }, 0.5);
     },
 
     update(dt) {
@@ -83,22 +84,35 @@ let GameManager = cc.Class({
         this.timer += dt;
     },
 
+    getAllEnemies () {
+        return this.enemies;
+    },
 
     createNewEnemy () {
         let enemy = null;
-        if (this.enemyPool.size() > 0) {
+
+        if (this.enemyPool.length > 0) {
             enemy = this.enemyPool.get();
         } else {
             enemy = cc.instantiate(this.enemyPrefab);
         }
         // 将新增的节点添加到 Canvas 节点下面
-        // this.node.addChild(newStar);
-        this.node.getChildByName("background").addChild(enemy);
-        enemy.getComponent('FallingStar').init();
+        this.node.addChild(enemy);
+        this.enemies.push(enemy);
+        enemy.getComponent('Enemy').init();
+    },
+
+    destroyEnemy (enemy) {
+        let index = this.enemies.indexOf(enemy);
+        if (index > -1) {
+            this.enemies.splice(index, 1);
+        }
+        this.enemyPool.put(enemy);
     },
 
     killEnemy (enemy) {
-        this.enemyPool.put(enemy);
+        this.destroyEnemy(enemy);
+        this.gainScore();
     },
 
     gainScore () {

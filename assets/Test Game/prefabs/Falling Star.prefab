@@ -123,8 +123,8 @@
     "fallingSpeed": 0,
     "xRangeMin": -400,
     "xRangeMax": 400,
-    "speedMin": 400,
-    "speedMax": 800
+    "speedMin": 100,
+    "speedMax": 300
   },
   {
     "__type__": "cc.PrefabInfo",

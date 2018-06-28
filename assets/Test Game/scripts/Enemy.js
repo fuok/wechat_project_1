@@ -44,7 +44,7 @@ cc.Class({
     
     onCollisionEnter: function(other) {
         if (other.node.name == "Ground") {
-            GameManager.instance.killEnemy(this.node);
+            GameManager.instance.destroyEnemy(this.node);
         } else if (other.node.name == "Player") {
             GameManager.instance.gameOver();
         }
