@@ -12,9 +12,6 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        fallingSpeed : 0,
-        speedMin : 0,
-        speedMax : 1080,
         enemyType: 0,
         // foo: {
         //     // ATTRIBUTES:
@@ -42,13 +39,19 @@ cc.Class({
     init () {
         this.node.x = BrickManager.instance.getRandomPosX();
         this.node.y = 1200;
-        this.fallingSpeed = Math.random() * (this.speedMax - this.speedMin) + this.speedMin;
+        this.resetSpeed();
     },
 
     update (dt) {
         this.node.y -= this.fallingSpeed * dt;
     },
     
+    resetSpeed() {
+        let minSpeed = GameManager.instance.curLevel.minSpeed;
+        let maxSpeed = GameManager.instance.curLevel.maxSpeed;
+        this.fallingSpeed = Math.random() * (maxSpeed - minSpeed) + minSpeed;
+    },
+
     onCollisionEnter (other) {
         if (other.node.group == 'border') {
             this.onHitBrick();

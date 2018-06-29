@@ -1,5 +1,3 @@
-let GameManager = require('GameManager')
-
 let EnemyManager = cc.Class({
     extends: cc.Component,
 
@@ -45,26 +43,34 @@ let EnemyManager = cc.Class({
 
     onLoad () {
         EnemyManager.instance = this;
-
+        // 避免循环引用，先用这个写法
+        this.GameManager = require('GameManager');
         this.enemyPool = new cc.NodePool();
         this.enemies = [];
-        this.spawnEnemyInterval = 0.5;
-
     },
 
     start () {
-        this.schedule(function() {
-            this.createNewNormalEnemy();
-        }, 0.5);
-        this.schedule(function() {
-            this.createNewSingleRecovery();
-        }, 3);
-        this.schedule(function() {
-            this.createNewFullRecovery();
-        }, 12);
     },
 
     // update (dt) {},
+    resetLevel () {
+        this.unscheduleAllCallbacks();
+
+        let curLevel = this.GameManager.instance.curLevel;
+        this.schedule(function() {
+            this.createNewNormalEnemy();
+        }, curLevel.normalEnemyInterval);
+        this.schedule(function() {
+            this.createNewSingleRecovery();
+        }, curLevel.singleRecoveryInterval);
+        this.schedule(function() {
+            this.createNewFullRecovery();
+        }, curLevel.fullRecoveryInterval);
+
+        for (let i = 0; i < this.enemies.length; i++) {
+            this.enemies[i].getComponent('Enemy').resetSpeed();
+        }
+    },
 
     getAllEnemies () {
         return this.enemies;
@@ -116,6 +122,6 @@ let EnemyManager = cc.Class({
 
     killNormalEnemy (enemyNode) {
         this.destroyNormalEnemy(enemyNode);
-        GameManager.instance.gainScore();
+        this.GameManager.instance.gainScore();
     }
 });

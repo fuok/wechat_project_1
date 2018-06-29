@@ -1,3 +1,32 @@
+let EnemyManager = require('EnemyManager')
+
+let levels = [
+    {
+        scoreLimit: 10,
+        normalEnemyInterval: 2,
+        singleRecoveryInterval: 8,
+        fullRecoveryInterval: 15,
+        minSpeed: 100,
+        maxSpeed: 120,
+    },
+    {
+        scoreLimit: 30,
+        normalEnemyInterval: 1.5,
+        singleRecoveryInterval: 5,
+        fullRecoveryInterval: 10,
+        minSpeed: 120,
+        maxSpeed: 150,
+    },
+    {
+        scoreLimit: 100,
+        normalEnemyInterval: 1,
+        singleRecoveryInterval: 5,
+        fullRecoveryInterval: 10,
+        minSpeed: 150,
+        maxSpeed: 200,
+    }
+];
+
 let GameManager = cc.Class({
     extends: cc.Component,
 
@@ -22,6 +51,11 @@ let GameManager = cc.Class({
             default: null,
             type: cc.Label
         },
+        curLevel: {
+            get() {
+                return levels[this.curLevelIndex];
+            }
+        },
         // 得分音效资源
         scoreAudio: {
             default: null,
@@ -38,13 +72,13 @@ let GameManager = cc.Class({
         let manager = cc.director.getCollisionManager();
         manager.enabled = true;
 
-        // 获取地平面的 y 轴坐标
-        this.groundY = this.ground.y + this.ground.height / 2;// + 418;
         // 初始化计分
         this.score = 0;
     },
 
     start() {
+        this.curLevelIndex = -1;
+        this.nextLevel();
     },
 
     update(dt) {
@@ -56,6 +90,19 @@ let GameManager = cc.Class({
         this.scoreDisplay.string = 'Score: ' + this.score.toString();
         // 播放得分音效
         cc.audioEngine.playEffect(this.scoreAudio, false);
+
+        if (this.score > levels[this.curLevelIndex].scoreLimit) {
+            this.nextLevel();
+        }
+    },
+
+    nextLevel () {
+        if (this.curLevelIndex >= levels.length - 1) {
+            return;
+        }
+        
+        this.curLevelIndex += 1;
+        EnemyManager.instance.resetLevel();
     },
 
     gameOver () {
