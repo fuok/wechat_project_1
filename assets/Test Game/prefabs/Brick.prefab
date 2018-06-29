@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Falling Star",
+    "_name": "Brick",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -47,8 +47,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60,
-      "height": 66
+      "width": 36,
+      "height": 36
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -64,7 +64,7 @@
     "_localZOrder": 0,
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
-    "groupIndex": 3
+    "groupIndex": 5
   },
   {
     "__type__": "cc.Sprite",
@@ -75,7 +75,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "8f8ba54f-70f6-4ca1-86d9-dddbd85e769d"
+      "__uuid__": "00c9149a-602e-4c9d-b670-a809ba5247d4"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -108,22 +108,19 @@
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 34,
-      "height": 34
+      "width": 36,
+      "height": 36
     }
   },
   {
-    "__type__": "5afe83YHTdMJ4hK04ymKrOJ",
+    "__type__": "4c50cGK0ahLS4w6B0u6kEru",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "fallingSpeed": 0,
-    "speedMin": 100,
-    "speedMax": 300,
-    "enemyType": 0
+    "walkable": true
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -131,9 +128,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "61da1e2f-afe0-441b-b973-c3eb23624865"
+      "__uuid__": "5ac88ac4-8c59-4d81-ae01-8d36ad012908"
     },
-    "fileId": "85Q9yEPdtNR7qxr7WMjCmP",
+    "fileId": "7fHkAl1WhGdJECR1JbOAzj",
     "sync": false
   }
 ]

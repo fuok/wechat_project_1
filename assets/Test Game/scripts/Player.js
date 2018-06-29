@@ -1,25 +1,18 @@
 let GameManager = require('GameManager')
+let EnemyManager = require('EnemyManager')
+let BrickManager = require('BrickManager')
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
 
-        // 主角跳跃高度
-        jumpHeight: 0,
-        // 主角跳跃持续时间
-        jumpDuration: 0,
         // 最大移动速度
         maxMoveSpeed: 0,
         // 加速度
         accel: 0,
         // 摩擦系数
         friction: 0,
-        // 跳跃音效资源
-        jumpAudio: {
-            default: null,
-            url: cc.AudioClip
-        },
         //控制左右移动按钮
         btnLeft: {
             default: null,
@@ -38,10 +31,6 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        // 初始化跳跃动作
-        this.jumpAction = this.setJumpAction();
-        //this.node.runAction(this.jumpAction);
-
         // 加速度方向开关
         this.accLeft = false;
         this.accRight = false;
@@ -55,11 +44,10 @@ cc.Class({
     },
 
     start() {
-
+        this.xSpeed = 0;
     },
 
     update(dt) {
-
         // 根据当前加速度方向每帧更新速度
         if (this.accLeft) {
             this.xSpeed -= this.accel * dt;
@@ -82,40 +70,29 @@ cc.Class({
         }
 
         // 根据当前速度更新主角的位置
-        this.node.x += this.xSpeed * dt;
-
+        let newPosX = this.node.x + this.xSpeed * dt;
+        let halfBrickSize = BrickManager.instance.brickSize / 2;
+        // 判断地板砖块是否允许移动
+        if (BrickManager.instance.isPosXWalkable(newPosX + halfBrickSize) &&
+            BrickManager.instance.isPosXWalkable(newPosX - halfBrickSize)) {
+            this.node.x += this.xSpeed * dt;
+        }
     },
 
     shoot () {
-        let enemies = GameManager.instance.getAllEnemies();
+        let enemies = EnemyManager.instance.getAllEnemies();
         for (let i = 0; i < enemies.length; i++) {
-            let enemy = enemies[i];
+            let enemyNode = enemies[i];
             // 注意这里目前使用的是bounding box而不是collider，用世界坐标系判断
             let a1 = this.node.parent.convertToWorldSpace(this.node.position);
             let newX = this.direction == 0 ? this.node.x - 1000 : this.node.x + 1000;
             let newY = this.node.y + 1000;
             let a2 = this.node.parent.convertToWorldSpace(cc.v2(newX, newY));
-            let rect = enemy.getBoundingBoxToWorld();
+            let rect = enemyNode.getBoundingBoxToWorld();
             if (cc.Intersection.lineRect(a1, a2, rect)) {
-                GameManager.instance.killEnemy(enemy);
+                enemyNode.getComponent('Enemy').onHitByBullet();
             }
         }
-    },
-
-    setJumpAction: function () {
-        // 跳跃上升
-        var jumpUp = cc.moveBy(this.jumpDuration, cc.p(0, this.jumpHeight)).easing(cc.easeCubicActionOut());
-        // 下落
-        var jumpDown = cc.moveBy(this.jumpDuration, cc.p(0, -this.jumpHeight)).easing(cc.easeCubicActionIn());
-        // 添加一个回调函数，用于在动作结束时调用我们定义的其他方法
-        var callback = cc.callFunc(this.playJumpSound, this);
-        // 不断重复，而且每次完成落地动作后调用回调来播放声音
-        return cc.repeatForever(cc.sequence(jumpUp, jumpDown, callback));
-    },
-
-    playJumpSound: function () {
-        // 调用声音引擎播放声音
-        cc.audioEngine.playEffect(this.jumpAudio, false);
     },
 
     setInputControl: function () {

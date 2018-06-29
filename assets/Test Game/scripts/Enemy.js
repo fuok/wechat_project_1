@@ -1,14 +1,20 @@
 let GameManager = require('GameManager')
+let EnemyManager = require('EnemyManager')
+let BrickManager = require('BrickManager')
+
+const EnemyType = {
+    Normal: 0,
+    Recover: 1,
+};
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
         fallingSpeed : 0,
-        xRangeMin : 0,
-        xRangeMax : 1080,
         speedMin : 0,
         speedMax : 1080,
+        enemyType: 0,
         // foo: {
         //     // ATTRIBUTES:
         //     default: null,        // The default value will be used only when the component attaching
@@ -33,7 +39,7 @@ cc.Class({
     },
 
     init () {
-        this.node.x = Math.random() * (this.xRangeMax - this.xRangeMin) + this.xRangeMin;
+        this.node.x = BrickManager.instance.getRandomPosX();
         this.node.y = 1200;
         this.fallingSpeed = Math.random() * (this.speedMax - this.speedMin) + this.speedMin;
     },
@@ -42,11 +48,31 @@ cc.Class({
         this.node.y -= this.fallingSpeed * dt;
     },
     
-    onCollisionEnter: function(other) {
-        if (other.node.name == "Ground") {
-            GameManager.instance.destroyEnemy(this.node);
-        } else if (other.node.name == "Player") {
+    onCollisionEnter (other) {
+        if (other.node.group == 'border') {
+            this.onHitBrick();
+        }
+        else if (other.node.group == 'player') {
             GameManager.instance.gameOver();
+        } else if (other.node.group == 'brick') {
+            this.onHitBrick();
+        }
+    },
+
+    onHitBrick() {
+        if (this.enemyType == EnemyType.Normal) {
+            EnemyManager.instance.destroyNormalEnemy(this.node);
+        } else if (this.enemyType == EnemyType.Recover) {
+            EnemyManager.instance.destroyFullRecovery(this.node);
+        }
+    },
+
+    onHitByBullet () {
+        if (this.enemyType == EnemyType.Recover) {
+            BrickManager.instance.repairAllBrokenBricks();
+            EnemyManager.instance.destroyFullRecovery(this.node);
+        } else if (this.enemyType == EnemyType.Normal) {
+            EnemyManager.instance.killNormalEnemy(this.node);
         }
     }
 });

@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Falling Star",
+    "_name": "Full Recovery",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -47,8 +47,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60,
-      "height": 66
+      "width": 50,
+      "height": 50
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -75,10 +75,10 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "8f8ba54f-70f6-4ca1-86d9-dddbd85e769d"
+      "__uuid__": "4b342e2e-e7e1-441d-b6fb-699ef734f7fc"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -123,7 +123,7 @@
     "fallingSpeed": 0,
     "speedMin": 100,
     "speedMax": 300,
-    "enemyType": 0
+    "enemyType": 1
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -131,9 +131,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "61da1e2f-afe0-441b-b973-c3eb23624865"
+      "__uuid__": "cda4a780-6c94-4f04-9d63-1903e635029f"
     },
-    "fileId": "85Q9yEPdtNR7qxr7WMjCmP",
+    "fileId": "88dMcsQoVNKry7BrAhYUOv",
     "sync": false
   }
 ]
