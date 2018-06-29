@@ -4,7 +4,8 @@ let BrickManager = require('BrickManager')
 
 const EnemyType = {
     Normal: 0,
-    Recover: 1,
+    SingleRecovery: 1,
+    FullRecovery: 2,
 };
 
 cc.Class({
@@ -62,15 +63,19 @@ cc.Class({
     onHitBrick() {
         if (this.enemyType == EnemyType.Normal) {
             EnemyManager.instance.destroyNormalEnemy(this.node);
-        } else if (this.enemyType == EnemyType.Recover) {
-            EnemyManager.instance.destroyFullRecovery(this.node);
+        } else if (this.enemyType == EnemyType.SingleRecovery 
+                   || this.enemyType == EnemyType.FullRecovery) {
+            EnemyManager.instance.destroyRecovery(this.node);
         }
     },
 
     onHitByBullet () {
-        if (this.enemyType == EnemyType.Recover) {
+        if (this.enemyType == EnemyType.SingleRecovery) {
+            BrickManager.instance.repairSingleRandomBrokenBrick();
+            EnemyManager.instance.destroyRecovery(this.node);
+        } else if (this.enemyType == EnemyType.FullRecovery) {
             BrickManager.instance.repairAllBrokenBricks();
-            EnemyManager.instance.destroyFullRecovery(this.node);
+            EnemyManager.instance.destroyRecovery(this.node);
         } else if (this.enemyType == EnemyType.Normal) {
             EnemyManager.instance.killNormalEnemy(this.node);
         }

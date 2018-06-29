@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Full Recovery",
+    "_name": "Single Recovery",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -75,7 +75,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "d60c5af3-3acd-4dd4-878e-9fcca433e7e1"
+      "__uuid__": "4b342e2e-e7e1-441d-b6fb-699ef734f7fc"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -123,7 +123,7 @@
     "fallingSpeed": 0,
     "speedMin": 100,
     "speedMax": 300,
-    "enemyType": 2
+    "enemyType": 1
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -131,9 +131,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "cda4a780-6c94-4f04-9d63-1903e635029f"
+      "__id__": 0
     },
-    "fileId": "88dMcsQoVNKry7BrAhYUOv",
+    "fileId": "d5SFOyqE9B95RHZdzyLZzz",
     "sync": false
   }
 ]

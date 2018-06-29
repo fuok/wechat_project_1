@@ -78,6 +78,20 @@ let BrickManager = cc.Class({
         }
     },
 
+    repairSingleRandomBrokenBrick () {
+        let brokenBricks = [];
+        for (let i = 0; i < this.bricks.length; i++) {
+            if (this.bricks[i].getComponent('Brick').isBroken) {
+                brokenBricks.push(this.bricks[i]);
+            }
+        }
+
+        if (brokenBricks.length > 0) {
+            let randomBrickIndex = Math.floor(Math.random() * brokenBricks.length);
+            brokenBricks[randomBrickIndex].getComponent('Brick').isBroken = false;
+        }
+    },
+
     checkAllBricksBroken () {
         for (let i = 0; i < this.bricks.length; ++i) {
             if (!this.bricks[i].getComponent('Brick').isBroken) {

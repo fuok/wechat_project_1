@@ -16,6 +16,10 @@ let EnemyManager = cc.Class({
             default: null,
             type: cc.Prefab
         },
+        singleRecoveryPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
         fullRecoveryPrefab: {
             default: null,
             type: cc.Prefab
@@ -53,8 +57,11 @@ let EnemyManager = cc.Class({
             this.createNewNormalEnemy();
         }, 0.5);
         this.schedule(function() {
-            this.createNewFullRecovery();
+            this.createNewSingleRecovery();
         }, 3);
+        this.schedule(function() {
+            this.createNewFullRecovery();
+        }, 12);
     },
 
     // update (dt) {},
@@ -87,6 +94,11 @@ let EnemyManager = cc.Class({
         this.addEnemy(normalEnemyNode);
     },
 
+    createNewSingleRecovery () {
+        let singleRecoveryNode = cc.instantiate(this.singleRecoveryPrefab);
+        this.addEnemy(singleRecoveryNode);
+    },
+
     createNewFullRecovery () {
         let fullRecoveryNode = cc.instantiate(this.fullRecoveryPrefab);
         this.addEnemy(fullRecoveryNode);
@@ -97,9 +109,9 @@ let EnemyManager = cc.Class({
         this.enemyPool.put(enemyNode);
     },
 
-    destroyFullRecovery (fullRecoveryNode) {
-        this.removeEnemy(fullRecoveryNode);
-        fullRecoveryNode.destroy();
+    destroyRecovery (recoveryNode) {
+        this.removeEnemy(recoveryNode);
+        recoveryNode.destroy();
     },
 
     killNormalEnemy (enemyNode) {
