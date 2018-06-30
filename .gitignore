@@ -1,6 +1,5 @@
-temp
-local
-library
-build
-*.meta
-settings/project.json
+.DS_Store
+/temp
+/local
+/library
+/build
