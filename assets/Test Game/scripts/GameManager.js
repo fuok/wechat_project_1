@@ -84,8 +84,8 @@ let GameManager = cc.Class({
     update(dt) {
     },
 
-    gainScore () {
-        this.score += 1;
+    gainScore (score) {
+        this.score += score;
         // 更新 scoreDisplay Label 的文字
         this.scoreDisplay.string = 'Score: ' + this.score.toString();
         // 播放得分音效

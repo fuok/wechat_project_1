@@ -22,6 +22,10 @@ let EnemyManager = cc.Class({
             default: null,
             type: cc.Prefab
         },
+        getScoreLabelPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -106,7 +110,18 @@ let EnemyManager = cc.Class({
     },
 
     killNormalEnemy (enemyNode) {
+        //显示击中得分
+        var score=10;
+        var getScoreLabel=cc.instantiate(this.getScoreLabelPrefab);
+        this.rootNode.addChild(getScoreLabel);
+        getScoreLabel.setPosition(enemyNode);
+        //延迟销毁
+        setTimeout(function () {
+            getScoreLabel.destroy();
+          }.bind(this), 500);
+          
+        //回收对象
         this.destroyNormalEnemy(enemyNode);
-        this.GameManager.instance.gainScore();
+        this.GameManager.instance.gainScore(score);//击中不同目标得分不同
     }
 });
