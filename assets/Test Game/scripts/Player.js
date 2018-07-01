@@ -64,11 +64,7 @@ cc.Class({
             }
         },
         //控制左右移动按钮
-        btnLeft: {
-            default: null,
-            type: cc.Button
-        },
-        btnRight: {
+        btnDirection: {
             default: null,
             type: cc.Button
         },
@@ -91,6 +87,9 @@ cc.Class({
         // 方向, 0:左, 1:右
         this.direction = PlayerDirection.Right;
 
+        // 获得方向键按钮x
+        this.btnDirectionCenterX = this.btnDirection.node.getBoundingBoxToWorld().center.x;
+
         // 初始化键盘输入监听
         this.setInputControl();
     },
@@ -99,7 +98,7 @@ cc.Class({
         this.xSpeed = 0;
     },
 
-    update(dt) {
+    updatePlayerPos(dt) {
         // 根据当前加速度方向每帧更新速度
         if (this.accLeft) {
             this.xSpeed -= this.accel * dt;
@@ -134,7 +133,17 @@ cc.Class({
         }
     },
 
+    update(dt) {
+        if (this.state != PlayerState.Shooting) {
+            this.updatePlayerPos(dt);
+        }
+    },
+
     shoot () {
+        // 先把状态设置成shooting
+        this.xSpeed = 0;
+        this.state = PlayerState.Shooting;
+
         let enemies = EnemyManager.instance.getAllEnemies();
         for (let i = 0; i < enemies.length; i++) {
             let enemyNode = enemies[i];
@@ -151,7 +160,11 @@ cc.Class({
     },
 
     shootingAnimComplete () {
-        this.state = PlayerState.Idle;
+        if (this.accLeft == false && this.accRight == false) {
+            this.state = PlayerState.Idle;
+        } else {
+            this.state = PlayerState.Running;
+        }
     },
 
     dieAnimComplete () {
@@ -164,32 +177,53 @@ cc.Class({
         }
     },
 
+    moveLeft () {
+        if (!this.accLeft && this.state != PlayerState.Shooting) {
+            this.accLeft = true;
+            this.accRight = false;
+            this.state = PlayerState.Running;
+            this.direction = PlayerDirection.Left;
+        }
+    },
+
+    moveRight () {
+        if (!this.accRight && this.state != PlayerState.Shooting) {
+            this.accLeft = false;
+            this.accRight = true;
+            this.state = PlayerState.Running;
+            this.direction = PlayerDirection.Right;
+        }
+    },
+
+    stopMove () {
+        this.accLeft = false;
+        this.accRight = false;
+    },
+
+    checkDirectionButtonTouchEvent (locationWS) {
+        if (locationWS.x <= this.btnDirectionCenterX) {
+            this.moveLeft();
+        } else {
+            this.moveRight();
+        }
+    },
     setInputControl: function () {
         var self = this;
 
         //监听屏幕上两个按钮
-        self.btnLeft.node.on(cc.Node.EventType.TOUCH_START, function (event) {
-            if (!self.accRight) {
-                self.accLeft = true;
-                self.state = PlayerState.Running;
-                self.direction = PlayerDirection.Left;
-            }
+        self.btnDirection.node.on(cc.Node.EventType.TOUCH_START, function (event) {
+            self.checkDirectionButtonTouchEvent(event.getLocation());
         });
-        self.btnLeft.node.on(cc.Node.EventType.TOUCH_END, function (event) {
-            self.accLeft = false;
+        self.btnDirection.node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
+            self.checkDirectionButtonTouchEvent(event.getLocation());
         });
-        self.btnRight.node.on(cc.Node.EventType.TOUCH_START, function (event) {
-            if (!self.accLeft) {
-                self.accRight = true;
-                self.state = PlayerState.Running;
-                self.direction = PlayerDirection.Right;
-            }
+        self.btnDirection.node.on(cc.Node.EventType.TOUCH_END, function (event) {
+            self.stopMove();
         });
-        self.btnRight.node.on(cc.Node.EventType.TOUCH_END, function (event) {
-            self.accRight = false;
+        self.btnDirection.node.on(cc.Node.EventType.TOUCH_CANCEL, function (event) {
+            self.stopMove();
         });
         self.btnShoot.node.on(cc.Node.EventType.TOUCH_START, function (event) {
-            self.state = PlayerState.Shooting;
             self.shoot();
         });
     },
