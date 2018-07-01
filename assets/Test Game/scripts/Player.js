@@ -32,11 +32,9 @@ cc.Class({
                 if (this.playerDirection != value) {
                     this.playerDirection = value;
                     if (this.playerDirection == PlayerDirection.Left) {
-                        this.node.scaleX = -1;
-                        console.log('direction set to ' + this.playerDirection);
+                        this.node.scaleX = -Math.abs(this.node.scaleX);
                     } else {
-                        this.node.scaleX = 1;
-                        console.log('direction set to ' + this.playerDirection);
+                        this.node.scaleX = Math.abs(this.node.scaleX);
                     }
                 }
             }
@@ -48,7 +46,6 @@ cc.Class({
             set (value) {
                 if (this.playerState != value) {
                     this.playerState = value;
-                    console.log('state set to ' + value);
                     switch (this.playerState) {
                         case PlayerState.Idle:
                             this.getComponent(cc.Animation).play('idle');
@@ -58,6 +55,9 @@ cc.Class({
                             break;
                         case PlayerState.Shooting:
                             this.getComponent(cc.Animation).play('shoot');
+                            break;
+                        case PlayerState.Dead:
+                            this.getComponent(cc.Animation).play('die');
                             break;
                     };
                 }
@@ -151,8 +151,17 @@ cc.Class({
     },
 
     shootingAnimComplete () {
-        console.log('shootingAnimComplete called!');
         this.state = PlayerState.Idle;
+    },
+
+    dieAnimComplete () {
+        GameManager.instance.gameOver();
+    },
+
+    onCollisionEnter (other) {
+        if (other.node.group == 'enemy') {
+            this.state = PlayerState.Dead;
+        }
     },
 
     setInputControl: function () {

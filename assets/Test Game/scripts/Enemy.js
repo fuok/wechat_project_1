@@ -12,22 +12,7 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        enemyType: 0,
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        enemyType: 0
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -57,7 +42,8 @@ cc.Class({
             this.onHitBrick();
         }
         else if (other.node.group == 'player') {
-            GameManager.instance.gameOver();
+            // 这里有待商榷，是让enemy简单消失还是子弹效果，之后再说
+            this.onHitByBullet();
         } else if (other.node.group == 'brick') {
             this.onHitBrick();
         }
