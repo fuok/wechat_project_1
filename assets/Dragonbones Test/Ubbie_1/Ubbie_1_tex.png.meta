@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "9e7f2716-85f2-4107-911f-5c8b5b579d37",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "Ubbie_1_tex": {
+      "ver": "1.0.3",
+      "uuid": "c9ac4af0-5f8e-4368-b3d8-4636de4d48d2",
+      "rawTextureUuid": "9e7f2716-85f2-4107-911f-5c8b5b579d37",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -7.5,
+      "offsetY": 169,
+      "trimX": 1,
+      "trimY": 1,
+      "width": 1007,
+      "height": 684,
+      "rawWidth": 1024,
+      "rawHeight": 1024,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
