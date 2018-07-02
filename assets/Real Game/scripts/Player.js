@@ -44,7 +44,10 @@ cc.Class({
                 return this.playerState;
             },
             set (value) {
-                if (this.playerState != value) {
+                if (value == PlayerState.Shooting) {
+                    // 射击动画会强制取消前边的动画
+                    this.playerArmatureDisplay.playAnimation('atc', 1);
+                } else if (this.playerState != value) {
                     this.playerState = value;
                     switch (this.playerState) {
                         case PlayerState.Idle:
@@ -52,9 +55,6 @@ cc.Class({
                             break;
                         case PlayerState.Running:
                             this.playerArmatureDisplay.playAnimation('walk', 0);
-                            break;
-                        case PlayerState.Shooting:
-                            this.playerArmatureDisplay.playAnimation('atc', 1);
                             break;
                         case PlayerState.Dead:
                             this.playerArmatureDisplay.playAnimation('turn face', 1);
@@ -143,11 +143,6 @@ cc.Class({
     },
 
     shoot () {
-        // 如果当前正在射击，则忽略这次按键
-        if (this.state == PlayerState.Shooting) {
-            return;
-        }
-
         // 先把状态设置成shooting
         this.xSpeed = 0;
         this.state = PlayerState.Shooting;
@@ -226,6 +221,7 @@ cc.Class({
             this.moveRight();
         }
     },
+
     setInputControl: function () {
         var self = this;
 
