@@ -1,5 +1,6 @@
-let BrickManager = require('BrickManager')
-let EnemyManager = require('EnemyManager')
+let BrickManager = require('BrickManager');
+let EnemyManager = require('EnemyManager');
+let ParticleManager = require('ParticleManager');
 
 cc.Class({
     extends: cc.Component,
@@ -45,10 +46,16 @@ cc.Class({
 
     // update (dt) {},
 
+    break () {
+        // 粒子效果
+        ParticleManager.instance.createBrickHitFX(this.node.position);
+
+        this.isBroken = true;
+        BrickManager.instance.checkAllBricksBroken();
+    },
     onCollisionEnter: function(other) {
         if (other.node.group == 'enemy') {
-            this.isBroken = true;
-            BrickManager.instance.checkAllBricksBroken();
+            this.break();
         }
     }
 });

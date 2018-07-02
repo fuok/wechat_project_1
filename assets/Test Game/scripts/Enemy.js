@@ -1,6 +1,7 @@
-let GameManager = require('GameManager')
-let EnemyManager = require('EnemyManager')
-let BrickManager = require('BrickManager')
+let GameManager = require('GameManager');
+let EnemyManager = require('EnemyManager');
+let BrickManager = require('BrickManager');
+let ParticleManager = require('ParticleManager');
 
 const EnemyType = {
     Normal: 0,
@@ -43,7 +44,7 @@ cc.Class({
         }
         else if (other.node.group == 'player') {
             // 这里有待商榷，是让enemy简单消失还是子弹效果，之后再说
-            this.onHitByBullet();
+            this.onHitBrick();
         } else if (other.node.group == 'brick') {
             this.onHitBrick();
         }
@@ -59,6 +60,9 @@ cc.Class({
     },
 
     onHitByBullet () {
+        // 被子弹击中的粒子效果
+        ParticleManager.instance.createEnemyHitFX(this.node.position);
+
         if (this.enemyType == EnemyType.SingleRecovery) {
             BrickManager.instance.repairSingleRandomBrokenBrick();
             EnemyManager.instance.destroyRecovery(this.node);
