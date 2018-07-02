@@ -32,9 +32,9 @@ cc.Class({
                 if (this.playerDirection != value) {
                     this.playerDirection = value;
                     if (this.playerDirection == PlayerDirection.Left) {
-                        this.node.scaleX = -Math.abs(this.node.scaleX);
-                    } else {
                         this.node.scaleX = Math.abs(this.node.scaleX);
+                    } else {
+                        this.node.scaleX = -Math.abs(this.node.scaleX);
                     }
                 }
             }
@@ -48,16 +48,16 @@ cc.Class({
                     this.playerState = value;
                     switch (this.playerState) {
                         case PlayerState.Idle:
-                            this.getComponent(cc.Animation).play('idle');
+                            this.playerArmatureDisplay.playAnimation('stand', 0);
                             break;
                         case PlayerState.Running:
-                            this.getComponent(cc.Animation).play('run');
+                            this.playerArmatureDisplay.playAnimation('walk', 0);
                             break;
                         case PlayerState.Shooting:
-                            this.getComponent(cc.Animation).play('shoot');
+                            this.playerArmatureDisplay.playAnimation('atc', 1);
                             break;
                         case PlayerState.Dead:
-                            this.getComponent(cc.Animation).play('die');
+                            this.playerArmatureDisplay.playAnimation('turn face', 1);
                             break;
                     };
                 }
@@ -77,18 +77,21 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        // 获得方向键按钮x
+        this.btnDirectionCenterX = this.btnDirection.node.getBoundingBoxToWorld().center.x;
+        // 获得负责动画渲染的子节点
+        this.playerArmatureDisplay = this.node.getChildByName('PlayerAnim').getComponent(dragonBones.ArmatureDisplay);
+        this.playerArmatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this.playerAnimComplete, this);
+
+        // 初始状态：idle
+        this.state = PlayerState.Idle;
         // 加速度方向开关
         this.accLeft = false;
         this.accRight = false;
         // 主角当前水平方向速度
         this.xSpeed = 0;
-        // 初始状态：idle
-        this.state = PlayerState.Idle;
         // 方向, 0:左, 1:右
-        this.direction = PlayerDirection.Right;
-
-        // 获得方向键按钮x
-        this.btnDirectionCenterX = this.btnDirection.node.getBoundingBoxToWorld().center.x;
+        this.direction = PlayerDirection.Left;
 
         // 初始化键盘输入监听
         this.setInputControl();
@@ -140,6 +143,11 @@ cc.Class({
     },
 
     shoot () {
+        // 如果当前正在射击，则忽略这次按键
+        if (this.state == PlayerState.Shooting) {
+            return;
+        }
+
         // 先把状态设置成shooting
         this.xSpeed = 0;
         this.state = PlayerState.Shooting;
@@ -156,6 +164,17 @@ cc.Class({
             if (cc.Intersection.lineRect(a1, a2, rect)) {
                 enemyNode.getComponent('Enemy').onHitByBullet();
             }
+        }
+    },
+
+    playerAnimComplete() {
+        switch (this.state) {
+            case PlayerState.Shooting:
+                this.shootingAnimComplete();
+                break;
+            case PlayerState.Dead:
+                this.dieAnimComplete();
+                break;
         }
     },
 
