@@ -61,7 +61,9 @@ cc.Class({
 
     onHitByBullet () {
         // 被子弹击中的粒子效果
-        ParticleManager.instance.createEnemyHitFX(this.node.position);
+        ParticleManager.instance.createEnemyHitFX1(this.node.position);
+        ParticleManager.instance.createEnemyHitFX2(this.node.position);
+        ParticleManager.instance.createEnemyHitFX3(this.node.position);
 
         if (this.enemyType == EnemyType.SingleRecovery) {
             BrickManager.instance.repairSingleRandomBrokenBrick();

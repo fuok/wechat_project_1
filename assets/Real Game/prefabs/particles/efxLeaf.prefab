@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "efxSmoke",
+    "_name": "efxLeaf",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -46,8 +46,8 @@
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
+    "_scaleX": 1.5,
+    "_scaleY": 1.5,
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -70,17 +70,17 @@
     "_enabled": true,
     "_custom": true,
     "_texture": {
-      "__uuid__": "238f14f0-7e04-48aa-ab85-6689c663001d"
+      "__uuid__": "f373022d-25b9-4a8b-a66b-2de33053b49b"
     },
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "playOnLoad": true,
     "_autoRemoveOnFinish": true,
     "_totalParticles": 50,
-    "_duration": 0.15,
-    "_emissionRate": 50,
-    "_life": 0.4,
-    "_lifeVar": 0.3,
+    "_duration": 1,
+    "_emissionRate": 4,
+    "_life": 4,
+    "_lifeVar": 4,
     "_startColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -100,25 +100,25 @@
       "r": 255,
       "g": 255,
       "b": 255,
-      "a": 0
+      "a": 255
     },
     "_endColorVar": {
       "__type__": "cc.Color",
       "r": 0,
       "g": 0,
       "b": 0,
-      "a": 0
+      "a": 255
     },
     "_angle": 0,
-    "_angleVar": 360,
-    "_startSize": 15,
-    "_startSizeVar": 15,
-    "_endSize": 30,
-    "_endSizeVar": 40,
+    "_angleVar": 0,
+    "_startSize": 20,
+    "_startSizeVar": 20,
+    "_endSize": 20,
+    "_endSizeVar": 20,
     "_startSpin": 0,
-    "_startSpinVar": 0,
+    "_startSpinVar": 360,
     "_endSpin": 0,
-    "_endSpinVar": 0,
+    "_endSpinVar": 360,
     "_sourcePos": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -134,15 +134,15 @@
     "_gravity": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": -50
     },
-    "_speed": 30,
-    "_speedVar": 40,
-    "_tangentialAccel": 80,
-    "_tangentialAccelVar": 0,
+    "_speed": 10,
+    "_speedVar": 20,
+    "_tangentialAccel": 20,
+    "_tangentialAccelVar": -20,
     "_radialAccel": 0,
     "_radialAccelVar": 0,
-    "_rotationIsDir": false,
+    "_rotationIsDir": true,
     "_startRadius": 0,
     "_startRadiusVar": 0,
     "_endRadius": 0,
@@ -157,9 +157,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "60e7af7d-7cb1-48c7-b851-e4adaccf961a"
+      "__uuid__": "315ed8ef-fbcc-4cf9-9757-56aea7bedb66"
     },
-    "fileId": "065k2TmJ5DgqtqK/T67Fld",
+    "fileId": "cbMnUqRu5IJLHOzQ1RkoMn",
     "sync": false
   }
 ]

@@ -11,11 +11,23 @@ let ParticleManager = cc.Class({
             default: null,
             type: cc.Node
         },
-        enemyHitFXPrefab: {
+        enemyHitFX1Prefab: {
+            default: null,
+            type: cc.Prefab
+        },
+        enemyHitFX2Prefab: {
+            default: null,
+            type: cc.Prefab
+        },
+        enemyHitFX3Prefab: {
             default: null,
             type: cc.Prefab
         },
         brickHitFXPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
+        brickRepairFXPrefab: {
             default: null,
             type: cc.Prefab
         },
@@ -26,47 +38,52 @@ let ParticleManager = cc.Class({
     onLoad () {
         ParticleManager.instance = this;
 
-        this.enemyHitFXPool = new cc.NodePool();
+        this.enemyHitFX1Pool = new cc.NodePool();
+        this.enemyHitFX2Pool = new cc.NodePool();
+        this.enemyHitFX3Pool = new cc.NodePool();
         this.brickHitFXPool = new cc.NodePool();
+        this.brickRepairFXPool = new cc.NodePool();
     },
 
     start () {
 
     },
 
-    destroyEnemyHitFX(fxNode) {
-        this.enemyHitFXPool.put(fxNode);
-    },
-
-    createEnemyHitFX (pos) {
+    createFX (pos, nodePool, FXPrefab) {
         let fxNode = null;
 
-        if (this.enemyHitFXPool.length > 0) {
-            fxNode = this.enemyHitFXPool.get();
+        if (nodePool.length > 0) {
+            fxNode = nodePool.get();
         } else {
-            fxNode = cc.instantiate(this.enemyHitFXPrefab);
+            fxNode = cc.instantiate(FXPrefab);
         }
-        fxNode.getComponent(cc.ParticleSystem).scheduleOnce(this.destroyEnemyHitFX.bind(this, fxNode), 2);
+        fxNode.getComponent(cc.ParticleSystem).scheduleOnce(this.destroyFX.bind(this, fxNode, nodePool), 2);
         this.rootNode.addChild(fxNode);
         // pos参数是相对于rootNode的pos
         fxNode.position = pos;
     },
 
-    destroyBrickHitFX(fxNode) {
-        this.brickHitFXPool.put(fxNode);
+    destroyFX(fxNode, nodePool) {
+        nodePool.put(fxNode);
+    },
+
+    createEnemyHitFX1 (pos) {
+        this.createFX(pos, this.enemyHitFX1Pool, this.enemyHitFX1Prefab);
+    },
+
+    createEnemyHitFX2 (pos) {
+        this.createFX(pos, this.enemyHitFX2Pool, this.enemyHitFX2Prefab);
+    },
+
+    createEnemyHitFX3 (pos) {
+        this.createFX(pos, this.enemyHitFX3Pool, this.enemyHitFX3Prefab);
     },
 
     createBrickHitFX (pos) {
-        let fxNode = null;
+        this.createFX(pos, this.brickHitFXPool, this.brickHitFXPrefab);
+    },
 
-        if (this.brickHitFXPool.length > 0) {
-            fxNode = this.brickHitFXPool.get();
-        } else {
-            fxNode = cc.instantiate(this.brickHitFXPrefab);
-        }
-        fxNode.getComponent(cc.ParticleSystem).scheduleOnce(this.destroyBrickHitFX.bind(this, fxNode), 2);
-        this.rootNode.addChild(fxNode);
-        // pos参数是相对于rootNode的pos
-        fxNode.position = pos;
+    createBrickRepairFX (pos) {
+        this.createFX(pos, this.brickRepairFXPool, this.brickRepairFXPrefab);
     },
 });

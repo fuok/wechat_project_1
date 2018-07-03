@@ -9,12 +9,6 @@ cc.Class({
         isBroken: {
             get () {
                 return this._isBroken;
-            },
-            set (value) {
-                this._isBroken = value;
-                if (this.node.active != !this._isBroken) {
-                    this.node.active = !this._isBroken;
-                }
             }
         },
         // foo: {
@@ -37,7 +31,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.isBroken = false;
+        this._isBroken = false;
     },
 
     start () {
@@ -50,12 +44,21 @@ cc.Class({
         // 粒子效果
         ParticleManager.instance.createBrickHitFX(this.node.position);
 
-        this.isBroken = true;
+        this._isBroken = true;
+        this.node.active = false;
         BrickManager.instance.checkAllBricksBroken();
     },
     onCollisionEnter: function(other) {
         if (other.node.group == 'enemy') {
             this.break();
+        }
+    },
+
+    repair () {
+        if (this.isBroken == true) {
+            this._isBroken = false;
+            this.node.active = true;
+            ParticleManager.instance.createBrickRepairFX(this.node.position);
         }
     }
 });

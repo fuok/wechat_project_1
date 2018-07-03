@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "efxFruit",
+    "_name": "efxSmoke2",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -70,51 +70,51 @@
     "_enabled": true,
     "_custom": true,
     "_texture": {
-      "__uuid__": "238f14f0-7e04-48aa-ab85-6689c663001d"
+      "__uuid__": "1850e850-ee33-442d-9f86-3030d09056a2"
     },
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "playOnLoad": true,
     "_autoRemoveOnFinish": true,
     "_totalParticles": 50,
-    "_duration": 0.15,
-    "_emissionRate": 100,
-    "_life": 1,
-    "_lifeVar": 2,
+    "_duration": 0.2,
+    "_emissionRate": 50,
+    "_life": 0.4,
+    "_lifeVar": 0.3,
     "_startColor": {
       "__type__": "cc.Color",
-      "r": 240,
-      "g": 240,
-      "b": 23,
+      "r": 37,
+      "g": 159,
+      "b": 255,
       "a": 255
     },
     "_startColorVar": {
       "__type__": "cc.Color",
-      "r": 206,
-      "g": 252,
-      "b": 26,
+      "r": 0,
+      "g": 0,
+      "b": 0,
       "a": 255
     },
     "_endColor": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 96,
-      "b": 109,
-      "a": 120
+      "r": 91,
+      "g": 194,
+      "b": 252,
+      "a": 0
     },
     "_endColorVar": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 176,
-      "b": 176,
-      "a": 81
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 0
     },
-    "_angle": -90,
-    "_angleVar": -90,
-    "_startSize": 5,
-    "_startSizeVar": 8,
-    "_endSize": 5,
-    "_endSizeVar": 8,
+    "_angle": 0,
+    "_angleVar": 360,
+    "_startSize": 15,
+    "_startSizeVar": 15,
+    "_endSize": 30,
+    "_endSizeVar": 40,
     "_startSpin": 0,
     "_startSpinVar": 0,
     "_endSpin": 0,
@@ -130,23 +130,23 @@
       "y": 0
     },
     "_positionType": 1,
-    "_emitterMode": 0,
+    "_emitterMode": 1,
     "_gravity": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -2000
+      "y": 0
     },
-    "_speed": 250,
-    "_speedVar": 200,
-    "_tangentialAccel": -90,
-    "_tangentialAccelVar": -90,
-    "_radialAccel": 10,
-    "_radialAccelVar": 10,
+    "_speed": 30,
+    "_speedVar": 40,
+    "_tangentialAccel": 80,
+    "_tangentialAccelVar": 0,
+    "_radialAccel": 0,
+    "_radialAccelVar": 0,
     "_rotationIsDir": false,
-    "_startRadius": 0,
-    "_startRadiusVar": 0,
-    "_endRadius": 0,
-    "_endRadiusVar": 0,
+    "_startRadius": 10,
+    "_startRadiusVar": 10,
+    "_endRadius": 10,
+    "_endRadiusVar": 20,
     "_rotatePerS": 0,
     "_rotatePerSVar": 0,
     "_N$preview": true
@@ -157,9 +157,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "db4a9f51-8a6d-44eb-9d3d-6eed47eec1d9"
+      "__uuid__": "7f6f3a47-0442-4c73-92cc-fd75699dc0f1"
     },
-    "fileId": "c5L5bnkBxHbbABMjc+a0AH",
+    "fileId": "26z1q1TCFC7ouV1kjWd15Y",
     "sync": false
   }
 ]

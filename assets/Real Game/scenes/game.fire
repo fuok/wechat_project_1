@@ -1514,11 +1514,20 @@
     "rootNode": {
       "__id__": 6
     },
-    "enemyHitFXPrefab": {
+    "enemyHitFX1Prefab": {
+      "__uuid__": "873dd278-d510-446a-b15d-3b495d701ca1"
+    },
+    "enemyHitFX2Prefab": {
       "__uuid__": "db4a9f51-8a6d-44eb-9d3d-6eed47eec1d9"
     },
+    "enemyHitFX3Prefab": {
+      "__uuid__": "315ed8ef-fbcc-4cf9-9757-56aea7bedb66"
+    },
     "brickHitFXPrefab": {
-      "__uuid__": "60e7af7d-7cb1-48c7-b851-e4adaccf961a"
+      "__uuid__": "030b1c23-df40-4293-91ed-e1e7adad5db4"
+    },
+    "brickRepairFXPrefab": {
+      "__uuid__": "7f6f3a47-0442-4c73-92cc-fd75699dc0f1"
     }
   },
   {
