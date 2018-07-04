@@ -4,28 +4,28 @@ let EnemyManager = require('EnemyManager')
 let levels = [
     {
         scoreLimit: 10,
-        normalEnemyInterval: 2,
+        normalEnemyInterval: 1,
         singleRecoveryInterval: 8,
         fullRecoveryInterval: 15,
         // DEBUG
-        minSpeed: 500,
-        maxSpeed: 700,
-    },
-    {
-        scoreLimit: 30,
-        normalEnemyInterval: 1.5,
-        singleRecoveryInterval: 5,
-        fullRecoveryInterval: 10,
-        minSpeed: 120,
+        minSpeed: 100,
         maxSpeed: 150,
     },
     {
-        scoreLimit: 100,
-        normalEnemyInterval: 1,
+        scoreLimit: 30,
+        normalEnemyInterval: 0.5,
         singleRecoveryInterval: 5,
         fullRecoveryInterval: 10,
         minSpeed: 150,
         maxSpeed: 200,
+    },
+    {
+        scoreLimit: 100,
+        normalEnemyInterval: 0.2,
+        singleRecoveryInterval: 5,
+        fullRecoveryInterval: 10,
+        minSpeed: 200,
+        maxSpeed: 400,
     }
 ];
 

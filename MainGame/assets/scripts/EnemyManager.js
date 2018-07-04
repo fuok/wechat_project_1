@@ -1,3 +1,5 @@
+let ScoreManager = require('ScoreManager')
+
 let EnemyManager = cc.Class({
     extends: cc.Component,
 
@@ -122,6 +124,7 @@ let EnemyManager = cc.Class({
           
         //回收对象
         this.destroyNormalEnemy(enemyNode);
-        this.GameManager.instance.gainScore(score);//击中不同目标得分不同
+        // TODO: 击中目标不同得分不同
+        ScoreManager.instance.gainScore(score);
     }
 });

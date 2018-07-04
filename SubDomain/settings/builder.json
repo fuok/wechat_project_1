@@ -2,16 +2,14 @@
   "appKey": "",
   "appSecret": "",
   "encryptJs": true,
-  "excludeScenes": [
-    "3719c8c9-fcfd-49f5-843c-8a13c253b905"
-  ],
+  "excludeScenes": [],
   "fb-instant-games": {},
   "includeAnySDK": false,
   "includeSDKBox": false,
   "inlineSpriteFrames": true,
-  "inlineSpriteFrames_native": true,
+  "inlineSpriteFrames_native": false,
   "jailbreakPlatform": false,
-  "md5Cache": false,
+  "md5Cache": true,
   "mergeStartScene": false,
   "oauthLoginServer": "",
   "optimizeHotUpdate": false,
@@ -21,23 +19,23 @@
     "portrait": false,
     "upsideDown": false
   },
-  "packageName": "org.cocos2d.start_project",
+  "packageName": "org.cocos2d.helloworld",
   "privateKey": "",
   "qqplay": {
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
-  "renderMode": "0",
-  "startScene": "e63d56a6-1f5c-4f0d-b710-c35fc030017f",
-  "title": "start_project",
-  "webOrientation": "portrait",
+  "renderMode": "2",
+  "startScene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
+  "title": "wechatRank",
+  "webOrientation": "auto",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
-    "appid": "wxbdd2fe63649efae1",
-    "isSubdomain": false,
+    "appid": "wx6ac3f5090a6b99c5",
+    "isSubdomain": true,
     "orientation": "portrait",
     "subContext": ""
   },
-  "xxteaKey": "805ac52c-931a-4f",
+  "xxteaKey": "854e3d76-e3c2-42",
   "zipCompressJs": true
 }
