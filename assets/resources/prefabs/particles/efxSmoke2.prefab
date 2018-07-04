@@ -46,12 +46,12 @@
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 1.5,
-    "_scaleY": 1.5,
+    "_scaleX": 1,
+    "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 220,
+      "y": 1002
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -76,9 +76,9 @@
     "_dstBlendFactor": 771,
     "playOnLoad": true,
     "_autoRemoveOnFinish": true,
-    "_totalParticles": 50,
+    "_totalParticles": 10,
     "_duration": 0.2,
-    "_emissionRate": 50,
+    "_emissionRate": 30,
     "_life": 0.4,
     "_lifeVar": 0.3,
     "_startColor": {
@@ -110,11 +110,11 @@
       "a": 0
     },
     "_angle": 0,
-    "_angleVar": 360,
-    "_startSize": 15,
-    "_startSizeVar": 15,
-    "_endSize": 30,
-    "_endSizeVar": 40,
+    "_angleVar": 180,
+    "_startSize": 20,
+    "_startSizeVar": 20,
+    "_endSize": 55,
+    "_endSizeVar": 45,
     "_startSpin": 0,
     "_startSpinVar": 0,
     "_endSpin": 0,
@@ -127,7 +127,7 @@
     "_posVar": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": 40
     },
     "_positionType": 1,
     "_emitterMode": 1,
@@ -143,10 +143,10 @@
     "_radialAccel": 0,
     "_radialAccelVar": 0,
     "_rotationIsDir": false,
-    "_startRadius": 10,
-    "_startRadiusVar": 10,
-    "_endRadius": 10,
-    "_endRadiusVar": 20,
+    "_startRadius": 15,
+    "_startRadiusVar": 5,
+    "_endRadius": 30,
+    "_endRadiusVar": 15,
     "_rotatePerS": 0,
     "_rotatePerSVar": 0,
     "_N$preview": true
