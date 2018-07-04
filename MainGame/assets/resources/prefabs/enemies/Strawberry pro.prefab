@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Strawberry",
+    "_name": "Strawberry pro",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -103,13 +103,13 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 0.6,
+      "y": 6.7
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 34,
-      "height": 45
+      "width": 22.1,
+      "height": 88.6
     }
   },
   {
@@ -120,7 +120,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "enemyType": 0
+    "enemyType": 2
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -128,9 +128,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "61da1e2f-afe0-441b-b973-c3eb23624865"
+      "__uuid__": "cda4a780-6c94-4f04-9d63-1903e635029f"
     },
-    "fileId": "85Q9yEPdtNR7qxr7WMjCmP",
+    "fileId": "88dMcsQoVNKry7BrAhYUOv",
     "sync": false
   }
 ]

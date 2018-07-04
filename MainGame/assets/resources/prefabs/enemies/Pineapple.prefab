@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Single Recovery",
+    "_name": "Pineapple",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -47,7 +47,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 45,
+      "width": 43,
       "height": 80
     },
     "_rotationX": 0,
@@ -78,7 +78,7 @@
       "__uuid__": "f638821c-ffdd-403d-8f1f-063ae7ec9442"
     },
     "_type": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 1,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -103,13 +103,13 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": -0.3,
+      "y": 6.9
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 34,
-      "height": 45
+      "width": 24.9,
+      "height": 89.3
     }
   },
   {
@@ -120,7 +120,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "enemyType": 1
+    "enemyType": 0
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -128,9 +128,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "26ca2b4a-6b62-4b25-bba8-8f2b8e64c729"
+      "__uuid__": "61da1e2f-afe0-441b-b973-c3eb23624865"
     },
-    "fileId": "d5SFOyqE9B95RHZdzyLZzz",
+    "fileId": "85Q9yEPdtNR7qxr7WMjCmP",
     "sync": false
   }
 ]

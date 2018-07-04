@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Full Recovery",
+    "_name": "Strawberry",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -47,8 +47,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 50
+      "width": 42,
+      "height": 79
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -75,10 +75,10 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "d60c5af3-3acd-4dd4-878e-9fcca433e7e1"
+      "__uuid__": "94645ca1-f6b8-4d69-a8bc-ba67d5014903"
     },
     "_type": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 1,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -103,13 +103,13 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 0.1,
+      "y": 6.3
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 34,
-      "height": 34
+      "width": 20,
+      "height": 88.9
     }
   },
   {
@@ -120,10 +120,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "fallingSpeed": 0,
-    "speedMin": 100,
-    "speedMax": 300,
-    "enemyType": 2
+    "enemyType": 1
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -131,9 +128,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "cda4a780-6c94-4f04-9d63-1903e635029f"
+      "__uuid__": "26ca2b4a-6b62-4b25-bba8-8f2b8e64c729"
     },
-    "fileId": "88dMcsQoVNKry7BrAhYUOv",
+    "fileId": "d5SFOyqE9B95RHZdzyLZzz",
     "sync": false
   }
 ]
