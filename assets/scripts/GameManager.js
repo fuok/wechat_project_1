@@ -1,3 +1,4 @@
+let ScoreManager = require('ScoreManager')
 let EnemyManager = require('EnemyManager')
 
 let levels = [
@@ -6,8 +7,9 @@ let levels = [
         normalEnemyInterval: 2,
         singleRecoveryInterval: 8,
         fullRecoveryInterval: 15,
-        minSpeed: 100,
-        maxSpeed: 120,
+        // DEBUG
+        minSpeed: 500,
+        maxSpeed: 700,
     },
     {
         scoreLimit: 30,
@@ -36,6 +38,14 @@ let GameManager = cc.Class({
 
     properties: {
         // 地面节点，用于确定星星生成的高度
+        rootNode: {
+            default: null,
+            type: cc.Node
+        },
+        uiNode: {
+            default: null,
+            type: cc.Node
+        },
         ground: {
             default: null,
             type: cc.Node
@@ -46,21 +56,11 @@ let GameManager = cc.Class({
             type: cc.Node
         },
         groundPosY: 0,
-        // score label 的引用
-        scoreDisplay: {
-            default: null,
-            type: cc.Label
-        },
         curLevel: {
             get() {
                 return levels[this.curLevelIndex];
             }
         },
-        // 得分音效资源
-        scoreAudio: {
-            default: null,
-            url: cc.AudioClip
-        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -72,8 +72,6 @@ let GameManager = cc.Class({
         let manager = cc.director.getCollisionManager();
         manager.enabled = true;
 
-        // 初始化计分
-        this.score = 0;
     },
 
     start() {
@@ -84,14 +82,8 @@ let GameManager = cc.Class({
     update(dt) {
     },
 
-    gainScore (score) {
-        this.score += score;
-        // 更新 scoreDisplay Label 的文字
-        this.scoreDisplay.string = 'Score: ' + this.score.toString();
-        // 播放得分音效
-        cc.audioEngine.playEffect(this.scoreAudio, false);
-
-        if (this.score > levels[this.curLevelIndex].scoreLimit) {
+    checkNextLevel () {
+        if (ScoreManager.instance.currentScore > levels[this.curLevelIndex].scoreLimit) {
             this.nextLevel();
         }
     },
@@ -105,8 +97,22 @@ let GameManager = cc.Class({
         EnemyManager.instance.resetLevel();
     },
 
-    gameOver () {
+    restartGame () {
         this.player.stopAllActions(); //停止 player 节点的跳跃动作
         cc.director.loadScene('game');
+    },
+
+    gameOver () {
+        this.loadPanel('prefabs/panels/GameOverPanel');
+    },
+
+    loadPanel(panelName) {//加载图层
+        cc.loader.loadRes(panelName, (err, prefab) => {
+            if (!err) {
+                let node = cc.instantiate(prefab);
+                this.uiNode.addChild(node);
+            }
+        });
     }
+
 });

@@ -80,7 +80,7 @@ cc.Class({
         // 获得方向键按钮x
         this.btnDirectionCenterX = this.btnDirection.node.getBoundingBoxToWorld().center.x;
         // 获得负责动画渲染的子节点
-        this.playerArmatureDisplay = this.node.getChildByName('PlayerAnim').getComponent(dragonBones.ArmatureDisplay);
+        this.playerArmatureDisplay = this.node.getChildByName('Player Animation').getComponent(dragonBones.ArmatureDisplay);
         this.playerArmatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this.playerAnimComplete, this);
 
         // 初始状态：idle
