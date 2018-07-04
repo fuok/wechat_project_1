@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Falling Star",
+    "_name": "Strawberry",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -47,8 +47,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 60,
-      "height": 66
+      "width": 42,
+      "height": 79
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -75,7 +75,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "8f8ba54f-70f6-4ca1-86d9-dddbd85e769d"
+      "__uuid__": "94645ca1-f6b8-4d69-a8bc-ba67d5014903"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -109,7 +109,7 @@
     "_size": {
       "__type__": "cc.Size",
       "width": 34,
-      "height": 34
+      "height": 45
     }
   },
   {
@@ -120,9 +120,6 @@
       "__id__": 1
     },
     "_enabled": true,
-    "fallingSpeed": 0,
-    "speedMin": 100,
-    "speedMax": 300,
     "enemyType": 0
   },
   {

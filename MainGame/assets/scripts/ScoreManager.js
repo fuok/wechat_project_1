@@ -12,11 +12,6 @@ let ScoreManager = cc.Class({
             default: null,
             type: cc.Label
         },
-        // 得分音效资源
-        scoreAudio: {
-            default: null,
-            url: cc.AudioClip
-        },
 
         currentScore: {
             get () {
@@ -63,8 +58,6 @@ let ScoreManager = cc.Class({
         this._currentScore += score;
         // 更新 scoreDisplay Label 的文字
         this.scoreDisplay.string = 'Score: ' + this._currentScore.toString();
-        // 播放得分音效
-        cc.audioEngine.playEffect(this.scoreAudio, false);
 
         this.GameManager.instance.checkNextLevel();
     }

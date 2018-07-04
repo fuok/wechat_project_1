@@ -47,8 +47,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 50,
-      "height": 50
+      "width": 45,
+      "height": 80
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -75,7 +75,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "4b342e2e-e7e1-441d-b6fb-699ef734f7fc"
+      "__uuid__": "f638821c-ffdd-403d-8f1f-063ae7ec9442"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -109,7 +109,7 @@
     "_size": {
       "__type__": "cc.Size",
       "width": 34,
-      "height": 34
+      "height": 45
     }
   },
   {
