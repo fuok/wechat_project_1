@@ -50,8 +50,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 635,
+      "y": 980
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -83,9 +83,9 @@
     "_lifeVar": 0.1,
     "_startColor": {
       "__type__": "cc.Color",
-      "r": 41,
-      "g": 113,
-      "b": 223,
+      "r": 8,
+      "g": 221,
+      "b": 252,
       "a": 255
     },
     "_startColorVar": {
@@ -97,10 +97,10 @@
     },
     "_endColor": {
       "__type__": "cc.Color",
-      "r": 49,
-      "g": 118,
-      "b": 206,
-      "a": 151
+      "r": 8,
+      "g": 221,
+      "b": 252,
+      "a": 255
     },
     "_endColorVar": {
       "__type__": "cc.Color",
