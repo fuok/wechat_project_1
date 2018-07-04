@@ -1,4 +1,4 @@
-let ScoreManager = require('ScoreManager')
+let ScoreManager = require('ScoreManager');
 
 let EnemyManager = cc.Class({
     extends: cc.Component,

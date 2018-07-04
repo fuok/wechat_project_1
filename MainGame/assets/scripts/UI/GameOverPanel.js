@@ -44,11 +44,11 @@ cc.Class({
     },
 
     onRankingButtonPressed(event) {
-        //GameTools.getRankData();
+        GameManager.instance.wechatRanking();
     },
 
     onShareButtonPressed(event) {
-        //GameTools.sharePicture();
+        SubDomainManager.instance.sharePicture();
     },
 
     // 刷新子域的纹理

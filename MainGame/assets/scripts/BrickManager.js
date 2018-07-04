@@ -1,3 +1,5 @@
+let GameConfig = require('GameConfig');
+
 let BrickManager = cc.Class({
     extends: cc.Component,
 
@@ -10,43 +12,29 @@ let BrickManager = cc.Class({
             default: null,
             type:cc.Prefab
         },
-        ground: {
+        rootNode: {
             default: null,
             type:cc.Node
         },
         brickSize: 36,
         brickCount: 30,
-        canvasWidth: 1080,
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+        groundPosY: 0
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         BrickManager.instance = this;
+        this.canvasWidth = GameConfig.DEVICE_WIDTH;
 
         this.bricks = [];
         // create all bricks from the prefab
         for (let i = 0; i < this.brickCount; i++) {
             let newBrick = cc.instantiate(this.brickPrefab);
-            this.ground.addChild(newBrick);
+            this.rootNode.addChild(newBrick);
             // set brick's position, brick size 36, totally 30 bricks
             newBrick.x = -(this.canvasWidth - this.brickSize) / 2  + i * this.brickSize;
-            newBrick.y = 0;
+            newBrick.y = this.groundPosY;
             this.bricks.push(newBrick);
         }
     },

@@ -8,8 +8,8 @@ let levels = [
         singleRecoveryInterval: 8,
         fullRecoveryInterval: 15,
         // DEBUG
-        minSpeed: 100,
-        maxSpeed: 150,
+        minSpeed: 300,
+        maxSpeed: 500,
     },
     {
         scoreLimit: 30,
@@ -104,6 +104,10 @@ let GameManager = cc.Class({
 
     gameOver () {
         this.loadPanel('prefabs/panels/GameOverPanel');
+    },
+
+    wechatRanking () {
+        this.loadPanel('prefabs/panels/WechatRankingPanel');
     },
 
     loadPanel(panelName) {//加载图层
