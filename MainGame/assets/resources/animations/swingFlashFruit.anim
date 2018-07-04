@@ -1,0 +1,81 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "swingFlashFruit",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 2,
+  "sample": 60,
+  "speed": 2,
+  "wrapMode": "2",
+  "curveData": {
+    "props": {
+      "skewX": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.5,
+          "value": 10
+        },
+        {
+          "frame": 1.5,
+          "value": -10
+        },
+        {
+          "frame": 2,
+          "value": 0
+        }
+      ],
+      "skewY": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 0.5,
+          "value": -5
+        },
+        {
+          "frame": 1.5,
+          "value": 5
+        },
+        {
+          "frame": 2,
+          "value": 0
+        }
+      ]
+    },
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "94645ca1-f6b8-4d69-a8bc-ba67d5014903"
+            }
+          },
+          {
+            "frame": 0.5,
+            "value": {
+              "__uuid__": "0a77d8bb-0e38-423d-92fe-4961d952af41"
+            }
+          },
+          {
+            "frame": 1,
+            "value": {
+              "__uuid__": "94645ca1-f6b8-4d69-a8bc-ba67d5014903"
+            }
+          },
+          {
+            "frame": 1.5,
+            "value": {
+              "__uuid__": "0a77d8bb-0e38-423d-92fe-4961d952af41"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
