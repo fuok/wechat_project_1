@@ -46,12 +46,12 @@
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 1.5,
-    "_scaleY": 1.5,
+    "_scaleX": 1,
+    "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 635,
+      "y": 980
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -76,11 +76,11 @@
     "_dstBlendFactor": 771,
     "playOnLoad": true,
     "_autoRemoveOnFinish": true,
-    "_totalParticles": 50,
+    "_totalParticles": 10,
     "_duration": 0.2,
-    "_emissionRate": 50,
-    "_life": 0.4,
-    "_lifeVar": 0.5,
+    "_emissionRate": 30,
+    "_life": 0.7,
+    "_lifeVar": 0.1,
     "_startColor": {
       "__type__": "cc.Color",
       "r": 41,
@@ -100,7 +100,7 @@
       "r": 49,
       "g": 118,
       "b": 206,
-      "a": 0
+      "a": 151
     },
     "_endColorVar": {
       "__type__": "cc.Color",
@@ -109,16 +109,16 @@
       "b": 0,
       "a": 0
     },
-    "_angle": 180,
-    "_angleVar": 360,
-    "_startSize": 15,
-    "_startSizeVar": 15,
-    "_endSize": 15,
-    "_endSizeVar": 15,
+    "_angle": 270,
+    "_angleVar": 20,
+    "_startSize": 35,
+    "_startSizeVar": 20,
+    "_endSize": 35,
+    "_endSizeVar": 20,
     "_startSpin": 0,
-    "_startSpinVar": 360,
+    "_startSpinVar": 0,
     "_endSpin": 0,
-    "_endSpinVar": 0,
+    "_endSpinVar": 180,
     "_sourcePos": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -126,17 +126,17 @@
     },
     "_posVar": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 20,
+      "y": 40
     },
     "_positionType": 1,
     "_emitterMode": 0,
     "_gravity": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -90
+      "y": -10
     },
-    "_speed": 30,
+    "_speed": 100,
     "_speedVar": 40,
     "_tangentialAccel": 0,
     "_tangentialAccelVar": 0,
