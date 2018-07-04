@@ -106,12 +106,12 @@
     "tag": 0,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 0.1,
+      "x": 0.5,
       "y": 6.3
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 20,
+      "width": 31.2,
       "height": 88.9
     }
   },

@@ -10,6 +10,8 @@ let levels = [
         // DEBUG
         minSpeed: 300,
         maxSpeed: 500,
+        //TODO
+        burstNumber: 5,
     },
     {
         scoreLimit: 30,
