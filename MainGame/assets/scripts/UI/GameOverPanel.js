@@ -34,17 +34,17 @@ cc.Class({
     },
 
     onBackButtonPressed(event) {
-        // TODO: 回到菜单
-        GameManager.instance.restartGame();
+        this.node.destroy();
+        GameManager.instance.Opening();
     },
 
     onRestartButtonPressed(event) {
-        // TODO: 重新开始游戏
-        GameManager.instance.restartGame();
+        this.node.destroy();
+        GameManager.instance.gameStart();
     },
 
     onRankingButtonPressed(event) {
-        GameManager.instance.wechatRanking();
+        GameManager.instance.showWechatRankingPanel();
     },
 
     onShareButtonPressed(event) {

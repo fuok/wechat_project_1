@@ -82,23 +82,8 @@ cc.Class({
         // 获得负责动画渲染的子节点
         this.playerArmatureDisplay = this.node.getChildByName('Player Animation').getComponent(dragonBones.ArmatureDisplay);
         this.playerArmatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this.playerAnimComplete, this);
-
-        // 初始状态：idle
-        this.state = PlayerState.Idle;
-        // 加速度方向开关
-        this.accLeft = false;
-        this.accRight = false;
-        // 主角当前水平方向速度
-        this.xSpeed = 0;
-        // 方向, 0:左, 1:右
-        this.direction = PlayerDirection.Left;
-
-        // 初始化键盘输入监听
-        this.setInputControl();
-    },
-
-    start() {
-        this.xSpeed = 0;
+        this.inputEnabled = false;
+        this.setupInputControl();
     },
 
     updatePlayerPos(dt) {
@@ -142,7 +127,33 @@ cc.Class({
         }
     },
 
+    reset () {
+        // 初始状态：idle
+        this.state = PlayerState.Idle;
+        // 加速度方向开关
+        this.accLeft = false;
+        this.accRight = false;
+        // 主角当前水平方向速度
+        this.xSpeed = 0;
+        // 方向, 0:左, 1:右
+        this.direction = PlayerDirection.Left;
+        this.node.position.x = 0;
+        // 初始化键盘输入监听
+        this.inputEnabled = false;
+    },
+
+    die () {
+        this.state = PlayerState.Dead;
+        this.stopMove();
+        this.disableInput();
+        GameManager.instance.gameOver();
+    },
+
     shoot () {
+        if (!this.inputEnabled) {
+            return;
+        }
+
         // 先把状态设置成shooting
         this.xSpeed = 0;
         this.state = PlayerState.Shooting;
@@ -182,12 +193,12 @@ cc.Class({
     },
 
     dieAnimComplete () {
-        GameManager.instance.gameOver();
+        GameManager.instance.showGameOverPanel();
     },
 
     onCollisionEnter (other) {
         if (other.node.group == 'enemy') {
-            this.state = PlayerState.Dead;
+            this.die();
         }
     },
 
@@ -210,11 +221,19 @@ cc.Class({
     },
 
     stopMove () {
+        if (!this.inputEnabled) {
+            return;
+        }
+
         this.accLeft = false;
         this.accRight = false;
     },
 
     checkDirectionButtonTouchEvent (locationWS) {
+        if (!this.inputEnabled) {
+            return;
+        }
+
         if (locationWS.x <= this.btnDirectionCenterX) {
             this.moveLeft();
         } else {
@@ -222,9 +241,8 @@ cc.Class({
         }
     },
 
-    setInputControl: function () {
-        var self = this;
-
+    setupInputControl () {
+        let self = this;
         //监听屏幕上两个按钮
         self.btnDirection.node.on(cc.Node.EventType.TOUCH_START, function (event) {
             self.checkDirectionButtonTouchEvent(event.getLocation());
@@ -242,5 +260,11 @@ cc.Class({
             self.shoot();
         });
     },
+    enableInput () {
+        this.inputEnabled = true;
+    },
 
+    disableInput () {
+        this.inputEnabled = false;
+    },
 });

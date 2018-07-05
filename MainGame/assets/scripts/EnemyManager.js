@@ -67,6 +67,13 @@ let EnemyManager = cc.Class({
         return this.enemies;
     },
 
+    clearAllEnemies () {
+        this.unscheduleAllCallbacks();
+        while(this.enemies.length > 0) {
+            this.enemies[this.enemies.length - 1].getComponent('Enemy').eliminate();
+        }
+    },
+
     addEnemy (enemyNode) {
         this.rootNode.addChild(enemyNode);
         this.enemies.push(enemyNode);

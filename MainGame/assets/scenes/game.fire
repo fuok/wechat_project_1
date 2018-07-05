@@ -183,6 +183,9 @@
     "rootNode": {
       "__id__": 5
     },
+    "cameraNode": {
+      "__id__": 29
+    },
     "uiNode": {
       "__id__": 7
     },
@@ -1365,31 +1368,7 @@
     },
     "camera": {
       "__id__": 31
-    },
-    "anim": null,
-    "jumpZoom": false,
-    "centerAtStart": false,
-    "smoothFollow": false,
-    "followX": 0,
-    "followY": 0,
-    "minFollowDist": 0,
-    "followRatio": 0,
-    "overview": true,
-    "overviewTargets": [],
-    "overviewMargin": 0,
-    "speedZoom": false,
-    "zoomInSpeed": 0,
-    "zoomOutSpeed": 0,
-    "canShake": false,
-    "shakeDuration": 0,
-    "pointerPan": false,
-    "pointerXMult": 0,
-    "pointerYMult": 0,
-    "useBoundaries": false,
-    "topBound": 0,
-    "bottomBound": 0,
-    "leftBound": 0,
-    "rightBound": 0
+    }
   },
   {
     "__type__": "cc.Node",
@@ -1440,7 +1419,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -500,
+      "x": 0,
       "y": -210
     },
     "_skewX": 0,

@@ -1,5 +1,12 @@
 let ScoreManager = require('ScoreManager')
+let BrickManager = require('BrickManager')
 let EnemyManager = require('EnemyManager')
+
+const GameState = {
+    Opening: 0,
+    Playing: 1,
+    GameOver: 2,
+};
 
 let levels = [
     {
@@ -44,6 +51,10 @@ let GameManager = cc.Class({
             default: null,
             type: cc.Node
         },
+        cameraNode: {
+            default: null,
+            type: cc.Node
+        },
         uiNode: {
             default: null,
             type: cc.Node
@@ -63,6 +74,11 @@ let GameManager = cc.Class({
                 return levels[this.curLevelIndex];
             }
         },
+        gameState: {
+            get () {
+                return this._gameState;
+            }
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -77,11 +93,34 @@ let GameManager = cc.Class({
     },
 
     start() {
-        this.curLevelIndex = -1;
-        this.nextLevel();
+        this.Opening();
     },
 
-    update(dt) {
+    Opening () {
+        this._gameState = GameState.Opening;
+        this.player.getComponent('Player').reset();
+        BrickManager.instance.resetAllBricks();
+        EnemyManager.instance.clearAllEnemies();
+        this.cameraNode.getComponent('CameraController').resetCameraToTarget();
+        this.loadPanel('prefabs/panels/OpeningPanel');
+    },
+
+    gameStart () {
+        this._gameState = GameState.Playing;
+        this.player.getComponent('Player').reset();
+        this.player.getComponent('Player').enableInput();
+        BrickManager.instance.resetAllBricks();
+        EnemyManager.instance.clearAllEnemies();
+        this.curLevelIndex = -1;
+        this.nextLevel();
+        this.cameraNode.getComponent('CameraController').moveCameraToCenter();
+    },
+
+    gameOver () {
+        this._gameState = GameState.GameOver;
+        this.player.getComponent('Player').disableInput();
+        EnemyManager.instance.clearAllEnemies();
+        this.cameraNode.getComponent('CameraController').moveCameraToTarget();
     },
 
     checkNextLevel () {
@@ -99,16 +138,11 @@ let GameManager = cc.Class({
         EnemyManager.instance.resetLevel();
     },
 
-    restartGame () {
-        this.player.stopAllActions(); //停止 player 节点的跳跃动作
-        cc.director.loadScene('game');
-    },
-
-    gameOver () {
+    showGameOverPanel () {
         this.loadPanel('prefabs/panels/GameOverPanel');
     },
 
-    wechatRanking () {
+    showWechatRankingPanel () {
         this.loadPanel('prefabs/panels/WechatRankingPanel');
     },
 

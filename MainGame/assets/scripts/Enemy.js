@@ -50,13 +50,17 @@ cc.Class({
         }
     },
 
-    onHitBrick() {
+    eliminate () {
         if (this.enemyType == EnemyType.Normal) {
             EnemyManager.instance.destroyNormalEnemy(this.node);
         } else if (this.enemyType == EnemyType.SingleRecovery 
                    || this.enemyType == EnemyType.FullRecovery) {
             EnemyManager.instance.destroyRecovery(this.node);
         }
+    },
+
+    onHitBrick() {
+        this.eliminate();
     },
 
     onHitByBullet () {

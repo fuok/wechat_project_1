@@ -39,7 +39,10 @@ let BrickManager = cc.Class({
         }
     },
 
-    start () {
+    resetAllBricks() {
+        for (let i = 0; i < this.brickCount; i++) {
+            this.bricks[i].getComponent('Brick').repair(false);
+        }
     },
 
     // update (dt) {},

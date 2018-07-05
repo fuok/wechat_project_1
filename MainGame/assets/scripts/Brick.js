@@ -39,11 +39,13 @@ cc.Class({
         }
     },
 
-    repair () {
+    repair (playFX=true) {
         if (this.isBroken == true) {
             this._isBroken = false;
             this.node.active = true;
-            ParticleManager.instance.createBrickRepairFX(this.node.position);
+            if (playFX) {
+                ParticleManager.instance.createBrickRepairFX(this.node.position);
+            }
         }
     }
 });

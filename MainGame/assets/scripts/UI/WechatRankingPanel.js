@@ -60,7 +60,6 @@ cc.Class({
             });
         }
         this.node.destroy();
-        GameManager.instance.restartGame();
     },
 
     // 刷新子域的纹理
