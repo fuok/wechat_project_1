@@ -17,7 +17,7 @@
         "__id__": 2
       },
       {
-        "__id__": 52
+        "__id__": 53
       },
       {
         "__id__": 6
@@ -68,16 +68,16 @@
         "__id__": 42
       },
       {
-        "__id__": 44
+        "__id__": 45
       },
       {
-        "__id__": 46
+        "__id__": 47
       },
       {
-        "__id__": 48
+        "__id__": 49
       },
       {
-        "__id__": 50
+        "__id__": 51
       }
     ],
     "_tag": -1,
@@ -1704,6 +1704,9 @@
     "_components": [
       {
         "__id__": 43
+      },
+      {
+        "__id__": 44
       }
     ],
     "_prefab": null,
@@ -1744,6 +1747,24 @@
     "groupIndex": 0
   },
   {
+    "__type__": "cc.Animation",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 42
+    },
+    "_enabled": true,
+    "_defaultClip": {
+      "__uuid__": "02e8c0cb-ec62-4c20-929f-b24c9613f831"
+    },
+    "_clips": [
+      {
+        "__uuid__": "02e8c0cb-ec62-4c20-929f-b24c9613f831"
+      }
+    ],
+    "playOnLoad": true
+  },
+  {
     "__type__": "9d92bY6SeFEYZK8DRTrVhfD",
     "_name": "",
     "_objFlags": 0,
@@ -1765,7 +1786,8 @@
     },
     "getScoreLabelPrefab": {
       "__uuid__": "0fac1a64-1594-430f-99fa-2da7a3e5e489"
-    }
+    },
+    "timetime": 1
   },
   {
     "__type__": "cc.Node",
@@ -1779,7 +1801,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 45
+        "__id__": 46
       }
     ],
     "_prefab": null,
@@ -1824,7 +1846,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 44
+      "__id__": 45
     },
     "_enabled": true,
     "brickPrefab": {
@@ -1849,7 +1871,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 47
+        "__id__": 48
       }
     ],
     "_prefab": null,
@@ -1894,7 +1916,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 46
+      "__id__": 47
     },
     "_enabled": true,
     "rootNode": {
@@ -1928,7 +1950,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 49
+        "__id__": 50
       }
     ],
     "_prefab": null,
@@ -1973,7 +1995,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 48
+      "__id__": 49
     },
     "_enabled": true
   },
@@ -1989,7 +2011,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 51
+        "__id__": 52
       }
     ],
     "_prefab": null,
@@ -2034,7 +2056,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 50
+      "__id__": 51
     },
     "_enabled": true,
     "scoreDisplay": {

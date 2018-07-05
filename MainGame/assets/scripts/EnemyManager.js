@@ -8,6 +8,7 @@ let EnemyManager = cc.Class({
     },
 
     properties: {
+        timeScale: 1,
         rootNode: {
             default: null,
             type: cc.Node
@@ -43,7 +44,6 @@ let EnemyManager = cc.Class({
     start () {
     },
 
-    // update (dt) {},
     resetLevel () {
         this.unscheduleAllCallbacks();
 
@@ -133,5 +133,9 @@ let EnemyManager = cc.Class({
         this.destroyNormalEnemy(enemyNode);
         // TODO: 击中目标不同得分不同
         ScoreManager.instance.gainScore(score);
+    },
+
+    slowMotion() {
+        this.getComponent(cc.Animation).play();
     }
 });

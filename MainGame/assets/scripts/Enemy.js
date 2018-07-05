@@ -29,7 +29,7 @@ cc.Class({
     },
 
     update (dt) {
-        this.node.y -= this.fallingSpeed * dt;
+        this.node.y -= this.fallingSpeed * dt * EnemyManager.instance.timeScale;
     },
     
     resetSpeed() {

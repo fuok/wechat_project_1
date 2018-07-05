@@ -159,6 +159,7 @@ cc.Class({
         this.state = PlayerState.Shooting;
 
         let enemies = EnemyManager.instance.getAllEnemies();
+        let hitCount = 0;
         for (let i = 0; i < enemies.length; i++) {
             let enemyNode = enemies[i];
             // 注意这里目前使用的是bounding box而不是collider，用世界坐标系判断
@@ -169,7 +170,11 @@ cc.Class({
             let rect = enemyNode.getBoundingBoxToWorld();
             if (cc.Intersection.lineRect(a1, a2, rect)) {
                 enemyNode.getComponent('Enemy').onHitByBullet();
+                hitCount += 1;
             }
+        }
+        if (hitCount >= 2) {
+            EnemyManager.instance.slowMotion();
         }
     },
 

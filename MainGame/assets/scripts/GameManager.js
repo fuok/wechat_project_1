@@ -10,31 +10,55 @@ const GameState = {
 
 let levels = [
     {
-        scoreLimit: 10,
-        normalEnemyInterval: 1,
-        singleRecoveryInterval: 8,
+        scoreLimit: 30,
+        normalEnemyInterval: 1.5,
+        singleRecoveryInterval: 6,
         fullRecoveryInterval: 15,
         // DEBUG
-        minSpeed: 300,
-        maxSpeed: 500,
+        minSpeed: 150,
+        maxSpeed: 170,
         //TODO
         burstNumber: 5,
     },
     {
-        scoreLimit: 30,
-        normalEnemyInterval: 0.5,
+        scoreLimit: 80,
+        normalEnemyInterval: 1.4,
         singleRecoveryInterval: 5,
-        fullRecoveryInterval: 10,
-        minSpeed: 150,
-        maxSpeed: 200,
+        fullRecoveryInterval: 14,
+        minSpeed: 170,
+        maxSpeed: 190,
     },
     {
-        scoreLimit: 100,
-        normalEnemyInterval: 0.2,
-        singleRecoveryInterval: 5,
-        fullRecoveryInterval: 10,
-        minSpeed: 200,
-        maxSpeed: 400,
+        scoreLimit: 150,
+        normalEnemyInterval: 1.3,
+        singleRecoveryInterval: 4,
+        fullRecoveryInterval: 13,
+        minSpeed: 190,
+        maxSpeed: 210,
+    },
+    {
+        scoreLimit: 200,
+        normalEnemyInterval: 1.2,
+        singleRecoveryInterval: 4,
+        fullRecoveryInterval: 13,
+        minSpeed: 210,
+        maxSpeed: 240,
+    },
+    {
+        scoreLimit: 280,
+        normalEnemyInterval: 1.1,
+        singleRecoveryInterval: 4,
+        fullRecoveryInterval: 13,
+        minSpeed: 240,
+        maxSpeed: 280,
+    },
+    {
+        scoreLimit: 400,
+        normalEnemyInterval: 1,
+        singleRecoveryInterval: 3.5,
+        fullRecoveryInterval: 12,
+        minSpeed: 280,
+        maxSpeed: 350,
     }
 ];
 

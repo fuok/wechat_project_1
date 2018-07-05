@@ -6,7 +6,7 @@
   "_duration": 2,
   "sample": 60,
   "speed": 2,
-  "wrapMode": "2",
+  "wrapMode": "0",
   "curveData": {
     "props": {
       "skewX": [
