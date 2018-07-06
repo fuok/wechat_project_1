@@ -58,7 +58,5 @@ let ScoreManager = cc.Class({
         this._currentScore += score;
         // 更新 scoreDisplay Label 的文字
         this.scoreDisplay.string = 'Score: ' + this._currentScore.toString();
-
-        this.GameManager.instance.checkNextLevel();
     }
 });

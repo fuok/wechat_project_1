@@ -1,6 +1,16 @@
 let ScoreManager = require('ScoreManager');
 let BrickManager = require('BrickManager');
 
+let initLevel = {
+        normalEnemyInterval: 1.5,
+        singleRecoveryInterval: 6,
+        fullRecoveryInterval: 15,
+        minSpeed: 150,
+        maxSpeed: 190,
+        //TODO
+        burstNumber: 5,
+};
+
 let EnemyManager = cc.Class({
     extends: cc.Component,
 
@@ -10,8 +20,9 @@ let EnemyManager = cc.Class({
 
     properties: {
         timeScale: 1,
-        enemyWaveInterval: 5,
-        enemyBreakInterval: 1,
+        enemyWaveInterval: 0,
+        enemyBreakInterval: 0,
+        enemyWaveCountPerLevel: 3,
         rootNode: {
             default: null,
             type: cc.Node
@@ -47,30 +58,53 @@ let EnemyManager = cc.Class({
     start () {
     },
 
+    getCurLevel (index) {
+        // index从0开始
+        let level = {};
+        level.normalEnemyInterval = initLevel.normalEnemyInterval * Math.pow(0.9, index);
+        level.singleRecoveryInterval = initLevel.singleRecoveryInterval * Math.pow(0.9, index);
+        level.fullRecoveryInterval = initLevel.fullRecoveryInterval * Math.pow(0.9, index);
+        level.minSpeed = initLevel.minSpeed * Math.pow(1.1, index);
+        level.maxSpeed = initLevel.maxSpeed * Math.pow(1.1, index);
+        level.burstNumber = initLevel.burstNumber * Math.pow(1.1, index);
+
+        return level;
+    },
+
     resetLevel () {
         this.unscheduleAllCallbacks();
 
-        let curLevel = this.GameManager.instance.curLevel;
-        this.generatedNormalEnemyCount = 0;
-        this.schedule(this.controlGenerateNewNormalEnemy, curLevel.normalEnemyInterval);
-        this.schedule(this.createNewSingleRecovery, curLevel.singleRecoveryInterval);
-        this.schedule(this.createNewFullRecovery, curLevel.fullRecoveryInterval);
+        this.curLevel = this.getCurLevel(this.GameManager.instance.curLevelIndex);
+        this.curLevelWave = 0;
+        this.curLevelEnemyCountPerWave = this.enemyWaveInterval / this.curLevel.normalEnemyInterval;
+        this.curWaveGeneratedNormalEnemyCount = 0;
+
+        this.unschedule(this.controlGenerateNewNormalEnemy);
+        this.unschedule(this.createNewSingleRecovery);
+        this.unschedule(this.createNewFullRecovery);
+        this.schedule(this.controlGenerateNewNormalEnemy, this.curLevel.normalEnemyInterval);
+        this.schedule(this.createNewSingleRecovery, this.curLevel.singleRecoveryInterval);
+        this.schedule(this.createNewFullRecovery, this.curLevel.fullRecoveryInterval);
     },
 
     controlGenerateNewNormalEnemy () {
-        let curLevel = this.GameManager.instance.curLevel;
-
-        if (this.generatedNormalEnemyCount == -1) {
-            this.generatedNormalEnemyCount = 0;
+        if (this.curWaveGeneratedNormalEnemyCount == -1) {
+            this.curWaveGeneratedNormalEnemyCount = 0;
+            this.curLevelWave += 1;
+            if (this.curLevelWave >= this.enemyWaveCountPerLevel) {
+                this.GameManager.instance.nextLevel();
+            }
             this.unschedule(this.controlGenerateNewNormalEnemy);
-            this.schedule(this.controlGenerateNewNormalEnemy, curLevel.normalEnemyInterval);
+            this.schedule(this.controlGenerateNewNormalEnemy, this.curLevel.normalEnemyInterval);
+            console.log("wave " + this.curLevelWave + " start, enemyCount=" + this.curLevelEnemyCountPerWave);
+
             return;
         }
 
-        this.generatedNormalEnemyCount += 1;
+        this.curWaveGeneratedNormalEnemyCount += 1;
         this.createOneOrTwoEnemies();
-        if (this.generatedNormalEnemyCount > this.enemyWaveInterval / curLevel.normalEnemyInterval) {
-            this.generatedNormalEnemyCount = -1;
+        if (this.curWaveGeneratedNormalEnemyCount > this.curLevelEnemyCountPerWave) {
+            this.curWaveGeneratedNormalEnemyCount = -1;
             this.unschedule(this.controlGenerateNewNormalEnemy);
             this.schedule(this.controlGenerateNewNormalEnemy, this.enemyBreakInterval);
         }
@@ -93,8 +127,8 @@ let EnemyManager = cc.Class({
     },
 
     randomSpeed() {
-        let minSpeed = this.GameManager.instance.curLevel.minSpeed;
-        let maxSpeed = this.GameManager.instance.curLevel.maxSpeed;
+        let minSpeed = this.curLevel.minSpeed;
+        let maxSpeed = this.curLevel.maxSpeed;
         return Math.random() * (maxSpeed - minSpeed) + minSpeed;
     },
 
@@ -119,7 +153,7 @@ let EnemyManager = cc.Class({
     },
 
     createTwoEnemies () {
-        let indexDis = Math.floor(Math.random() * 5) + 1;
+        let indexDis = Math.floor(Math.random() * 10) + 1;
         let firstIndex = Math.floor(Math.random() * (BrickManager.instance.brickCount - 2 * indexDis) + indexDis);
         let secondIndex = Math.random() >= 0.5 ? firstIndex + indexDis : firstIndex - indexDis;
         let firstY = 1100 + Math.random() * 300;

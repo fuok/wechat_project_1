@@ -8,59 +8,6 @@ const GameState = {
     GameOver: 2,
 };
 
-let levels = [
-    {
-        scoreLimit: 50,
-        normalEnemyInterval: 1.5,
-        singleRecoveryInterval: 6,
-        fullRecoveryInterval: 15,
-        minSpeed: 150,
-        maxSpeed: 170,
-        //TODO
-        burstNumber: 5,
-    },
-    {
-        scoreLimit: 80,
-        normalEnemyInterval: 1.4,
-        singleRecoveryInterval: 5,
-        fullRecoveryInterval: 14,
-        minSpeed: 170,
-        maxSpeed: 190,
-    },
-    {
-        scoreLimit: 150,
-        normalEnemyInterval: 1.3,
-        singleRecoveryInterval: 4,
-        fullRecoveryInterval: 13,
-        minSpeed: 190,
-        maxSpeed: 210,
-    },
-    {
-        scoreLimit: 200,
-        normalEnemyInterval: 1.2,
-        singleRecoveryInterval: 4,
-        fullRecoveryInterval: 13,
-        minSpeed: 210,
-        maxSpeed: 240,
-    },
-    {
-        scoreLimit: 280,
-        normalEnemyInterval: 1.1,
-        singleRecoveryInterval: 4,
-        fullRecoveryInterval: 13,
-        minSpeed: 240,
-        maxSpeed: 280,
-    },
-    {
-        scoreLimit: 400,
-        normalEnemyInterval: 1,
-        singleRecoveryInterval: 3.5,
-        fullRecoveryInterval: 12,
-        minSpeed: 280,
-        maxSpeed: 350,
-    }
-];
-
 let GameManager = cc.Class({
     extends: cc.Component,
 
@@ -92,11 +39,8 @@ let GameManager = cc.Class({
             type: cc.Node
         },
         groundPosY: 0,
-        curLevel: {
-            get() {
-                return levels[this.curLevelIndex];
-            }
-        },
+        curLevelIndex: 0,
+        levelCount: 999,
         gameState: {
             get () {
                 return this._gameState;
@@ -146,19 +90,14 @@ let GameManager = cc.Class({
         this.cameraNode.getComponent('CameraController').moveCameraToTarget();
     },
 
-    checkNextLevel () {
-        if (ScoreManager.instance.currentScore > levels[this.curLevelIndex].scoreLimit) {
-            this.nextLevel();
-        }
-    },
-
     nextLevel () {
-        if (this.curLevelIndex >= levels.length - 1) {
+        if (this.curLevelIndex >= this.levelCount - 1) {
             return;
         }
         
         this.curLevelIndex += 1;
         EnemyManager.instance.resetLevel();
+        console.log("level=" + this.curLevelIndex);
     },
 
     showGameOverPanel () {

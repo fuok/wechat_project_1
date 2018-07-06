@@ -193,7 +193,9 @@
     "player": {
       "__id__": 33
     },
-    "groundPosY": 0
+    "groundPosY": 0,
+    "curLevelIndex": 0,
+    "levelCount": 999
   },
   {
     "__type__": "cc.Node",
@@ -1755,8 +1757,9 @@
     },
     "_enabled": true,
     "timeScale": 1,
-    "enemyWaveInterval": 5,
-    "enemyBreakInterval": 10,
+    "enemyWaveInterval": 10,
+    "enemyBreakInterval": 1,
+    "enemyWaveCountPerLevel": 3,
     "rootNode": {
       "__id__": 5
     },
