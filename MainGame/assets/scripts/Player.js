@@ -176,7 +176,7 @@ cc.Class({
                 hitEnemies.push(enemyNode);
             } 
         }
-        if (hitEnemies.length >= 2) {
+        if (hitEnemies.length >= 3) {
             EnemyManager.instance.slowMotion();
         }
         for (let i = 0; i < hitEnemies.length; i++) {

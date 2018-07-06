@@ -6,7 +6,7 @@ let initLevel = {
         singleRecoveryInterval: 6,
         fullRecoveryInterval: 15,
         minSpeed: 150,
-        maxSpeed: 190,
+        maxSpeed: 250,
         //TODO
         burstNumber: 5,
 };
@@ -61,12 +61,12 @@ let EnemyManager = cc.Class({
     getCurLevel (index) {
         // index从0开始
         let level = {};
-        level.normalEnemyInterval = initLevel.normalEnemyInterval * Math.pow(0.9, index);
-        level.singleRecoveryInterval = initLevel.singleRecoveryInterval * Math.pow(0.9, index);
-        level.fullRecoveryInterval = initLevel.fullRecoveryInterval * Math.pow(0.9, index);
-        level.minSpeed = initLevel.minSpeed * Math.pow(1.1, index);
-        level.maxSpeed = initLevel.maxSpeed * Math.pow(1.1, index);
-        level.burstNumber = initLevel.burstNumber * Math.pow(1.1, index);
+        level.normalEnemyInterval = initLevel.normalEnemyInterval * Math.pow(0.85, index);
+        level.singleRecoveryInterval = initLevel.singleRecoveryInterval * Math.pow(0.85, index);
+        level.fullRecoveryInterval = initLevel.fullRecoveryInterval * Math.pow(0.85, index);
+        level.minSpeed = initLevel.minSpeed * Math.pow(1.15, index);
+        level.maxSpeed = initLevel.maxSpeed * Math.pow(1.15, index);
+        level.burstNumber = initLevel.burstNumber * Math.pow(1.15, index);
 
         return level;
     },
