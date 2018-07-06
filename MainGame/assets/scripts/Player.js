@@ -72,6 +72,18 @@ cc.Class({
             default: null,
             type: cc.Button
         },
+        bulletTraceAnim: {
+            default: null,
+            type: cc.Animation
+        },
+        comboNode: {
+            default: null,
+            type: cc.Node
+        },
+        comboLabel: {
+            default: null,
+            type: cc.Label
+        },
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -154,6 +166,9 @@ cc.Class({
             return;
         }
 
+        // 先播放弹道动画
+        this.bulletTraceAnim.play();
+
         // 先把状态设置成shooting
         this.xSpeed = 0;
         this.state = PlayerState.Shooting;
@@ -175,6 +190,11 @@ cc.Class({
             if (cc.Intersection.lineRect(a1, a2, rect) || cc.Intersection.lineRect(a3, a4, rect)) {
                 hitEnemies.push(enemyNode);
             } 
+        }
+        if (hitEnemies.length >= 2) {
+            this.comboNode.position = hitEnemies[0].position;
+            this.comboLabel.string = hitEnemies.length + "连";
+            this.comboNode.getComponent(cc.Animation).play();
         }
         if (hitEnemies.length >= 3) {
             EnemyManager.instance.slowMotion();
