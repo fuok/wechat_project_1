@@ -1,7 +1,7 @@
-let GameManager = require('GameManager');
-let EnemyManager = require('EnemyManager');
-let BrickManager = require('BrickManager');
 let ParticleManager = require('ParticleManager');
+let BrickManager = require('BrickManager');
+let EnemyManager = require('EnemyManager')
+let GameManager = require('GameManager');
 
 const EnemyType = {
     Normal: 0,
@@ -19,25 +19,20 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.init();
     },
 
-    init () {
-        this.node.x = BrickManager.instance.getRandomPosX();
-        this.node.y = 1200;
-        this.resetSpeed();
+    start () {
+    },
+
+    init (pos, fallingSpeed) {
+        this.node.position = pos;
+        this.fallingSpeed = fallingSpeed;
     },
 
     update (dt) {
         this.node.y -= this.fallingSpeed * dt * EnemyManager.instance.timeScale;
     },
     
-    resetSpeed() {
-        let minSpeed = GameManager.instance.curLevel.minSpeed;
-        let maxSpeed = GameManager.instance.curLevel.maxSpeed;
-        this.fallingSpeed = Math.random() * (maxSpeed - minSpeed) + minSpeed;
-    },
-
     onCollisionEnter (other) {
         if (other.node.group == 'border') {
             this.onHitBrick();
@@ -70,7 +65,7 @@ cc.Class({
         ParticleManager.instance.createEnemyHitFX3(this.node.position);
 
         if (this.enemyType == EnemyType.SingleRecovery) {
-            BrickManager.instance.repairSingleRandomBrokenBrick();
+            BrickManager.instance.repairOneBrick();
             EnemyManager.instance.destroyRecovery(this.node);
         } else if (this.enemyType == EnemyType.FullRecovery) {
             BrickManager.instance.repairAllBrokenBricks();

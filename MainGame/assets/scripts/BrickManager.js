@@ -16,6 +16,10 @@ let BrickManager = cc.Class({
             default: null,
             type:cc.Node
         },
+        playerNode: {
+            default: null,
+            type:cc.Node
+        },
         brickSize: 36,
         brickCount: 30,
         groundPosY: 0
@@ -35,13 +39,13 @@ let BrickManager = cc.Class({
             // set brick's position, brick size 36, totally 30 bricks
             newBrick.x = -(this.canvasWidth - this.brickSize) / 2  + i * this.brickSize;
             newBrick.y = this.groundPosY;
-            this.bricks.push(newBrick);
+            this.bricks.push(newBrick.getComponent('Brick'));
         }
     },
 
     resetAllBricks() {
         for (let i = 0; i < this.brickCount; i++) {
-            this.bricks[i].getComponent('Brick').repair(false);
+            this.bricks[i].repair(false);
         }
     },
 
@@ -52,7 +56,11 @@ let BrickManager = cc.Class({
 
     getRandomPosX () {
         let randIndex = Math.floor(Math.random() * 30);
-        return this.bricks[randIndex].x;
+        return this.bricks[randIndex].node.x;
+    },
+
+    getBrickPosX (index) {
+        return this.bricks[index].node.x;
     },
 
     isPosXWalkable (x) {
@@ -60,32 +68,48 @@ let BrickManager = cc.Class({
             return false;
         }
         let index = this.getBrickIndexFromX(x);
-        return !this.bricks[index].getComponent('Brick').isBroken;
+        return !this.bricks[index].isBroken;
     },
 
     repairAllBrokenBricks () {
         for (let i = 0; i < this.bricks.length; i++) {
-            this.bricks[i].getComponent('Brick').repair();
+            this.bricks[i].repair();
         }
     },
 
-    repairSingleRandomBrokenBrick () {
-        let brokenBricks = [];
-        for (let i = 0; i < this.bricks.length; i++) {
-            if (this.bricks[i].getComponent('Brick').isBroken) {
-                brokenBricks.push(this.bricks[i]);
+    findNearestBrickFromPlayer () {
+        let playerPosX = this.playerNode.position.x;
+        let playerIndex = this.getBrickIndexFromX(playerPosX);
+        let leftIndex = playerIndex;
+        let rightIndex = playerIndex + 1;
+        while (leftIndex >= 0 || rightIndex <= this.brickCount - 1) {
+            if (leftIndex >= 0) {
+                if (this.bricks[leftIndex].isBroken) {
+                    return leftIndex;
+                }
             }
+            if (rightIndex <= this.brickCount - 1) {
+                if (this.bricks[rightIndex].isBroken) {
+                    return rightIndex;
+                }
+            }
+            leftIndex -= 1;
+            rightIndex += 1;
         }
 
-        if (brokenBricks.length > 0) {
-            let randomBrickIndex = Math.floor(Math.random() * brokenBricks.length);
-            brokenBricks[randomBrickIndex].getComponent('Brick').repair();
+        return -1;
+    },
+
+    repairOneBrick () {
+        let brokenBrickIndex = this.findNearestBrickFromPlayer();
+        if (brokenBrickIndex >= 0) {
+            this.bricks[brokenBrickIndex].repair();
         }
     },
 
     checkAllBricksBroken () {
         for (let i = 0; i < this.bricks.length; ++i) {
-            if (!this.bricks[i].getComponent('Brick').isBroken) {
+            if (!this.bricks[i].isBroken) {
                 return;
             }
         }

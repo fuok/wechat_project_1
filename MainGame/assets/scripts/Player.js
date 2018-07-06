@@ -160,6 +160,7 @@ cc.Class({
 
         let enemies = EnemyManager.instance.getAllEnemies();
         let hitCount = 0;
+        let hitEnemies = [];
         for (let i = 0; i < enemies.length; i++) {
             let enemyNode = enemies[i];
             // 注意这里目前使用的是bounding box而不是collider，用世界坐标系判断
@@ -168,13 +169,18 @@ cc.Class({
             let newY = this.node.y + 1000;
             let a2 = this.node.parent.convertToWorldSpace(cc.v2(newX, newY));
             let rect = enemyNode.getBoundingBoxToWorld();
-            if (cc.Intersection.lineRect(a1, a2, rect)) {
-                enemyNode.getComponent('Enemy').onHitByBullet();
-                hitCount += 1;
-            }
+            // 我们这里判断两条线，相当于一束有宽度的激光，增加命中率
+            let a3 = cc.v2(a1.x, a1.y + 30);
+            let a4 = cc.v2(a2.x, a2.y + 30);
+            if (cc.Intersection.lineRect(a1, a2, rect) || cc.Intersection.lineRect(a3, a4, rect)) {
+                hitEnemies.push(enemyNode);
+            } 
         }
-        if (hitCount >= 2) {
+        if (hitEnemies.length >= 2) {
             EnemyManager.instance.slowMotion();
+        }
+        for (let i = 0; i < hitEnemies.length; i++) {
+            hitEnemies[i].getComponent('Enemy').onHitByBullet();
         }
     },
 

@@ -10,11 +10,10 @@ const GameState = {
 
 let levels = [
     {
-        scoreLimit: 30,
+        scoreLimit: 50,
         normalEnemyInterval: 1.5,
         singleRecoveryInterval: 6,
         fullRecoveryInterval: 15,
-        // DEBUG
         minSpeed: 150,
         maxSpeed: 170,
         //TODO

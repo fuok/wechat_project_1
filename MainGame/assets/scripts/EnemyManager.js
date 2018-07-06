@@ -1,4 +1,5 @@
 let ScoreManager = require('ScoreManager');
+let BrickManager = require('BrickManager');
 
 let EnemyManager = cc.Class({
     extends: cc.Component,
@@ -9,6 +10,8 @@ let EnemyManager = cc.Class({
 
     properties: {
         timeScale: 1,
+        enemyWaveInterval: 5,
+        enemyBreakInterval: 1,
         rootNode: {
             default: null,
             type: cc.Node
@@ -48,19 +51,30 @@ let EnemyManager = cc.Class({
         this.unscheduleAllCallbacks();
 
         let curLevel = this.GameManager.instance.curLevel;
-        this.schedule(function() {
-            this.createNewNormalEnemy();
-        }, curLevel.normalEnemyInterval);
-        this.schedule(function() {
-            this.createNewSingleRecovery();
-        }, curLevel.singleRecoveryInterval);
-        this.schedule(function() {
-            this.createNewFullRecovery();
-        }, curLevel.fullRecoveryInterval);
+        this.generatedNormalEnemyCount = 0;
+        this.schedule(this.controlGenerateNewNormalEnemy, curLevel.normalEnemyInterval);
+        this.schedule(this.createNewSingleRecovery, curLevel.singleRecoveryInterval);
+        this.schedule(this.createNewFullRecovery, curLevel.fullRecoveryInterval);
+    },
 
-        for (let i = 0; i < this.enemies.length; i++) {
-            this.enemies[i].getComponent('Enemy').resetSpeed();
+    controlGenerateNewNormalEnemy () {
+        let curLevel = this.GameManager.instance.curLevel;
+
+        if (this.generatedNormalEnemyCount == -1) {
+            this.generatedNormalEnemyCount = 0;
+            this.unschedule(this.controlGenerateNewNormalEnemy);
+            this.schedule(this.controlGenerateNewNormalEnemy, curLevel.normalEnemyInterval);
+            return;
         }
+
+        this.generatedNormalEnemyCount += 1;
+        this.createOneOrTwoEnemies();
+        if (this.generatedNormalEnemyCount > this.enemyWaveInterval / curLevel.normalEnemyInterval) {
+            this.generatedNormalEnemyCount = -1;
+            this.unschedule(this.controlGenerateNewNormalEnemy);
+            this.schedule(this.controlGenerateNewNormalEnemy, this.enemyBreakInterval);
+        }
+
     },
 
     getAllEnemies () {
@@ -74,10 +88,19 @@ let EnemyManager = cc.Class({
         }
     },
 
+    initEnemy (enemyNode) {
+        enemyNode.getComponent('Enemy').init(cc.v2(BrickManager.instance.getRandomPosX(), 1200), this.randomSpeed());
+    },
+
+    randomSpeed() {
+        let minSpeed = this.GameManager.instance.curLevel.minSpeed;
+        let maxSpeed = this.GameManager.instance.curLevel.maxSpeed;
+        return Math.random() * (maxSpeed - minSpeed) + minSpeed;
+    },
+
     addEnemy (enemyNode) {
         this.rootNode.addChild(enemyNode);
         this.enemies.push(enemyNode);
-        enemyNode.getComponent('Enemy').init();
     },
 
     removeEnemy (enemyNode) {
@@ -87,6 +110,30 @@ let EnemyManager = cc.Class({
         }
     },
 
+    createOneOrTwoEnemies () {
+        if (Math.random() >= 0.5) {
+            this.createNewNormalEnemy();
+        } else {
+            this.createTwoEnemies();
+        }
+    },
+
+    createTwoEnemies () {
+        let indexDis = Math.floor(Math.random() * 5) + 1;
+        let firstIndex = Math.floor(Math.random() * (BrickManager.instance.brickCount - 2 * indexDis) + indexDis);
+        let secondIndex = Math.random() >= 0.5 ? firstIndex + indexDis : firstIndex - indexDis;
+        let firstY = 1100 + Math.random() * 300;
+        let secondY = firstY + Math.abs(secondIndex - firstIndex) * BrickManager.instance.brickSize;
+        
+        let enemy1 = this.createNewNormalEnemy();
+        let enemy2 = this.createNewNormalEnemy();
+        let speed = this.randomSpeed();
+
+        enemy1.getComponent('Enemy').init(cc.v2(BrickManager.instance.getBrickPosX(firstIndex), firstY), speed);
+        enemy2.getComponent('Enemy').init(cc.v2(BrickManager.instance.getBrickPosX(secondIndex), secondY), speed);
+        //console.log("two enemies, pos1=" + this.enem)
+    },
+    
     createNewNormalEnemy () {
         let normalEnemyNode = null;
 
@@ -96,16 +143,20 @@ let EnemyManager = cc.Class({
             normalEnemyNode = cc.instantiate(this.normalEnemyPrefab);
         }
         this.addEnemy(normalEnemyNode);
+        this.initEnemy(normalEnemyNode);
+        return normalEnemyNode;
     },
 
     createNewSingleRecovery () {
         let singleRecoveryNode = cc.instantiate(this.singleRecoveryPrefab);
         this.addEnemy(singleRecoveryNode);
+        this.initEnemy(singleRecoveryNode);
     },
 
     createNewFullRecovery () {
         let fullRecoveryNode = cc.instantiate(this.fullRecoveryPrefab);
         this.addEnemy(fullRecoveryNode);
+        this.initEnemy(fullRecoveryNode);
     },
 
     destroyNormalEnemy (enemyNode) {
