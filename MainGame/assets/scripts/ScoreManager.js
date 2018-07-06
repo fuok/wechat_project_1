@@ -54,9 +54,15 @@ let ScoreManager = cc.Class({
         this._currentScore = 0;
     },
 
+    setScore(score) {
+        this._currentScore = score;
+        this.scoreDisplay.string = 'Score: ' + this._currentScore.toString();
+    },
+
     gainScore (score) {
         this._currentScore += score;
         // 更新 scoreDisplay Label 的文字
         this.scoreDisplay.string = 'Score: ' + this._currentScore.toString();
+        this.GameManager.instance.checkScoreForLevel(this._currentScore);
     }
 });

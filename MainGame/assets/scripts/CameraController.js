@@ -38,6 +38,7 @@ cc.Class({
     },
 
     moveCamera(pos) {
+        console.log("camera move to " + pos);
         let action = cc.moveTo(2, pos);
         action.easing(cc.easeExponentialOut());
         this.node.runAction(action);

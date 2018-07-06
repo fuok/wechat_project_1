@@ -1,16 +1,6 @@
 let ScoreManager = require('ScoreManager');
 let BrickManager = require('BrickManager');
 
-let initLevel = {
-        normalEnemyInterval: 1.5,
-        singleRecoveryInterval: 6,
-        fullRecoveryInterval: 15,
-        minSpeed: 150,
-        maxSpeed: 250,
-        //TODO
-        burstNumber: 5,
-};
-
 let EnemyManager = cc.Class({
     extends: cc.Component,
 
@@ -22,7 +12,6 @@ let EnemyManager = cc.Class({
         timeScale: 1,
         enemyWaveInterval: 0,
         enemyBreakInterval: 0,
-        enemyWaveCountPerLevel: 3,
         rootNode: {
             default: null,
             type: cc.Node
@@ -58,30 +47,14 @@ let EnemyManager = cc.Class({
     start () {
     },
 
-    getCurLevel (index) {
-        // index从0开始
-        let level = {};
-        level.normalEnemyInterval = initLevel.normalEnemyInterval * Math.pow(0.85, index);
-        level.singleRecoveryInterval = initLevel.singleRecoveryInterval * Math.pow(0.85, index);
-        level.fullRecoveryInterval = initLevel.fullRecoveryInterval * Math.pow(0.85, index);
-        level.minSpeed = initLevel.minSpeed * Math.pow(1.15, index);
-        level.maxSpeed = initLevel.maxSpeed * Math.pow(1.15, index);
-        level.burstNumber = initLevel.burstNumber * Math.pow(1.15, index);
-
-        return level;
-    },
 
     resetLevel () {
         this.unscheduleAllCallbacks();
 
-        this.curLevel = this.getCurLevel(this.GameManager.instance.curLevelIndex);
-        this.curLevelWave = 0;
+        this.curLevel = this.GameManager.instance.curLevel;
         this.curLevelEnemyCountPerWave = this.enemyWaveInterval / this.curLevel.normalEnemyInterval;
         this.curWaveGeneratedNormalEnemyCount = 0;
 
-        this.unschedule(this.controlGenerateNewNormalEnemy);
-        this.unschedule(this.createNewSingleRecovery);
-        this.unschedule(this.createNewFullRecovery);
         this.schedule(this.controlGenerateNewNormalEnemy, this.curLevel.normalEnemyInterval);
         this.schedule(this.createNewSingleRecovery, this.curLevel.singleRecoveryInterval);
         this.schedule(this.createNewFullRecovery, this.curLevel.fullRecoveryInterval);
@@ -90,14 +63,8 @@ let EnemyManager = cc.Class({
     controlGenerateNewNormalEnemy () {
         if (this.curWaveGeneratedNormalEnemyCount == -1) {
             this.curWaveGeneratedNormalEnemyCount = 0;
-            this.curLevelWave += 1;
-            if (this.curLevelWave >= this.enemyWaveCountPerLevel) {
-                this.GameManager.instance.nextLevel();
-            }
             this.unschedule(this.controlGenerateNewNormalEnemy);
             this.schedule(this.controlGenerateNewNormalEnemy, this.curLevel.normalEnemyInterval);
-            console.log("wave " + this.curLevelWave + " start, enemyCount=" + this.curLevelEnemyCountPerWave);
-
             return;
         }
 
@@ -113,6 +80,12 @@ let EnemyManager = cc.Class({
 
     getAllEnemies () {
         return this.enemies;
+    },
+
+    cancelAllTimeSchedules() {
+        this.unschedule(this.controlGenerateNewNormalEnemy);
+        this.unschedule(this.createNewSingleRecovery);
+        this.unschedule(this.createNewFullRecovery);
     },
 
     clearAllEnemies () {
@@ -216,8 +189,6 @@ let EnemyManager = cc.Class({
           
         //回收对象
         this.destroyNormalEnemy(enemyNode);
-        // TODO: 击中目标不同得分不同
-        ScoreManager.instance.gainScore(score);
     },
 
     slowMotion() {

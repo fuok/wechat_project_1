@@ -8,6 +8,17 @@ const GameState = {
     GameOver: 2,
 };
 
+let initLevel = {
+        scoreLimit: 100,
+        normalEnemyInterval: 1.5,
+        singleRecoveryInterval: 6,
+        fullRecoveryInterval: 15,
+        minSpeed: 150,
+        maxSpeed: 250,
+        //TODO
+        burstNumber: 5,
+};
+
 let GameManager = cc.Class({
     extends: cc.Component,
 
@@ -35,6 +46,10 @@ let GameManager = cc.Class({
         },
         // player 节点，用于获取主角弹跳的高度，和控制主角行动开关
         player: {
+            default: null,
+            type: cc.Node
+        },
+        nextLevelLabel: {
             default: null,
             type: cc.Node
         },
@@ -78,9 +93,9 @@ let GameManager = cc.Class({
         this.player.getComponent('Player').enableInput();
         BrickManager.instance.resetAllBricks();
         EnemyManager.instance.clearAllEnemies();
-        this.curLevelIndex = -1;
-        this.nextLevel();
-        this.cameraNode.getComponent('CameraController').moveCameraToCenter();
+        this.curLevelIndex = 1;
+        ScoreManager.instance.setScore(0);
+        this.nextLevelAnimDone();
     },
 
     gameOver () {
@@ -91,13 +106,20 @@ let GameManager = cc.Class({
     },
 
     nextLevel () {
-        if (this.curLevelIndex >= this.levelCount - 1) {
-            return;
-        }
-        
+        this.cameraNode.getComponent('CameraController').moveCameraToTarget();
+        EnemyManager.instance.cancelAllTimeSchedules();
+        EnemyManager.instance.clearAllEnemies();
         this.curLevelIndex += 1;
+        this.nextLevelLabel.active = true;
+        this.nextLevelLabel.getComponent(cc.Label).string = "LEVEL " + this.curLevelIndex;
+        this.scheduleOnce(this.nextLevelAnimDone, 2);
+    },
+
+    nextLevelAnimDone () {
+        this.nextLevelLabel.active = false;
+        this.generateCurLevel(this.curLevelIndex);
         EnemyManager.instance.resetLevel();
-        console.log("level=" + this.curLevelIndex);
+        this.cameraNode.getComponent('CameraController').moveCameraToCenter();
     },
 
     showGameOverPanel () {
@@ -115,6 +137,23 @@ let GameManager = cc.Class({
                 this.uiNode.addChild(node);
             }
         });
-    }
+    },
 
+    generateCurLevel (index) {
+        // index从0开始
+        this.curLevel = {};
+        this.curLevel.scoreLimit = initLevel.scoreLimit * index * index / 2;
+        this.curLevel.normalEnemyInterval = initLevel.normalEnemyInterval * Math.pow(0.9, index);
+        this.curLevel.singleRecoveryInterval = initLevel.singleRecoveryInterval * Math.pow(0.9, index);
+        this.curLevel.fullRecoveryInterval = initLevel.fullRecoveryInterval * Math.pow(0.9, index);
+        this.curLevel.minSpeed = initLevel.minSpeed * Math.pow(1.10, index);
+        this.curLevel.maxSpeed = initLevel.maxSpeed * Math.pow(1.10, index);
+        this.curLevel.burstNumber = initLevel.burstNumber * Math.pow(1.10, index);
+    },
+
+    checkScoreForLevel(score) {
+        if (score > this.curLevel.scoreLimit) {
+            this.nextLevel();
+        }
+    }
 });

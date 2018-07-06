@@ -1,3 +1,4 @@
+let ScoreManager = require('ScoreManager');
 let GameManager = require('GameManager')
 let EnemyManager = require('EnemyManager')
 let BrickManager = require('BrickManager')
@@ -191,16 +192,20 @@ cc.Class({
                 hitEnemies.push(enemyNode);
             } 
         }
-        if (hitEnemies.length >= 2) {
-            this.comboNode.position = hitEnemies[0].position;
-            this.comboLabel.string = hitEnemies.length + "连";
-            this.comboNode.getComponent(cc.Animation).play();
-        }
-        if (hitEnemies.length >= 3) {
-            EnemyManager.instance.slowMotion();
-        }
-        for (let i = 0; i < hitEnemies.length; i++) {
-            hitEnemies[i].getComponent('Enemy').onHitByBullet();
+        // 计算分数
+        if (hitEnemies.length > 0) {
+            ScoreManager.instance.gainScore(hitEnemies.length * hitEnemies.length * 10);
+            if (hitEnemies.length >= 2) {
+                this.comboNode.position = hitEnemies[0].position;
+                this.comboLabel.string = hitEnemies.length + "连";
+                this.comboNode.getComponent(cc.Animation).play();
+            }
+            if (hitEnemies.length >= 3) {
+                EnemyManager.instance.slowMotion();
+            }
+            for (let i = 0; i < hitEnemies.length; i++) {
+                hitEnemies[i].getComponent('Enemy').onHitByBullet();
+            }
         }
     },
 
