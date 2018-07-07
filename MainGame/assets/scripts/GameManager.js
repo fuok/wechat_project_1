@@ -13,7 +13,7 @@ let initLevel = {
         playerMoveSpeed: 400,
         normalEnemyInterval: 1.2,
         singleRecoveryInterval: 6,
-        fullRecoveryInterval: 15,
+        fullRecoveryInterval: 20,
         minSpeed: 150,
         maxSpeed: 250,
         //TODO
@@ -101,6 +101,7 @@ let GameManager = cc.Class({
         this.curLevelIndex = 1;
         ScoreManager.instance.setScore(0);
         this.nextLevelAnimDone();
+        this.cameraNode.getComponent('CameraController').moveCameraToCenter();
     },
 
     gameOver () {
@@ -111,9 +112,7 @@ let GameManager = cc.Class({
     },
 
     nextLevel () {
-        // 这个函数只是用来清除当前场景，并转镜头用的
-        this.cameraNode.getComponent('CameraController').moveCameraToTarget();
-        EnemyManager.instance.cancelAllTimeSchedules();
+        // 这个函数只是用来清除当前场景
         EnemyManager.instance.clearAllEnemies();
         this.curLevelIndex += 1;
         this.nextLevelLabel.active = true;
@@ -127,7 +126,6 @@ let GameManager = cc.Class({
         this.generateCurLevel(this.curLevelIndex);
         EnemyManager.instance.resetLevel();
         this.player.getComponent('Player').moveSpeed = this.curLevel.playerMoveSpeed;
-        this.cameraNode.getComponent('CameraController').moveCameraToCenter();
     },
 
     showGameOverPanel () {
@@ -157,7 +155,7 @@ let GameManager = cc.Class({
             this.curLevel.playerMoveSpeed = this.previousLevel.playerMoveSpeed * 1.1;
             this.curLevel.normalEnemyInterval = this.previousLevel.normalEnemyInterval * 0.9;
             this.curLevel.singleRecoveryInterval = this.previousLevel.singleRecoveryInterval * 0.9;
-            this.curLevel.fullRecoveryInterval = this.previousLevel.fullRecoveryInterval * 0.9;
+            this.curLevel.fullRecoveryInterval = this.previousLevel.fullRecoveryInterval * 0.95;
             this.curLevel.minSpeed = this.previousLevel.minSpeed * 1.05;
             this.curLevel.maxSpeed = this.previousLevel.maxSpeed * 1.05;
             this.curLevel.burstNumber = this.previousLevel.burstNumber * 1.1;

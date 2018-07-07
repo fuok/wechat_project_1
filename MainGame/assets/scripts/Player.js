@@ -136,6 +136,8 @@ cc.Class({
         this.node.position.x = 0;
         // 初始化键盘输入监听
         this.inputEnabled = false;
+        this.doubleKillCount = 0;
+        this.comboCount = 0;
     },
 
     die () {
@@ -180,17 +182,26 @@ cc.Class({
             let singleEnemyScore = hitEnemies.length * 10;
             ScoreManager.instance.gainScore(hitEnemies.length * singleEnemyScore);
             if (hitEnemies.length >= 2) {
+                this.doubleKillCount += 1;
+                this.comboCount += hitEnemies.length;
+
                 this.comboNode.position = hitEnemies[0].node.position;
-                this.comboLabel.string = hitEnemies.length + "连";
+                this.comboLabel.string = this.comboCount + "连";
                 this.comboNode.getComponent(cc.Animation).play();
+            } else {
+                this.doubleKillCount = 0;
+                this.comboCount = 0;
             }
-            if (hitEnemies.length >= 3) {
+            if (this.doubleKillCount >= 2) {
                 EnemyManager.instance.slowMotion();
             }
             for (let i = 0; i < hitEnemies.length; i++) {
                 ScoreManager.instance.createScoreFX(hitEnemies[i].node.position, singleEnemyScore);
                 hitEnemies[i].onHitByBullet();
             }
+        } else {
+            this.doubleKillCount = 0;
+            this.comboCount = 0;
         }
     },
 
