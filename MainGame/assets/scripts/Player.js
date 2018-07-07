@@ -1,6 +1,7 @@
 let ScoreManager = require('ScoreManager');
 let GameManager = require('GameManager')
 let EnemyManager = require('EnemyManager')
+let ParticleManager = require('ParticleManager');
 let BrickManager = require('BrickManager')
 
 const PlayerState = {
@@ -194,7 +195,8 @@ cc.Class({
         }
         // 计算分数
         if (hitEnemies.length > 0) {
-            ScoreManager.instance.gainScore(hitEnemies.length * hitEnemies.length * 10);
+            let singleEnemyScore = hitEnemies.length * 10;
+            ScoreManager.instance.gainScore(hitEnemies.length * singleEnemyScore);
             if (hitEnemies.length >= 2) {
                 this.comboNode.position = hitEnemies[0].position;
                 this.comboLabel.string = hitEnemies.length + "连";
@@ -204,6 +206,7 @@ cc.Class({
                 EnemyManager.instance.slowMotion();
             }
             for (let i = 0; i < hitEnemies.length; i++) {
+                ScoreManager.instance.createScoreFX(hitEnemies[i].position, singleEnemyScore);
                 hitEnemies[i].getComponent('Enemy').onHitByBullet();
             }
         }

@@ -1,4 +1,3 @@
-let ScoreManager = require('ScoreManager');
 let BrickManager = require('BrickManager');
 
 let EnemyManager = cc.Class({
@@ -178,7 +177,6 @@ let EnemyManager = cc.Class({
 
     killNormalEnemy (enemyNode) {
         //显示击中得分
-        var score=10;
         var getScoreLabel=cc.instantiate(this.getScoreLabelPrefab);
         this.rootNode.addChild(getScoreLabel);
         getScoreLabel.setPosition(enemyNode);
@@ -186,7 +184,6 @@ let EnemyManager = cc.Class({
         setTimeout(function () {
             getScoreLabel.destroy();
           }.bind(this), 500);
-          
         //回收对象
         this.destroyNormalEnemy(enemyNode);
     },

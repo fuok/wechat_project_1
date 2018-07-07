@@ -58,7 +58,7 @@ cc.Class({
         this.eliminate();
     },
 
-    onHitByBullet () {
+    onHitByBullet (score) {
         // 被子弹击中的粒子效果
         ParticleManager.instance.createEnemyHitFX1(this.node.position);
         ParticleManager.instance.createEnemyHitFX2(this.node.position);
@@ -71,7 +71,7 @@ cc.Class({
             BrickManager.instance.repairAllBrokenBricks();
             EnemyManager.instance.destroyRecovery(this.node);
         } else if (this.enemyType == EnemyType.Normal) {
-            EnemyManager.instance.killNormalEnemy(this.node);
+            EnemyManager.instance.destroyNormalEnemy(this.node);
         }
     }
 });

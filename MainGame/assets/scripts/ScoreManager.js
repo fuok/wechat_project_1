@@ -13,6 +13,16 @@ let ScoreManager = cc.Class({
             type: cc.Label
         },
 
+        rootNode: {
+            default: null,
+            type: cc.Node
+        },
+
+        scoreFXPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
+
         currentScore: {
             get () {
                 return this._currentScore;
@@ -21,21 +31,6 @@ let ScoreManager = cc.Class({
 
         // TODO: 定义本地存储的maxscore
         maxScore: 0
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -43,6 +38,7 @@ let ScoreManager = cc.Class({
     onLoad () {
         ScoreManager.instance = this;
         this.GameManager = require('GameManager');
+        this.scoreFXPool = new cc.NodePool();
     },
 
     start () {
@@ -52,6 +48,25 @@ let ScoreManager = cc.Class({
     init () {
         // 初始化计分
         this._currentScore = 0;
+    },
+
+    createScoreFX (pos, score) {
+        let fxNode = null;
+
+        if (this.scoreFXPool.length > 0) {
+            fxNode = this.scoreFXPool.get();
+        } else {
+            fxNode = cc.instantiate(this.scoreFXPrefab);
+        }
+        // pos参数是相对于rootNode的pos
+        fxNode.position = pos;
+        fxNode.getComponent(cc.Label).string = score;
+        this.rootNode.addChild(fxNode);
+        fxNode.getComponent(cc.Animation).scheduleOnce(this.destroyFX.bind(this, fxNode), 2);
+    },
+
+    destroyFX (fxNode) {
+        this.scoreFXPool.put(fxNode);
     },
 
     setScore(score) {

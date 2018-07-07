@@ -2509,6 +2509,12 @@
     "scoreDisplay": {
       "__id__": 27
     },
+    "rootNode": {
+      "__id__": 5
+    },
+    "scoreFXPrefab": {
+      "__uuid__": "0fac1a64-1594-430f-99fa-2da7a3e5e489"
+    },
     "maxScore": 0
   },
   {
