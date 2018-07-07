@@ -45,6 +45,7 @@ cc.Class({
                 if (value == PlayerState.Shooting) {
                     // 射击动画会强制取消前边的动画
                     this.playerArmatureDisplay.playAnimation('attack', 1);
+                    this.playerState = value;
                 } else if (this.playerState != value) {
                     this.playerState = value;
                     switch (this.playerState) {
