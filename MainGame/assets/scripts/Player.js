@@ -199,7 +199,7 @@ cc.Class({
             }
             for (let i = 0; i < hitEnemies.length; i++) {
                 ScoreManager.instance.createScoreFX(hitEnemies[i].node.position, singleEnemyScore);
-                hitEnemies[i].onHitByBullet();
+                hitEnemies[i].onHitByBullet(this.direction);
             }
         } else {
             this.doubleKillCount = 0;

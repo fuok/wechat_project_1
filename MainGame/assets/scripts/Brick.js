@@ -59,7 +59,7 @@ cc.Class({
             // 干掉该列的敌人
             while (this.enemies.length > 0) {
                 console.log('Enemy removed!');
-                this.enemies[this.enemies.length - 1].onHitByBullet(10);
+                this.enemies[this.enemies.length - 1].onHitByBullet();
             }
         }
     }

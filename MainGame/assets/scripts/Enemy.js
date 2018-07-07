@@ -59,11 +59,11 @@ cc.Class({
         this.eliminate();
     },
 
-    onHitByBullet (score) {
+    onHitByBullet (direction=1) {
         // 被子弹击中的粒子效果
-        ParticleManager.instance.createEnemyHitFX1(this.node.position);
-        ParticleManager.instance.createEnemyHitFX2(this.node.position);
-        ParticleManager.instance.createEnemyHitFX3(this.node.position);
+        ParticleManager.instance.createEnemyHitFX1(this.node.position, direction);
+        ParticleManager.instance.createEnemyHitFX2(this.node.position, direction);
+        ParticleManager.instance.createEnemyHitFX3(this.node.position, direction);
 
 
         if (this.enemyType == EnemyType.SingleRecovery) {

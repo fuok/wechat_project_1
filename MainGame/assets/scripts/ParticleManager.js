@@ -49,7 +49,7 @@ let ParticleManager = cc.Class({
 
     },
 
-    createFX (pos, nodePool, FXPrefab) {
+    createFX (pos, nodePool, FXPrefab, direction=-1) {
         let fxNode = null;
 
         if (nodePool.length > 0) {
@@ -61,22 +61,27 @@ let ParticleManager = cc.Class({
         this.rootNode.addChild(fxNode);
         // pos参数是相对于rootNode的pos
         fxNode.position = pos;
+        if (direction == 0 /* left */) {
+            fxNode.scaleX = -Math.abs(fxNode.scaleX);
+        } else if (direction == 1 /* right */) {
+            fxNode.scaleX = Math.abs(fxNode.scaleX);
+        }
     },
 
     destroyFX(fxNode, nodePool) {
         nodePool.put(fxNode);
     },
 
-    createEnemyHitFX1 (pos) {
-        this.createFX(pos, this.enemyHitFX1Pool, this.enemyHitFX1Prefab);
+    createEnemyHitFX1 (pos, direction) {
+        this.createFX(pos, this.enemyHitFX1Pool, this.enemyHitFX1Prefab, direction);
     },
 
-    createEnemyHitFX2 (pos) {
-        this.createFX(pos, this.enemyHitFX2Pool, this.enemyHitFX2Prefab);
+    createEnemyHitFX2 (pos, direction) {
+        this.createFX(pos, this.enemyHitFX2Pool, this.enemyHitFX2Prefab, direction);
     },
 
-    createEnemyHitFX3 (pos) {
-        this.createFX(pos, this.enemyHitFX3Pool, this.enemyHitFX3Prefab);
+    createEnemyHitFX3 (pos, direction) {
+        this.createFX(pos, this.enemyHitFX3Pool, this.enemyHitFX3Prefab, direction);
     },
 
     createBrickHitFX (pos) {
