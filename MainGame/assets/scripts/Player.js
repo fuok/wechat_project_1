@@ -11,6 +11,12 @@ const PlayerState = {
     Dead: 3
 };
 
+const DirectionKeyState = {
+    Idle: 0,
+    Left: 1,
+    Right: 2,
+};
+
 const PlayerDirection = {
     Left: 0,
     Right: 1,
@@ -100,9 +106,9 @@ cc.Class({
     updatePlayerPos(dt) {
         // 根据当前加速度方向每帧更新速度
         let speed = 0;
-        if (this.accLeft) {
+        if (this.directionKeyState == DirectionKeyState.Left) {
             speed = -this.moveSpeed;
-        } else if (this.accRight) {
+        } else if (this.directionKeyState == DirectionKeyState.Right) {
             speed = this.moveSpeed;
         } else {
             return;
@@ -127,11 +133,6 @@ cc.Class({
     reset () {
         // 初始状态：idle
         this.state = PlayerState.Idle;
-        // 加速度方向开关
-        this.accLeft = false;
-        this.accRight = false;
-        // 主角当前水平方向速度
-        this.xSpeed = 0;
         // 方向, 0:左, 1:右
         this.direction = PlayerDirection.Left;
         this.node.position.x = 0;
@@ -139,6 +140,7 @@ cc.Class({
         this.inputEnabled = false;
         this.doubleKillCount = 0;
         this.comboCount = 0;
+        this.directionKeyState = DirectionKeyState.Idle;
     },
 
     die () {
@@ -157,7 +159,6 @@ cc.Class({
         this.bulletTraceAnim.play();
 
         // 先把状态设置成shooting
-        this.xSpeed = 0;
         this.state = PlayerState.Shooting;
 
         let enemies = EnemyManager.instance.getAllEnemies();
@@ -218,10 +219,13 @@ cc.Class({
     },
 
     shootingAnimComplete () {
-        if (this.accLeft == false && this.accRight == false) {
-            this.state = PlayerState.Idle;
+        this.state = PlayerState.Idle;
+        if (this.directionKeyState == DirectionKeyState.Left) {
+            this.moveLeft();
+        } else if (this.directionKeyState == DirectionKeyState.Right) {
+            this.moveRight();
         } else {
-            this.state = PlayerState.Running;
+            // 什么也不做
         }
     },
 
@@ -236,18 +240,16 @@ cc.Class({
     },
 
     moveLeft () {
-        if (!this.accLeft && this.state != PlayerState.Shooting) {
-            this.accLeft = true;
-            this.accRight = false;
+        this.directionKeyState = DirectionKeyState.Left;
+        if (this.state != PlayerState.Shooting) {
             this.state = PlayerState.Running;
             this.direction = PlayerDirection.Left;
         }
     },
 
     moveRight () {
-        if (!this.accRight && this.state != PlayerState.Shooting) {
-            this.accLeft = false;
-            this.accRight = true;
+        this.directionKeyState = DirectionKeyState.Right;
+        if (this.state != PlayerState.Shooting) {
             this.state = PlayerState.Running;
             this.direction = PlayerDirection.Right;
         }
@@ -258,9 +260,10 @@ cc.Class({
             return;
         }
 
-        this.accLeft = false;
-        this.accRight = false;
-        this.state = PlayerState.Idle;
+        this.directionKeyState = DirectionKeyState.Idle;
+        if (this.state != PlayerState.Shooting) {
+            this.state = PlayerState.Idle;
+        }
     },
 
     checkDirectionButtonTouchEvent (locationWS) {
