@@ -76,7 +76,7 @@ let BrickManager = cc.Class({
 
     repairAllBrokenBricks () {
         this.repairAllBrokenBricksIndex = 0;
-        this.schedule(this.repairAllBrokenBricksCallback, 0.05, this.brickCount);
+        this.schedule(this.repairAllBrokenBricksCallback, 0.02, this.brickCount);
     },
 
     repairAllBrokenBricksCallback () {

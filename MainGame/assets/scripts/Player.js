@@ -30,9 +30,9 @@ cc.Class({
                 if (this.playerDirection != value) {
                     this.playerDirection = value;
                     if (this.playerDirection == PlayerDirection.Left) {
-                        this.node.scaleX = Math.abs(this.node.scaleX);
-                    } else {
                         this.node.scaleX = -Math.abs(this.node.scaleX);
+                    } else {
+                        this.node.scaleX = Math.abs(this.node.scaleX);
                     }
                 }
             }
@@ -44,18 +44,18 @@ cc.Class({
             set (value) {
                 if (value == PlayerState.Shooting) {
                     // 射击动画会强制取消前边的动画
-                    this.playerArmatureDisplay.playAnimation('atc', 1);
+                    this.playerArmatureDisplay.playAnimation('attack', 1);
                 } else if (this.playerState != value) {
                     this.playerState = value;
                     switch (this.playerState) {
                         case PlayerState.Idle:
-                            this.playerArmatureDisplay.playAnimation('stand', 0);
+                            this.playerArmatureDisplay.playAnimation('idle', 0);
                             break;
                         case PlayerState.Running:
                             this.playerArmatureDisplay.playAnimation('walk', 0);
                             break;
                         case PlayerState.Dead:
-                            this.playerArmatureDisplay.playAnimation('turn face', 1);
+                            this.playerArmatureDisplay.playAnimation('dead', 1);
                             break;
                     };
                 }

@@ -117,7 +117,8 @@ let GameManager = cc.Class({
         this.curLevelIndex += 1;
         this.nextLevelLabel.active = true;
         this.nextLevelLabel.getComponent(cc.Label).string = "LEVEL " + this.curLevelIndex;
-        this.scheduleOnce(this.nextLevelAnimDone, 2);
+        this.nextLevelLabel.getComponent(cc.Animation).play();
+        this.scheduleOnce(this.nextLevelAnimDone, 3);
     },
 
     nextLevelAnimDone () {
