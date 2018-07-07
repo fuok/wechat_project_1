@@ -89,6 +89,7 @@ let GameManager = cc.Class({
     },
 
     gameStart () {
+        this.uiNode.getChildByName('Opening Panel').destroy();
         this._gameState = GameState.Playing;
         this.player.getComponent('Player').reset();
         this.player.getComponent('Player').enableInput();

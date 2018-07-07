@@ -161,18 +161,18 @@ cc.Class({
         let hitCount = 0;
         let hitEnemies = [];
         for (let i = 0; i < enemies.length; i++) {
-            let enemyNode = enemies[i];
+            let enemy = enemies[i];
             // 注意这里目前使用的是bounding box而不是collider，用世界坐标系判断
             let a1 = this.node.parent.convertToWorldSpace(this.node.position);
             let newX = this.direction == PlayerDirection.Left ? this.node.x - 1000 : this.node.x + 1000;
             let newY = this.node.y + 1000;
             let a2 = this.node.parent.convertToWorldSpace(cc.v2(newX, newY));
-            let rect = enemyNode.getBoundingBoxToWorld();
+            let rect = enemy.node.getBoundingBoxToWorld();
             // 我们这里判断两条线，相当于一束有宽度的激光，增加命中率
             let a3 = cc.v2(a1.x, a1.y + 30);
             let a4 = cc.v2(a2.x, a2.y + 30);
             if (cc.Intersection.lineRect(a1, a2, rect) || cc.Intersection.lineRect(a3, a4, rect)) {
-                hitEnemies.push(enemyNode);
+                hitEnemies.push(enemy);
             } 
         }
         // 计算分数
@@ -180,7 +180,7 @@ cc.Class({
             let singleEnemyScore = hitEnemies.length * 10;
             ScoreManager.instance.gainScore(hitEnemies.length * singleEnemyScore);
             if (hitEnemies.length >= 2) {
-                this.comboNode.position = hitEnemies[0].position;
+                this.comboNode.position = hitEnemies[0].node.position;
                 this.comboLabel.string = hitEnemies.length + "连";
                 this.comboNode.getComponent(cc.Animation).play();
             }
@@ -188,8 +188,8 @@ cc.Class({
                 EnemyManager.instance.slowMotion();
             }
             for (let i = 0; i < hitEnemies.length; i++) {
-                ScoreManager.instance.createScoreFX(hitEnemies[i].position, singleEnemyScore);
-                hitEnemies[i].getComponent('Enemy').onHitByBullet();
+                ScoreManager.instance.createScoreFX(hitEnemies[i].node.position, singleEnemyScore);
+                hitEnemies[i].onHitByBullet();
             }
         }
     },
@@ -279,7 +279,11 @@ cc.Class({
             self.stopMove();
         });
         self.btnShoot.node.on(cc.Node.EventType.TOUCH_START, function (event) {
-            self.shoot();
+            if (GameManager.instance.gameState == 0 /* Opening */) {
+                GameManager.instance.gameStart();
+            } else {
+                self.shoot();
+            }
         });
     },
     enableInput () {

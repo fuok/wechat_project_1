@@ -64,12 +64,13 @@ cc.Class({
         ParticleManager.instance.createEnemyHitFX2(this.node.position);
         ParticleManager.instance.createEnemyHitFX3(this.node.position);
 
+
         if (this.enemyType == EnemyType.SingleRecovery) {
+            EnemyManager.instance.destroyRecovery(this.node);
             BrickManager.instance.repairOneBrick();
-            EnemyManager.instance.destroyRecovery(this.node);
         } else if (this.enemyType == EnemyType.FullRecovery) {
-            BrickManager.instance.repairAllBrokenBricks();
             EnemyManager.instance.destroyRecovery(this.node);
+            BrickManager.instance.repairAllBrokenBricks();
         } else if (this.enemyType == EnemyType.Normal) {
             EnemyManager.instance.destroyNormalEnemy(this.node);
         }

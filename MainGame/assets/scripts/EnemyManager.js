@@ -90,7 +90,7 @@ let EnemyManager = cc.Class({
     clearAllEnemies () {
         this.unscheduleAllCallbacks();
         while(this.enemies.length > 0) {
-            this.enemies[this.enemies.length - 1].getComponent('Enemy').eliminate();
+            this.enemies[this.enemies.length - 1].eliminate();
         }
     },
 
@@ -106,11 +106,12 @@ let EnemyManager = cc.Class({
 
     addEnemy (enemyNode) {
         this.rootNode.addChild(enemyNode);
-        this.enemies.push(enemyNode);
+        this.enemies.push(enemyNode.getComponent('Enemy'));
     },
 
     removeEnemy (enemyNode) {
-        let index = this.enemies.indexOf(enemyNode);
+        let enemy = enemyNode.getComponent('Enemy');
+        let index = this.enemies.indexOf(enemy);
         if (index > -1) {
             this.enemies.splice(index, 1);
         }
@@ -137,7 +138,6 @@ let EnemyManager = cc.Class({
 
         enemy1.getComponent('Enemy').init(cc.v2(BrickManager.instance.getBrickPosX(firstIndex), firstY), speed);
         enemy2.getComponent('Enemy').init(cc.v2(BrickManager.instance.getBrickPosX(secondIndex), secondY), speed);
-        //console.log("two enemies, pos1=" + this.enem)
     },
     
     createNewNormalEnemy () {
