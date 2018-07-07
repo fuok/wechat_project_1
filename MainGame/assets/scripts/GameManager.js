@@ -10,6 +10,7 @@ const GameState = {
 
 let initLevel = {
         scoreLimit: 100,
+        playerMoveSpeed: 400,
         normalEnemyInterval: 1.5,
         singleRecoveryInterval: 6,
         fullRecoveryInterval: 15,
@@ -106,6 +107,7 @@ let GameManager = cc.Class({
     },
 
     nextLevel () {
+        // 这个函数只是用来清除当前场景，并转镜头用的
         this.cameraNode.getComponent('CameraController').moveCameraToTarget();
         EnemyManager.instance.cancelAllTimeSchedules();
         EnemyManager.instance.clearAllEnemies();
@@ -116,9 +118,11 @@ let GameManager = cc.Class({
     },
 
     nextLevelAnimDone () {
+        // 这个函数是真正的初始化当前level的地方
         this.nextLevelLabel.active = false;
         this.generateCurLevel(this.curLevelIndex);
         EnemyManager.instance.resetLevel();
+        this.player.getComponent('Player').moveSpeed = this.curLevel.playerMoveSpeed;
         this.cameraNode.getComponent('CameraController').moveCameraToCenter();
     },
 
@@ -141,14 +145,19 @@ let GameManager = cc.Class({
 
     generateCurLevel (index) {
         // index从0开始
-        this.curLevel = {};
-        this.curLevel.scoreLimit = initLevel.scoreLimit * index * index / 2;
-        this.curLevel.normalEnemyInterval = initLevel.normalEnemyInterval * Math.pow(0.9, index);
-        this.curLevel.singleRecoveryInterval = initLevel.singleRecoveryInterval * Math.pow(0.9, index);
-        this.curLevel.fullRecoveryInterval = initLevel.fullRecoveryInterval * Math.pow(0.9, index);
-        this.curLevel.minSpeed = initLevel.minSpeed * Math.pow(1.10, index);
-        this.curLevel.maxSpeed = initLevel.maxSpeed * Math.pow(1.10, index);
-        this.curLevel.burstNumber = initLevel.burstNumber * Math.pow(1.10, index);
+        if (index == 1) {
+            this.curLevel = Object.assign(initLevel);
+        } else {
+            this.previousLevel = Object.assign(this.curLevel);
+            this.curLevel.scoreLimit = this.previousLevel.scoreLimit * 2;
+            this.curLevel.playerMoveSpeed = this.previousLevel.playerMoveSpeed * 1.1;
+            this.curLevel.normalEnemyInterval = this.previousLevel.normalEnemyInterval * 0.9;
+            this.curLevel.singleRecoveryInterval = this.previousLevel.singleRecoveryInterval * 0.9;
+            this.curLevel.fullRecoveryInterval = this.previousLevel.fullRecoveryInterval * 0.9;
+            this.curLevel.minSpeed = this.previousLevel.minSpeed * 1.1;
+            this.curLevel.maxSpeed = this.previousLevel.maxSpeed * 1.1;
+            this.curLevel.burstNumber = this.previousLevel.burstNumber * 1.1;
+        }
     },
 
     checkScoreForLevel(score) {

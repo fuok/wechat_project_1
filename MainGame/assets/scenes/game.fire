@@ -1727,9 +1727,7 @@
       "__id__": 33
     },
     "_enabled": true,
-    "maxMoveSpeed": 400,
-    "accel": 10000,
-    "friction": 3000,
+    "moveSpeed": 0,
     "btnDirection": {
       "__id__": 19
     },
