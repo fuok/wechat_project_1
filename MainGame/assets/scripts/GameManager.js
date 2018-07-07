@@ -9,9 +9,9 @@ const GameState = {
 };
 
 let initLevel = {
-        scoreLimit: 100,
+        scoreLimit: 200,
         playerMoveSpeed: 400,
-        normalEnemyInterval: 1.5,
+        normalEnemyInterval: 1.2,
         singleRecoveryInterval: 6,
         fullRecoveryInterval: 15,
         minSpeed: 150,
@@ -89,7 +89,10 @@ let GameManager = cc.Class({
     },
 
     gameStart () {
-        this.uiNode.getChildByName('Opening Panel').destroy();
+        let openingPanel = this.uiNode.getChildByName('Opening Panel');
+        if (openingPanel != undefined) {
+            openingPanel.destroy();
+        }
         this._gameState = GameState.Playing;
         this.player.getComponent('Player').reset();
         this.player.getComponent('Player').enableInput();
@@ -155,8 +158,8 @@ let GameManager = cc.Class({
             this.curLevel.normalEnemyInterval = this.previousLevel.normalEnemyInterval * 0.9;
             this.curLevel.singleRecoveryInterval = this.previousLevel.singleRecoveryInterval * 0.9;
             this.curLevel.fullRecoveryInterval = this.previousLevel.fullRecoveryInterval * 0.9;
-            this.curLevel.minSpeed = this.previousLevel.minSpeed * 1.1;
-            this.curLevel.maxSpeed = this.previousLevel.maxSpeed * 1.1;
+            this.curLevel.minSpeed = this.previousLevel.minSpeed * 1.05;
+            this.curLevel.maxSpeed = this.previousLevel.maxSpeed * 1.05;
             this.curLevel.burstNumber = this.previousLevel.burstNumber * 1.1;
         }
     },

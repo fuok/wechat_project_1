@@ -49,6 +49,9 @@ let BrickManager = cc.Class({
         }
     },
 
+    getBrick(index) {
+        return this.bricks[index];
+    },
     // update (dt) {},
     getBrickIndexFromX (x) {
         return parseInt((x + this.canvasWidth / 2) / this.brickSize);
@@ -72,8 +75,16 @@ let BrickManager = cc.Class({
     },
 
     repairAllBrokenBricks () {
-        for (let i = 0; i < this.bricks.length; i++) {
-            this.bricks[i].repair();
+        this.repairAllBrokenBricksIndex = 0;
+        this.schedule(this.repairAllBrokenBricksCallback, 0.05, this.brickCount);
+    },
+
+    repairAllBrokenBricksCallback () {
+        this.bricks[this.repairAllBrokenBricksIndex].repair(true, true);
+        this.repairAllBrokenBricksIndex += 1;
+        // 不知道为什么, repeat不好用，所以在这里强制取消schedule
+        if (this.repairAllBrokenBricksIndex >= this.brickCount) {
+            this.unschedule(this.repairAllBrokenBricksCallback);
         }
     },
 

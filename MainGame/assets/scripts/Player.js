@@ -139,9 +139,9 @@ cc.Class({
     },
 
     die () {
-        this.state = PlayerState.Dead;
         this.stopMove();
         this.disableInput();
+        this.state = PlayerState.Dead;
         GameManager.instance.gameOver();
     },
 

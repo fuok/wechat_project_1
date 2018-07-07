@@ -27,6 +27,7 @@ cc.Class({
     init (pos, fallingSpeed) {
         this.node.position = pos;
         this.fallingSpeed = fallingSpeed;
+        this.brickIndex = BrickManager.instance.getBrickIndexFromX(this.node.position.x);
     },
 
     update (dt) {

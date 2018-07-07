@@ -94,7 +94,7 @@ let EnemyManager = cc.Class({
         }
     },
 
-    initEnemy (enemyNode) {
+    initEnemyRandomly (enemyNode) {
         enemyNode.getComponent('Enemy').init(cc.v2(BrickManager.instance.getRandomPosX(), 1200), this.randomSpeed());
     },
 
@@ -105,8 +105,10 @@ let EnemyManager = cc.Class({
     },
 
     addEnemy (enemyNode) {
+        let enemy = enemyNode.getComponent('Enemy');
         this.rootNode.addChild(enemyNode);
-        this.enemies.push(enemyNode.getComponent('Enemy'));
+        this.enemies.push(enemy);
+        BrickManager.instance.getBrick(enemy.brickIndex).addEnemy(enemy);
     },
 
     removeEnemy (enemyNode) {
@@ -115,6 +117,7 @@ let EnemyManager = cc.Class({
         if (index > -1) {
             this.enemies.splice(index, 1);
         }
+        BrickManager.instance.getBrick(enemy.brickIndex).removeEnemy(enemy);
     },
 
     createOneOrTwoEnemies () {
@@ -132,15 +135,15 @@ let EnemyManager = cc.Class({
         let firstY = 1100 + Math.random() * 300;
         let secondY = firstY + Math.abs(secondIndex - firstIndex) * BrickManager.instance.brickSize;
         
-        let enemy1 = this.createNewNormalEnemy();
-        let enemy2 = this.createNewNormalEnemy();
+        let enemy1pos = cc.v2(BrickManager.instance.getBrickPosX(firstIndex), firstY);
+        let enemy2pos = cc.v2(BrickManager.instance.getBrickPosX(secondIndex), secondY);
         let speed = this.randomSpeed();
 
-        enemy1.getComponent('Enemy').init(cc.v2(BrickManager.instance.getBrickPosX(firstIndex), firstY), speed);
-        enemy2.getComponent('Enemy').init(cc.v2(BrickManager.instance.getBrickPosX(secondIndex), secondY), speed);
+        this.createNewNormalEnemy(enemy1pos, speed);
+        this.createNewNormalEnemy(enemy2pos, speed);
     },
     
-    createNewNormalEnemy () {
+    createNewNormalEnemy (pos, fallingSpeed) {
         let normalEnemyNode = null;
 
         if (this.enemyPool.length > 0) {
@@ -148,21 +151,25 @@ let EnemyManager = cc.Class({
         } else {
             normalEnemyNode = cc.instantiate(this.normalEnemyPrefab);
         }
+        if (pos == undefined) {
+            this.initEnemyRandomly(normalEnemyNode);
+        } else {
+            normalEnemyNode.getComponent('Enemy').init(pos, fallingSpeed);
+        }
         this.addEnemy(normalEnemyNode);
-        this.initEnemy(normalEnemyNode);
         return normalEnemyNode;
     },
 
     createNewSingleRecovery () {
         let singleRecoveryNode = cc.instantiate(this.singleRecoveryPrefab);
+        this.initEnemyRandomly(singleRecoveryNode);
         this.addEnemy(singleRecoveryNode);
-        this.initEnemy(singleRecoveryNode);
     },
 
     createNewFullRecovery () {
         let fullRecoveryNode = cc.instantiate(this.fullRecoveryPrefab);
+        this.initEnemyRandomly(fullRecoveryNode);
         this.addEnemy(fullRecoveryNode);
-        this.initEnemy(fullRecoveryNode);
     },
 
     destroyNormalEnemy (enemyNode) {
