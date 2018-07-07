@@ -1616,10 +1616,10 @@
     "_animationName": "idle",
     "playTimes": -1,
     "_N$dragonAsset": {
-      "__uuid__": "513ab1a5-a568-47b0-a028-2bab9a1b25d7"
+      "__uuid__": "e8c227de-e372-46ed-8ea0-c3b9643b3d5d"
     },
     "_N$dragonAtlasAsset": {
-      "__uuid__": "128e5b35-7a17-4211-bd10-895dcb198983"
+      "__uuid__": "cf64b0f3-769c-4829-a85e-25066bede76d"
     },
     "_N$_defaultArmatureIndex": 0,
     "_N$_animationIndex": 1,
