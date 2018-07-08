@@ -114,13 +114,20 @@ let GameManager = cc.Class({
         this.cameraNode.getComponent('CameraController').moveCameraToTarget();
     },
 
+    setNextLevelLabel () {
+        this.nextLevelLabel.active = true;
+        let curLevelLabel = this.nextLevelLabel.getChildByName('curLevel');
+        let nextLevelLabel = this.nextLevelLabel.getChildByName('nextLevel');
+        curLevelLabel.getComponent(cc.Label).string = this.curLevelIndex;
+        nextLevelLabel.getComponent(cc.Label).string = this.curLevelIndex + 1;
+        this.nextLevelLabel.getComponent(cc.Animation).play();
+    },
+
     nextLevel () {
         // 这个函数只是用来清除当前场景
         EnemyManager.instance.clearAllEnemies();
+        this.setNextLevelLabel();
         this.curLevelIndex += 1;
-        this.nextLevelLabel.active = true;
-        this.nextLevelLabel.getComponent(cc.Label).string = "LEVEL " + this.curLevelIndex;
-        this.nextLevelLabel.getComponent(cc.Animation).play();
         this.scheduleOnce(this.nextLevelAnimDone, 3);
     },
 

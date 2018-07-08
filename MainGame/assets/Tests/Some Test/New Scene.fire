@@ -548,12 +548,8 @@
     "_armatureName": "qie",
     "_animationName": "",
     "playTimes": -1,
-    "_N$dragonAsset": {
-      "__uuid__": "513ab1a5-a568-47b0-a028-2bab9a1b25d7"
-    },
-    "_N$dragonAtlasAsset": {
-      "__uuid__": "128e5b35-7a17-4211-bd10-895dcb198983"
-    },
+    "_N$dragonAsset": null,
+    "_N$dragonAtlasAsset": null,
     "_N$_defaultArmatureIndex": 0,
     "_N$_animationIndex": 0,
     "_N$timeScale": 1,
@@ -2375,9 +2371,10 @@
       "__id__": 54
     },
     "_enabled": true,
-    "_defaultClip": null,
+    "_defaultClip": {
+      "__uuid__": "757c69dd-92d1-40bd-9a00-ae38efc70f44"
+    },
     "_clips": [
-      null,
       {
         "__uuid__": "757c69dd-92d1-40bd-9a00-ae38efc70f44"
       }
