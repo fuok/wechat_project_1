@@ -109,7 +109,7 @@
       "b": 176,
       "a": 81
     },
-    "_angle": 270,
+    "_angle": 0,
     "_angleVar": 90,
     "_startSize": 7,
     "_startSizeVar": 7,
@@ -136,7 +136,7 @@
       "x": 0,
       "y": -2000
     },
-    "_speed": 250,
+    "_speed": 800,
     "_speedVar": 200,
     "_tangentialAccel": -10,
     "_tangentialAccelVar": 0,
