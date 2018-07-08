@@ -8,7 +8,8 @@ const PlayerState = {
     Idle: 0,
     Running: 1,
     Shooting: 2,
-    Dead: 3
+    NoAmmo: 3,
+    Dead: 4
 };
 
 const DirectionKeyState = {
@@ -43,6 +44,11 @@ cc.Class({
                 }
             }
         },
+        maxAmmo: 0.0,
+        currentAmmo: 0.0,
+        ammoConsumption: 0.0,
+        idleAmmoSpeed: 0.0,
+        runningAmmoSpeed: 0.0,
         state: {
             get () {
                 return this.playerState;
@@ -61,21 +67,15 @@ cc.Class({
                         case PlayerState.Running:
                             this.playerArmatureDisplay.playAnimation('walk', 0);
                             break;
+                        case PlayerState.NoAmmo:
+                            this.playerArmatureDisplay.playAnimation('reload', 0);
+                            break;
                         case PlayerState.Dead:
                             this.playerArmatureDisplay.playAnimation('dead', 1);
                             break;
                     };
                 }
             }
-        },
-        //控制左右移动按钮
-        btnDirection: {
-            default: null,
-            type: cc.Button
-        },
-        btnShoot: {
-            default: null,
-            type: cc.Button
         },
         bulletTraceAnim: {
             default: null,
@@ -84,6 +84,10 @@ cc.Class({
         comboNode: {
             default: null,
             type: cc.Node
+        },
+        ammoBar: {
+            default: null,
+            type: cc.ProgressBar
         },
         comboLabel: {
             default: null,
@@ -125,6 +129,17 @@ cc.Class({
         if (this.state != PlayerState.Shooting) {
             this.updatePlayerPos(dt);
         }
+
+        // 更新当前子弹
+        if (this.state == PlayerState.Running) {
+            this.currentAmmo += this.runningAmmoSpeed * dt;
+        } else {
+            this.currentAmmo += this.idleAmmoSpeed * dt;
+        }
+        if (this.currentAmmo > this.maxAmmo) {
+            this.currentAmmo = this.maxAmmo;
+        }
+        this.ammoBar.progress = this.currentAmmo / this.maxAmmo;
     },
 
     reset () {
@@ -134,6 +149,7 @@ cc.Class({
         this.direction = PlayerDirection.Left;
         this.node.position.x = 0;
         // 初始化键盘输入监听
+        this.currentAmmo = 100;
         this.inputEnabled = false;
         this.doubleKillCount = 0;
         this.comboCount = 0;
@@ -152,11 +168,17 @@ cc.Class({
             return;
         }
 
-        // 先播放弹道动画
-        this.bulletTraceAnim.play();
-
+        if (this.currentAmmo < this.ammoConsumption) {
+            this.state = PlayerState.NoAmmo;
+            return;
+        }
+        
         // 先把状态设置成shooting
         this.state = PlayerState.Shooting;
+        // 减少弹药
+        this.currentAmmo -= this.ammoConsumption;
+        // 播放弹道动画
+        this.bulletTraceAnim.play();
 
         let enemies = EnemyManager.instance.getAllEnemies();
         let hitCount = 0;
@@ -192,6 +214,7 @@ cc.Class({
                 this.comboCount = 0;
             }
             if (this.doubleKillCount >= 2) {
+                this.currentAmmo += this.ammoConsumption * 0.7;
                 EnemyManager.instance.slowMotion();
             }
             for (let i = 0; i < hitEnemies.length; i++) {
