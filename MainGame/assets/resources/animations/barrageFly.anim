@@ -12,12 +12,11 @@
       "x": [
         {
           "frame": 0,
-          "value": 1080,
-          "curve": "linear"
+          "value": 600
         },
         {
           "frame": 2,
-          "value": -399
+          "value": -800
         }
       ]
     },
