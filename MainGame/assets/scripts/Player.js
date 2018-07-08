@@ -1,4 +1,5 @@
 let ScoreManager = require('ScoreManager');
+let BarrageManager = require('BarrageManager');
 let GameManager = require('GameManager')
 let EnemyManager = require('EnemyManager')
 let ParticleManager = require('ParticleManager');
@@ -80,10 +81,6 @@ cc.Class({
         bulletTraceAnim: {
             default: null,
             type: cc.Animation
-        },
-        comboNode: {
-            default: null,
-            type: cc.Node
         },
         ammoBar: {
             default: null,
@@ -205,10 +202,7 @@ cc.Class({
             if (hitEnemies.length >= 2) {
                 this.doubleKillCount += 1;
                 this.comboCount += hitEnemies.length;
-
-                this.comboNode.position = hitEnemies[0].node.position;
-                this.comboLabel.string = this.comboCount + "连";
-                this.comboNode.getComponent(cc.Animation).play();
+                BarrageManager.instance.addCombo(this.comboCount);
             } else {
                 this.doubleKillCount = 0;
                 this.comboCount = 0;

@@ -1,6 +1,7 @@
-let ScoreManager = require('ScoreManager')
-let BrickManager = require('BrickManager')
-let EnemyManager = require('EnemyManager')
+let ScoreManager = require('ScoreManager');
+let BrickManager = require('BrickManager');
+let EnemyManager = require('EnemyManager');
+let BarrageManager = require('BarrageManager');
 
 const GameState = {
     Opening: 0,
@@ -9,7 +10,7 @@ const GameState = {
 };
 
 let initLevel = {
-        scoreLimit: 200,
+        scoreLimit: 50,
         playerMoveSpeed: 400,
         normalEnemyInterval: 1.2,
         singleRecoveryInterval: 6,
@@ -127,8 +128,18 @@ let GameManager = cc.Class({
         // 这个函数只是用来清除当前场景
         EnemyManager.instance.clearAllEnemies();
         this.setNextLevelLabel();
+        this.nextLevelBarrages = 0;
+        this.generateNextLevelBarrages();
         this.curLevelIndex += 1;
         this.scheduleOnce(this.nextLevelAnimDone, 3);
+    },
+
+    generateNextLevelBarrages() {
+        this.schedule(this.generateOneNextLevelBarrage, 0.7, 1);
+    },
+
+    generateOneNextLevelBarrage() {
+        BarrageManager.instance.generateNextLevelBarrage();
     },
 
     nextLevelAnimDone () {
