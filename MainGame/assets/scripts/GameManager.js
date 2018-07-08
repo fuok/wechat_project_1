@@ -41,6 +41,10 @@ let GameManager = cc.Class({
             default: null,
             type: cc.Node
         },
+        gamepadNode: {
+            default: null,
+            type: cc.Node
+        },
         ground: {
             default: null,
             type: cc.Node
@@ -84,15 +88,13 @@ let GameManager = cc.Class({
         this.player.getComponent('Player').reset();
         BrickManager.instance.resetAllBricks();
         EnemyManager.instance.clearAllEnemies();
+        ScoreManager.instance.clearScore();
+        this.gamepadNode.active = false;
         this.cameraNode.getComponent('CameraController').resetCameraToTarget();
         this.loadPanel('prefabs/panels/OpeningPanel');
     },
 
     gameStart () {
-        let openingPanel = this.uiNode.getChildByName('Opening Panel');
-        if (openingPanel != undefined) {
-            openingPanel.destroy();
-        }
         this._gameState = GameState.Playing;
         this.player.getComponent('Player').reset();
         this.player.getComponent('Player').enableInput();
@@ -101,6 +103,7 @@ let GameManager = cc.Class({
         this.curLevelIndex = 1;
         ScoreManager.instance.setScore(0);
         this.nextLevelAnimDone();
+        this.gamepadNode.active = true;
         this.cameraNode.getComponent('CameraController').moveCameraToCenter();
     },
 

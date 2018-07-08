@@ -94,13 +94,10 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        // 获得方向键按钮x
-        this.btnDirectionCenterX = this.btnDirection.node.getBoundingBoxToWorld().center.x;
         // 获得负责动画渲染的子节点
         this.playerArmatureDisplay = this.node.getChildByName('Player Animation').getComponent(dragonBones.ArmatureDisplay);
         this.playerArmatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this.playerAnimComplete, this);
         this.inputEnabled = false;
-        this.setupInputControl();
     },
 
     updatePlayerPos(dt) {
@@ -266,41 +263,6 @@ cc.Class({
         }
     },
 
-    checkDirectionButtonTouchEvent (locationWS) {
-        if (!this.inputEnabled) {
-            return;
-        }
-
-        if (locationWS.x <= this.btnDirectionCenterX) {
-            this.moveLeft();
-        } else {
-            this.moveRight();
-        }
-    },
-
-    setupInputControl () {
-        let self = this;
-        //监听屏幕上两个按钮
-        self.btnDirection.node.on(cc.Node.EventType.TOUCH_START, function (event) {
-            self.checkDirectionButtonTouchEvent(event.getLocation());
-        });
-        self.btnDirection.node.on(cc.Node.EventType.TOUCH_MOVE, function (event) {
-            self.checkDirectionButtonTouchEvent(event.getLocation());
-        });
-        self.btnDirection.node.on(cc.Node.EventType.TOUCH_END, function (event) {
-            self.stopMove();
-        });
-        self.btnDirection.node.on(cc.Node.EventType.TOUCH_CANCEL, function (event) {
-            self.stopMove();
-        });
-        self.btnShoot.node.on(cc.Node.EventType.TOUCH_START, function (event) {
-            if (GameManager.instance.gameState == 0 /* Opening */) {
-                GameManager.instance.gameStart();
-            } else {
-                self.shoot();
-            }
-        });
-    },
     enableInput () {
         this.inputEnabled = true;
     },
