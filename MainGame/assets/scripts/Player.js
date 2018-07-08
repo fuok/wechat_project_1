@@ -237,6 +237,10 @@ cc.Class({
     },
 
     moveLeft () {
+        if (!this.inputEnabled) {
+            return;
+        }
+
         this.directionKeyState = DirectionKeyState.Left;
         if (this.state != PlayerState.Shooting) {
             this.state = PlayerState.Running;
@@ -245,6 +249,10 @@ cc.Class({
     },
 
     moveRight () {
+        if (!this.inputEnabled) {
+            return;
+        }
+
         this.directionKeyState = DirectionKeyState.Right;
         if (this.state != PlayerState.Shooting) {
             this.state = PlayerState.Running;
