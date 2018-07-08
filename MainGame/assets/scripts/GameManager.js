@@ -150,11 +150,10 @@ let GameManager = cc.Class({
     },
 
     generateCurLevel (index) {
-        // index从0开始
         if (index == 1) {
-            this.curLevel = Object.assign(initLevel);
+            this.curLevel = Object.assign({}, initLevel);
         } else {
-            this.previousLevel = Object.assign(this.curLevel);
+            this.previousLevel = Object.assign({}, this.curLevel);
             this.curLevel.scoreLimit = this.previousLevel.scoreLimit * 2;
             this.curLevel.playerMoveSpeed = this.previousLevel.playerMoveSpeed * 1.1;
             this.curLevel.normalEnemyInterval = this.previousLevel.normalEnemyInterval * 0.9;
