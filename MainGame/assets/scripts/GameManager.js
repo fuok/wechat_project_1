@@ -10,7 +10,7 @@ const GameState = {
 };
 
 let initLevel = {
-        scoreLimit: 50,
+        scoreLimit: 200,
         playerMoveSpeed: 400,
         normalEnemyInterval: 1.2,
         singleRecoveryInterval: 6,
