@@ -177,6 +177,7 @@ cc.Class({
         this.stopMove();
         this.disableInput();
         this.state = PlayerState.Dead;
+        this.onFire = false;
         GameManager.instance.gameOver();
         this.scheduleOnce(this.dieAnimComplete, 0.5);
     },
