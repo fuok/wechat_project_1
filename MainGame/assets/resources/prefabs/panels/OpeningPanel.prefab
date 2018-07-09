@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Opening Panel",
+    "_name": "OpeningPanel",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -342,7 +342,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -382
+      "y": -407
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -455,7 +455,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -705
+      "y": -730
     },
     "_skewX": 0,
     "_skewY": 0,

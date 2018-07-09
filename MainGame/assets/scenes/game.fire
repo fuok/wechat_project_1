@@ -1935,7 +1935,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 500,
-      "height": 1
+      "height": 3
     },
     "_rotationX": 45,
     "_rotationY": 45,

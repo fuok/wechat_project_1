@@ -1,9 +1,9 @@
 {
   "__type__": "cc.AnimationClip",
-  "_name": "GameStartHint",
+  "_name": "FlashingHint",
   "_objFlags": 0,
   "_rawFiles": null,
-  "_duration": 1,
+  "_duration": 0.6666666666666666,
   "sample": 60,
   "speed": 1,
   "wrapMode": "2",
@@ -12,17 +12,29 @@
       "opacity": [
         {
           "frame": 0,
-          "value": 255,
-          "curve": "constant"
-        },
-        {
-          "frame": 0.5,
-          "value": 0,
-          "curve": "constant"
-        },
-        {
-          "frame": 1,
           "value": 255
+        },
+        {
+          "frame": 0.6666666666666666,
+          "value": 100
+        }
+      ],
+      "scale": [
+        {
+          "frame": 0,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
+        },
+        {
+          "frame": 0.6666666666666666,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1.2,
+            "y": 1.2
+          }
         }
       ]
     }
