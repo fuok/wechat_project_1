@@ -72,7 +72,7 @@ cc.Class({
                             this.playerArmatureDisplay.playAnimation('reload', 1);
                             break;
                         case PlayerState.Dead:
-                            this.playerArmatureDisplay.playAnimation('dead', 1);
+                            this.playerArmatureDisplay.playAnimation('dead', 0);
                             break;
                     };
                 }
