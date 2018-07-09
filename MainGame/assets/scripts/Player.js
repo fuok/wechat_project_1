@@ -86,6 +86,10 @@ cc.Class({
             default: null,
             type: cc.ProgressBar
         },
+        comboNode: {
+            default: null,
+            type: cc.Node
+        },
         comboLabel: {
             default: null,
             type: cc.Label
@@ -202,6 +206,9 @@ cc.Class({
             if (hitEnemies.length >= 2) {
                 this.doubleKillCount += 1;
                 this.comboCount += hitEnemies.length;
+                this.comboNode.position = hitEnemies[0].node.position;
+                this.comboLabel.string = this.comboCount + "连";
+                this.comboNode.getComponent(cc.Animation).play();
                 BarrageManager.instance.addCombo(this.comboCount);
             } else {
                 this.doubleKillCount = 0;
