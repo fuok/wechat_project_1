@@ -162,6 +162,7 @@ cc.Class({
         this.disableInput();
         this.state = PlayerState.Dead;
         GameManager.instance.gameOver();
+        this.scheduleOnce(this.dieAnimComplete, 0.5);
     },
 
     shoot () {
@@ -219,7 +220,7 @@ cc.Class({
                 EnemyManager.instance.slowMotion();
             }
             for (let i = 0; i < hitEnemies.length; i++) {
-                ScoreManager.instance.createScoreFX(hitEnemies[i].node.position, singleEnemyScore);
+                ScoreManager.instance.createScoreFX(hitEnemies[i].node.position, singleEnemyScore, this.comboCount);
                 hitEnemies[i].onHitByBullet(this.direction);
             }
         } else {
@@ -234,7 +235,8 @@ cc.Class({
                 this.shootingAnimComplete();
                 break;
             case PlayerState.Dead:
-                this.dieAnimComplete();
+                // 因为当前死亡动画是循环的，就不调用这个
+                //this.dieAnimComplete();
                 break;
         }
     },
