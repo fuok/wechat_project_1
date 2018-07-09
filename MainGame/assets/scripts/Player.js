@@ -69,7 +69,7 @@ cc.Class({
                             this.playerArmatureDisplay.playAnimation('walk', 0);
                             break;
                         case PlayerState.NoAmmo:
-                            this.playerArmatureDisplay.playAnimation('reload', 0);
+                            this.playerArmatureDisplay.playAnimation('reload', 1);
                             break;
                         case PlayerState.Dead:
                             this.playerArmatureDisplay.playAnimation('dead', 1);
