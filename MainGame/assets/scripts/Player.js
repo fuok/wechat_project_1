@@ -45,6 +45,17 @@ cc.Class({
                 }
             }
         },
+        onFire: {
+            get () {
+                return this._onFire;
+            }, 
+            set (value) {
+                if (this._onFire != value) {
+                    this._onFire = value;
+                    this.onFireNode.active = this._onFire;
+                }
+            }
+        },
         maxAmmo: 0.0,
         currentAmmo: 0.0,
         ammoConsumption: 0.0,
@@ -87,6 +98,10 @@ cc.Class({
             type: cc.ProgressBar
         },
         comboNode: {
+            default: null,
+            type: cc.Node
+        },
+        onFireNode: {
             default: null,
             type: cc.Node
         },
@@ -155,6 +170,7 @@ cc.Class({
         this.doubleKillCount = 0;
         this.comboCount = 0;
         this.directionKeyState = DirectionKeyState.Idle;
+        this.onFire = false;
     },
 
     die () {
@@ -210,10 +226,12 @@ cc.Class({
                 this.comboNode.position = hitEnemies[0].node.position;
                 this.comboLabel.string = this.comboCount + "连";
                 this.comboNode.getComponent(cc.Animation).play();
+                this.onFire = true;
                 BarrageManager.instance.addCombo(this.comboCount);
             } else {
                 this.doubleKillCount = 0;
                 this.comboCount = 0;
+                this.onFire = false;
             }
             if (this.doubleKillCount >= 2) {
                 this.currentAmmo += this.ammoConsumption * 0.7;
@@ -226,6 +244,7 @@ cc.Class({
         } else {
             this.doubleKillCount = 0;
             this.comboCount = 0;
+            this.onFire = false;
         }
     },
 
