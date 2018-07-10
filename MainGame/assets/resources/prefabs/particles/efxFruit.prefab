@@ -50,8 +50,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 306,
+      "y": 1394
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -109,12 +109,12 @@
       "b": 176,
       "a": 81
     },
-    "_angle": 0,
+    "_angle": 270,
     "_angleVar": 90,
-    "_startSize": 7,
-    "_startSizeVar": 7,
-    "_endSize": 7,
-    "_endSizeVar": 7,
+    "_startSize": 15,
+    "_startSizeVar": 5,
+    "_endSize": 10,
+    "_endSizeVar": 5,
     "_startSpin": 0,
     "_startSpinVar": 0,
     "_endSpin": 0,
@@ -136,7 +136,7 @@
       "x": 0,
       "y": -2000
     },
-    "_speed": 800,
+    "_speed": 250,
     "_speedVar": 200,
     "_tangentialAccel": -10,
     "_tangentialAccelVar": 0,
