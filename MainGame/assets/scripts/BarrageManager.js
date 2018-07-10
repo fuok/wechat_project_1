@@ -92,7 +92,9 @@ let BarrageManager = cc.Class({
     },
 
     tutorialBarrage () {
-        this.createBarrageFX(tutorialBarrages[this.tutorialBarrageIndex]);
+        if (eutorialBarrages[this.tutorialBarrageIndex] != '') {
+            this.createBarrageFX(eutorialBarrages[this.tutorialBarrageIndex]);
+        }
         this.tutorialBarrageIndex += 1;
     },
 
