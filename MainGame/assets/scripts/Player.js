@@ -228,7 +228,10 @@ cc.Class({
                 this.comboLabel.string = this.comboCount + "连";
                 this.comboNode.getComponent(cc.Animation).play();
                 this.onFire = true;
-                BarrageManager.instance.addCombo(this.comboCount);
+                // tutorial关不显示连击
+                if (GameManager.instance.curLevelIndex >= 1) {
+                    BarrageManager.instance.addCombo(this.comboCount);
+                }
             } else {
                 this.doubleKillCount = 0;
                 this.comboCount = 0;
