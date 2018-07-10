@@ -868,7 +868,7 @@
       "__uuid__": "d8f8dd40-42c9-4503-bd7c-c6288fcf6009"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -1366,8 +1366,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 60,
+      "height": 15
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1935,7 +1935,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 500,
-      "height": 3
+      "height": 1
     },
     "_rotationX": 45,
     "_rotationY": 45,
@@ -2805,6 +2805,7 @@
     "timeScale": 1,
     "enemyWaveInterval": 10,
     "enemyBreakInterval": 1,
+    "enemyGenerationY": 1100,
     "rootNode": {
       "__id__": 5
     },

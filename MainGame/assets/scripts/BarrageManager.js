@@ -18,6 +18,36 @@ let nextLevelBarrages = [
     '令人窒息的操作',
 ];
 
+let tutorialBarrages = [
+    '',
+    'UP主，用枪打水果',
+    '',
+    '',
+    '那不是枪，是扔石头吧。。。。',
+    '',
+    '臂力惊人',
+    '臂力惊人',
+    '',
+    '这游戏有点轴啊，只能45度角攻击',
+    '',
+    '试试一枪穿俩，上分快',
+    '串糖葫芦，爽',
+    '水果掉地板上会把地板砸坏，都砸坏你就玩完了',
+    '',
+    '前边的，打草莓可以修复一块地板',
+    '',
+    '',
+    '这游戏有个隐藏系统，持续连击水果可以开启慢动作！',
+    '',
+    '',
+    '',
+    '亲测有效',
+    '亲测有效',
+    '',
+    '',
+    '这游戏我玩了上百遍了，想活下去要尽量保持连击',
+    '',
+];
 let BarrageManager = cc.Class({
     extends: cc.Component,
 
@@ -52,6 +82,20 @@ let BarrageManager = cc.Class({
         this.createBarrageFX(comboCount + '连!!!! (＃°Д°)');
     },
 
+    cancelAllBarrageSchedules () {
+        this.unschedule(this.tutorialBarrage);
+    },
+
+    setTutorialBarrages () {
+        this.tutorialBarrageIndex = 0;
+        this.schedule(this.tutorialBarrage, 1, tutorialBarrages.length - 1);
+    },
+
+    tutorialBarrage () {
+        this.createBarrageFX(tutorialBarrages[this.tutorialBarrageIndex]);
+        this.tutorialBarrageIndex += 1;
+    },
+
     generateNextLevelBarrage() {
         let i = Math.floor(Math.random() * nextLevelBarrages.length);
         this.createBarrageFX(nextLevelBarrages[i]);
@@ -71,7 +115,7 @@ let BarrageManager = cc.Class({
         fxNode.position = cc.v2(0, y);
         fxNode.getChildByName('Barrage Node').getChildByName('Barrage Label').getComponent(cc.Label).string = content;
         this.rootNode.addChild(fxNode);
-        fxNode.getChildByName('Barrage Node').getComponent(cc.Animation).scheduleOnce(this.destroyFX.bind(this, fxNode), 4);
+        fxNode.getChildByName('Barrage Node').getComponent(cc.Animation).scheduleOnce(this.destroyFX.bind(this, fxNode), 6);
     },
 
     destroyFX (fxNode) {

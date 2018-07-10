@@ -11,6 +11,7 @@ let EnemyManager = cc.Class({
         timeScale: 1,
         enemyWaveInterval: 0,
         enemyBreakInterval: 0,
+        enemyGenerationY: 1100,
         rootNode: {
             default: null,
             type: cc.Node
@@ -46,17 +47,53 @@ let EnemyManager = cc.Class({
     start () {
     },
 
-
     resetLevel () {
-        this.unscheduleAllCallbacks();
+        this.cancelAllTimeSchedules();
 
         this.curLevel = this.GameManager.instance.curLevel;
         this.curLevelEnemyCountPerWave = this.enemyWaveInterval / this.curLevel.normalEnemyInterval;
         this.curWaveGeneratedNormalEnemyCount = 0;
 
-        this.schedule(this.controlGenerateNewNormalEnemy, this.curLevel.normalEnemyInterval);
-        this.schedule(this.createNewSingleRecovery, this.curLevel.singleRecoveryInterval);
-        this.schedule(this.createNewFullRecovery, this.curLevel.fullRecoveryInterval);
+        if (this.GameManager.instance.curLevelIndex == 0) {
+            // 教学关，启动预定义好的关卡
+            this.curTutorialStage = 0;
+            this.schedule(this.tutorialLevel, 10, 4);
+            this.tutorialLevel();
+        } else {
+            this.schedule(this.controlGenerateNewNormalEnemy, this.curLevel.normalEnemyInterval);
+            this.schedule(this.createNewSingleRecovery, this.curLevel.singleRecoveryInterval);
+            this.schedule(this.createNewFullRecovery, this.curLevel.fullRecoveryInterval);
+        }
+    },
+
+    getEnemyPosByIndex (indX, indY) {
+        let posX = BrickManager.instance.getBrickPosX(indX);
+        let posY = this.enemyGenerationY + indY * BrickManager.instance.brickSize;
+        return cc.v2(posX, posY);
+    },
+
+    tutorialLevel () {
+        let speed = 100;
+        this.curTutorialStage += 1;
+        switch(this.curTutorialStage) {
+            case 1:
+                this.createNewNormalEnemy(this.getEnemyPosByIndex(6, 0), speed);
+                this.createNewNormalEnemy(this.getEnemyPosByIndex(12, 6), speed);
+                this.createNewSingleRecovery(this.getEnemyPosByIndex(23, 16), speed);
+                break;
+            case 2:
+            case 3:
+            case 4:
+                this.createNewNormalEnemy(this.getEnemyPosByIndex(10, 0), speed);
+                this.createNewNormalEnemy(this.getEnemyPosByIndex(9, 1), speed);
+                this.createNewNormalEnemy(this.getEnemyPosByIndex(24, 7), speed);
+                this.createNewNormalEnemy(this.getEnemyPosByIndex(26, 9), speed);
+                this.createNewSingleRecovery(this.getEnemyPosByIndex(17, 16), speed);
+                break;
+            case 6:
+                this.GameManager.instance.nextLevel();
+                return;
+        }
     },
 
     controlGenerateNewNormalEnemy () {
@@ -85,10 +122,11 @@ let EnemyManager = cc.Class({
         this.unschedule(this.controlGenerateNewNormalEnemy);
         this.unschedule(this.createNewSingleRecovery);
         this.unschedule(this.createNewFullRecovery);
+        this.unschedule(this.tutorialLevel);
     },
 
     clearAllEnemies () {
-        this.unscheduleAllCallbacks();
+        this.cancelAllTimeSchedules();
         while(this.enemies.length > 0) {
             this.enemies[this.enemies.length - 1].eliminate();
         }
@@ -132,7 +170,7 @@ let EnemyManager = cc.Class({
         let indexDis = Math.floor(Math.random() * 10) + 1;
         let firstIndex = Math.floor(Math.random() * (BrickManager.instance.brickCount - 2 * indexDis) + indexDis);
         let secondIndex = Math.random() >= 0.5 ? firstIndex + indexDis : firstIndex - indexDis;
-        let firstY = 1100 + Math.random() * 300;
+        let firstY = this.enemyGenerationY + Math.random() * 300;
         let secondY = firstY + Math.abs(secondIndex - firstIndex) * BrickManager.instance.brickSize;
         
         let enemy1pos = cc.v2(BrickManager.instance.getBrickPosX(firstIndex), firstY);
@@ -160,9 +198,13 @@ let EnemyManager = cc.Class({
         return normalEnemyNode;
     },
 
-    createNewSingleRecovery () {
+    createNewSingleRecovery (pos, fallingSpeed) {
         let singleRecoveryNode = cc.instantiate(this.singleRecoveryPrefab);
-        this.initEnemyRandomly(singleRecoveryNode);
+        if (pos == undefined || fallingSpeed == undefined) {
+            this.initEnemyRandomly(singleRecoveryNode);
+        } else {
+            singleRecoveryNode.getComponent('Enemy').init(pos, fallingSpeed);
+        }
         this.addEnemy(singleRecoveryNode);
     },
 

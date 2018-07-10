@@ -10,7 +10,7 @@ const GameState = {
 };
 
 let initLevel = {
-        scoreLimit: 200,
+        scoreLimit: 400,
         playerMoveSpeed: 400,
         normalEnemyInterval: 1.2,
         singleRecoveryInterval: 6,
@@ -101,7 +101,8 @@ let GameManager = cc.Class({
         this.player.getComponent('Player').enableInput();
         BrickManager.instance.resetAllBricks();
         EnemyManager.instance.clearAllEnemies();
-        this.curLevelIndex = 1;
+        this.curLevelIndex = 0;
+        BarrageManager.instance.setTutorialBarrages();
         ScoreManager.instance.setScore(0);
         this.nextLevelAnimDone();
         this.gamepadNode.active = true;
@@ -127,8 +128,8 @@ let GameManager = cc.Class({
     nextLevel () {
         // 这个函数只是用来清除当前场景
         EnemyManager.instance.clearAllEnemies();
+        BarrageManager.instance.cancelAllBarrageSchedules();
         this.setNextLevelLabel();
-        this.nextLevelBarrages = 0;
         this.generateNextLevelBarrages();
         this.curLevelIndex += 1;
         this.scheduleOnce(this.nextLevelAnimDone, 3);
@@ -168,11 +169,14 @@ let GameManager = cc.Class({
     },
 
     generateCurLevel (index) {
-        if (index == 1) {
+        if (index == 0) {
+            this.curLevel = Object.assign({}, initLevel);
+            this.curLevel.scoreLimit = 100;
+        } else if (index == 1) {
             this.curLevel = Object.assign({}, initLevel);
         } else {
             this.previousLevel = Object.assign({}, this.curLevel);
-            this.curLevel.scoreLimit = this.previousLevel.scoreLimit * 2;
+            this.curLevel.scoreLimit = this.previousLevel.scoreLimit + 400 * (1 + this.curLevelIndex/3);
             this.curLevel.playerMoveSpeed = this.previousLevel.playerMoveSpeed * 1.1;
             this.curLevel.normalEnemyInterval = this.previousLevel.normalEnemyInterval * 0.9;
             this.curLevel.singleRecoveryInterval = this.previousLevel.singleRecoveryInterval * 0.9;
