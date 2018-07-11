@@ -98,6 +98,10 @@ cc.Class({
             default: null,
             type: cc.ProgressBar
         },
+        ammoLabel: {
+            default: null,
+            type: cc.Label
+        },
         comboNode: {
             default: null,
             type: cc.Node
@@ -119,6 +123,7 @@ cc.Class({
         this.playerArmatureDisplay = this.node.getChildByName('Player Animation').getComponent(dragonBones.ArmatureDisplay);
         this.playerArmatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this.playerAnimComplete, this);
         this.inputEnabled = false;
+        this.maxAmmoCount = Math.floor(this.maxAmmo / this.ammoConsumption);
     },
 
     updatePlayerPos(dt) {
@@ -142,11 +147,15 @@ cc.Class({
         }
     },
 
-    update(dt) {
+    update (dt) {
         if (this.state != PlayerState.Shooting) {
             this.updatePlayerPos(dt);
         }
 
+        this.updateAmmo(dt);
+    },
+
+    updateAmmo (dt) {
         // 更新当前子弹
         if (this.state == PlayerState.Running) {
             this.currentAmmo += this.runningAmmoSpeed * dt;
@@ -157,6 +166,8 @@ cc.Class({
             this.currentAmmo = this.maxAmmo;
         }
         this.ammoBar.progress = this.currentAmmo / this.maxAmmo;
+        this.currentAmmoCount = Math.floor(this.currentAmmo / this.ammoConsumption);
+        this.ammoLabel.string = this.currentAmmoCount + ' / ' + this.maxAmmoCount;
     },
 
     reset () {
