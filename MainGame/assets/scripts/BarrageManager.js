@@ -145,6 +145,5 @@ let BarrageManager = cc.Class({
             this.barrages.splice(index, 1);
         }
         this.barrageFXPool.put(fxNode);
-        console.log("barrage destroyed!");
     },
 });

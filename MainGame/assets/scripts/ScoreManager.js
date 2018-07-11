@@ -25,12 +25,6 @@ let ScoreManager = cc.Class({
     },
 
     properties: {
-        // score label 的引用
-        scoreDisplay: {
-            default: null,
-            type: cc.Label
-        },
-
         rootNode: {
             default: null,
             type: cc.Node
@@ -41,10 +35,24 @@ let ScoreManager = cc.Class({
             type: cc.Prefab
         },
 
-        currentScore: {
-            get () {
-                return this._currentScore;
-            }
+        statusBar: {
+            default: null,
+            type: cc.Node
+        },
+
+        scoreBar: {
+            default: null,
+            type: cc.ProgressBar
+        },
+
+        scoreLabel: {
+            default: null,
+            type: cc.Label
+        },
+
+        levelLabel: {
+            default: null,
+            type: cc.Label
         },
 
         // TODO: 定义本地存储的maxscore
@@ -59,13 +67,17 @@ let ScoreManager = cc.Class({
         this.scoreFXPool = new cc.NodePool();
     },
 
-    start () {
-        this.init();
+    hideStatusBar () {
+        this.statusBar.active = false;
     },
 
-    init () {
+    resetLevel (curLevel, levelMaxScore) {
         // 初始化计分
-        this._currentScore = 0;
+        this.levelLabel.string = 'LV. ' + curLevel;
+        this.currentScore = 0;
+        this.levelMaxScore = levelMaxScore;
+        this.updateScoreBar();
+        this.statusBar.active = true;
     },
 
     createScoreFX (pos, score, comboCount) {
@@ -100,20 +112,18 @@ let ScoreManager = cc.Class({
         this.scoreFXPool.put(fxNode);
     },
 
-    clearScore () {
-        this._currentScore = 0;
-        this.scoreDisplay.string = '';
+    updateScoreBar () {
+        this.scoreBar.progress = this.currentScore / this.levelMaxScore;
+        this.scoreLabel.string = this.currentScore + ' / ' + this.levelMaxScore;
     },
-
-    setScore(score) {
-        this._currentScore = score;
-        this.scoreDisplay.string = this._currentScore.toString();
-    },
-
     gainScore (score) {
-        this._currentScore += score;
-        // 更新 scoreDisplay Label 的文字
-        this.scoreDisplay.string = this._currentScore.toString();
-        this.GameManager.instance.checkScoreForLevel(this._currentScore);
+        this.currentScore += score;
+        if (this.currentScore > this.levelMaxScore) {
+            this.currentScore = this.levelMaxScore;
+        }
+        this.updateScoreBar();
+        if (this.currentScore >= this.levelMaxScore) {
+            this.GameManager.instance.nextLevel();
+        }
     }
 });

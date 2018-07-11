@@ -89,7 +89,7 @@ let GameManager = cc.Class({
         this.player.getComponent('Player').reset();
         BrickManager.instance.resetAllBricks();
         EnemyManager.instance.clearAllEnemies();
-        ScoreManager.instance.clearScore();
+        ScoreManager.instance.hideStatusBar();
         this.gamepadNode.active = false;
         this.cameraNode.getComponent('CameraController').resetCameraToTarget();
         this.loadPanel('prefabs/panels/OpeningPanel');
@@ -103,7 +103,6 @@ let GameManager = cc.Class({
         EnemyManager.instance.clearAllEnemies();
         this.curLevelIndex = 0;
         BarrageManager.instance.setTutorialBarrages();
-        ScoreManager.instance.setScore(0);
         this.nextLevelAnimDone();
         this.gamepadNode.active = true;
         this.cameraNode.getComponent('CameraController').moveCameraToCenter();
@@ -148,6 +147,7 @@ let GameManager = cc.Class({
         this.nextLevelLabel.active = false;
         this.generateCurLevel(this.curLevelIndex);
         EnemyManager.instance.resetLevel();
+        ScoreManager.instance.resetLevel(this.curLevelIndex, this.curLevel.scoreLimit);
         this.player.getComponent('Player').moveSpeed = this.curLevel.playerMoveSpeed;
     },
 
@@ -176,7 +176,7 @@ let GameManager = cc.Class({
             this.curLevel = Object.assign({}, initLevel);
         } else {
             this.previousLevel = Object.assign({}, this.curLevel);
-            this.curLevel.scoreLimit = this.previousLevel.scoreLimit + 400 * (1 + this.curLevelIndex/3);
+            this.curLevel.scoreLimit = Math.floor(this.previousLevel.scoreLimit + 100 * this.curLevelIndex);
             this.curLevel.playerMoveSpeed = this.previousLevel.playerMoveSpeed * 1.1;
             this.curLevel.normalEnemyInterval = this.previousLevel.normalEnemyInterval * 0.9;
             this.curLevel.singleRecoveryInterval = this.previousLevel.singleRecoveryInterval * 0.9;
@@ -184,12 +184,6 @@ let GameManager = cc.Class({
             this.curLevel.minSpeed = this.previousLevel.minSpeed * 1.05;
             this.curLevel.maxSpeed = this.previousLevel.maxSpeed * 1.05;
             this.curLevel.burstNumber = this.previousLevel.burstNumber * 1.1;
-        }
-    },
-
-    checkScoreForLevel(score) {
-        if (score > this.curLevel.scoreLimit) {
-            this.nextLevel();
         }
     }
 });
