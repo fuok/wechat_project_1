@@ -1,4 +1,3 @@
-
 let nextLevelBarrages = [
     '膜拜大神！！！',
     '难道是直播？',
@@ -48,6 +47,13 @@ let tutorialBarrages = [
     '我打了一下午，想得高分要一直保持连击',
     '',
 ];
+
+let barrageColors = [
+    cc.color(204, 255, 0, 255),
+    cc.color(247, 57, 255, 255),
+    cc.color(55, 255, 159, 255),
+];
+
 let BarrageManager = cc.Class({
     extends: cc.Component,
 
@@ -73,9 +79,29 @@ let BarrageManager = cc.Class({
         BarrageManager.instance = this;
         this.GameManager = require('GameManager');
         this.barrageFXPool = new cc.NodePool();
+        this.barrages = [];
     },
 
     start () {
+    },
+
+    update (dt) {
+        for (let i = 0; i < this.barrages.length; i++) {
+            let barrageNode = this.barrages[i];
+            barrageNode.x -= dt * barrageNode.speed;
+            barrageNode.color = this.getLerpColor(barrageNode.x);
+            if (barrageNode.position.x < -2000) {
+                this.destroyFX(barrageNode);
+            }
+        }
+    },
+
+    getLerpColor(x) {
+        let v = Math.abs(x % 400 / 400.0);
+        let i = Math.floor(v * barrageColors.length);
+        let j = i >= barrageColors.length - 1 ? 0 : i + 1;
+        let r = (v - i / barrageColors.length) * barrageColors.length;
+        return barrageColors[i].lerp(barrageColors[j], r);
     },
 
     addCombo(comboCount) {
@@ -111,16 +137,22 @@ let BarrageManager = cc.Class({
         } else {
             fxNode = cc.instantiate(this.barrageFXPrefab);
         }
+        this.barrages.push(fxNode);
         // pos参数是相对于rootNode的pos
         let row = Math.floor(Math.random() * 3);
         let y = 800 - row * 70;
-        fxNode.position = cc.v2(0, y);
-        fxNode.getChildByName('Barrage Node').getChildByName('Barrage Label').getComponent(cc.Label).string = content;
+        fxNode.position = cc.v2(1000, y);
+        fxNode.speed = 1000;
+        fxNode.getComponent(cc.Label).string = content;
         this.rootNode.addChild(fxNode);
-        fxNode.getChildByName('Barrage Node').getComponent(cc.Animation).scheduleOnce(this.destroyFX.bind(this, fxNode), 6);
     },
 
     destroyFX (fxNode) {
+        let index = this.barrages.indexOf(fxNode);
+        if (index > -1) {
+            this.barrages.splice(index, 1);
+        }
         this.barrageFXPool.put(fxNode);
+        console.log("barrage destroyed!");
     },
 });
