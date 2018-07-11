@@ -89,19 +89,10 @@ let BarrageManager = cc.Class({
         for (let i = 0; i < this.barrages.length; i++) {
             let barrageNode = this.barrages[i];
             barrageNode.x -= dt * barrageNode.speed;
-            barrageNode.color = this.getLerpColor(barrageNode.x);
             if (barrageNode.position.x < -2000) {
                 this.destroyFX(barrageNode);
             }
         }
-    },
-
-    getLerpColor(x) {
-        let v = Math.abs(x % 400 / 400.0);
-        let i = Math.floor(v * barrageColors.length);
-        let j = i >= barrageColors.length - 1 ? 0 : i + 1;
-        let r = (v - i / barrageColors.length) * barrageColors.length;
-        return barrageColors[i].lerp(barrageColors[j], r);
     },
 
     addCombo(comboCount) {
@@ -143,6 +134,7 @@ let BarrageManager = cc.Class({
         let y = 800 - row * 70;
         fxNode.position = cc.v2(1000, y);
         fxNode.speed = 1000;
+        fxNode.color = barrageColors[Math.floor(Math.random() * barrageColors.length)];
         fxNode.getComponent(cc.Label).string = content;
         this.rootNode.addChild(fxNode);
     },

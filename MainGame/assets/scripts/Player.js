@@ -52,7 +52,8 @@ cc.Class({
             set (value) {
                 if (this._onFire != value) {
                     this._onFire = value;
-                    this.onFireNode.active = this._onFire;
+                    // 节省效率，我们暂时不开启onfire模式
+                    //this.onFireNode.active = this._onFire;
                 }
             }
         },

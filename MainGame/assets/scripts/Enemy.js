@@ -61,7 +61,7 @@ cc.Class({
 
     onHitByBullet (direction=1) {
         // 被子弹击中的粒子效果
-        //ParticleManager.instance.createEnemyHitFX1(this.node.position, direction);
+        ParticleManager.instance.createEnemyHitFX1(this.node.position, direction);
         ParticleManager.instance.createEnemyHitFX2(this.node.position, direction);
         ParticleManager.instance.createEnemyHitFX3(this.node.position, direction);
 
