@@ -53,7 +53,7 @@ cc.Class({
                 if (this._onFire != value) {
                     this._onFire = value;
                     // 节省效率，我们暂时不开启onfire模式
-                    //this.onFireNode.active = this._onFire;
+                    this.onFireNode.active = this._onFire;
                 }
             }
         },
