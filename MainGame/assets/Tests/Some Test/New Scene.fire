@@ -544,9 +544,9 @@
     "_autoRemoveOnFinish": true,
     "_totalParticles": 5,
     "_duration": 0.15,
-    "_emissionRate": 30,
-    "_life": 0.4,
-    "_lifeVar": 0.1,
+    "_emissionRate": 60,
+    "_life": 0.5,
+    "_lifeVar": 0,
     "_startColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -577,10 +577,10 @@
     },
     "_angle": 0,
     "_angleVar": 180,
-    "_startSize": 5,
+    "_startSize": 20,
     "_startSizeVar": 5,
-    "_endSize": 35,
-    "_endSizeVar": 10,
+    "_endSize": 60,
+    "_endSizeVar": 5,
     "_startSpin": 0,
     "_startSpinVar": 0,
     "_endSpin": 0,
@@ -610,10 +610,10 @@
     "_radialAccelVar": 0,
     "_rotationIsDir": false,
     "_startRadius": 5,
-    "_startRadiusVar": 5,
-    "_endRadius": 10,
-    "_endRadiusVar": 5,
-    "_rotatePerS": 0,
+    "_startRadiusVar": 0,
+    "_endRadius": 25,
+    "_endRadiusVar": 0,
+    "_rotatePerS": 100,
     "_rotatePerSVar": 0,
     "_N$preview": true
   },
@@ -2447,6 +2447,9 @@
     "_enabled": true,
     "_custom": false,
     "_file": {
+      "__uuid__": "1e592884-6c93-4c06-b9b7-8b6af2bfd9c3"
+    },
+    "_texture": {
       "__uuid__": "1e592884-6c93-4c06-b9b7-8b6af2bfd9c3"
     },
     "_srcBlendFactor": 770,
