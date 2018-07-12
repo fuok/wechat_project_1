@@ -29,16 +29,19 @@ let BrickManager = cc.Class({
 
     onLoad () {
         BrickManager.instance = this;
-        this.canvasWidth = GameConfig.DEVICE_WIDTH;
+        this.EnemyManager = require('EnemyManager');
 
+        this.canvasWidth = GameConfig.DEVICE_WIDTH;
         this.bricks = [];
+
         // create all bricks from the prefab
         for (let i = 0; i < this.brickCount; i++) {
             let newBrick = cc.instantiate(this.brickPrefab);
             this.rootNode.addChild(newBrick);
             // set brick's position, brick size 36, totally 30 bricks
-            newBrick.x = -(this.canvasWidth - this.brickSize) / 2  + i * this.brickSize;
-            newBrick.y = this.groundPosY;
+            let newBrickX = -(this.canvasWidth - this.brickSize) / 2  + i * this.brickSize;
+            let newBrickY = this.groundPosY;
+            newBrick.getComponent('Brick').initPos(newBrickX, newBrickY);
             this.bricks.push(newBrick.getComponent('Brick'));
         }
     },
@@ -75,12 +78,14 @@ let BrickManager = cc.Class({
     },
 
     repairAllBrokenBricks () {
+        // 先将所有当前砖块速度设为0
+        this.EnemyManager.instance.freezeAllEnemies();
         this.repairAllBrokenBricksIndex = 0;
         this.schedule(this.repairAllBrokenBricksCallback, 0.02, this.brickCount);
     },
 
     repairAllBrokenBricksCallback () {
-        this.bricks[this.repairAllBrokenBricksIndex].repair(true, true);
+        this.bricks[this.repairAllBrokenBricksIndex].repair(true, false);
         this.repairAllBrokenBricksIndex += 1;
         // 不知道为什么, repeat不好用，所以在这里强制取消schedule
         if (this.repairAllBrokenBricksIndex >= this.brickCount) {

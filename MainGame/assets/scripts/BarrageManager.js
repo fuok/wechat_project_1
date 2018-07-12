@@ -133,7 +133,7 @@ let BarrageManager = cc.Class({
         let row = Math.floor(Math.random() * 3);
         let y = 800 - row * 70;
         fxNode.position = cc.v2(1000, y);
-        fxNode.speed = 1000;
+        fxNode.speed = 700 + Math.random() * 200;
         fxNode.color = barrageColors[Math.floor(Math.random() * barrageColors.length)];
         fxNode.getComponent(cc.Label).string = content;
         this.rootNode.addChild(fxNode);

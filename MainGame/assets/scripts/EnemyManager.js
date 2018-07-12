@@ -239,5 +239,11 @@ let EnemyManager = cc.Class({
 
     slowMotion() {
         this.getComponent(cc.Animation).play();
+    },
+
+    freezeAllEnemies () {
+        for (let i = 0; i < this.enemies.length; i++) {
+            this.enemies[i].fallingSpeed = 0;
+        }
     }
 });

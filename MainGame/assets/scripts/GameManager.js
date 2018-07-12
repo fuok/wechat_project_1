@@ -15,6 +15,7 @@ let initLevel = {
         normalEnemyInterval: 1.2,
         singleRecoveryInterval: 6,
         fullRecoveryInterval: 20,
+        fullRecoveryInterval: 8,
         minSpeed: 150,
         maxSpeed: 250,
         //TODO

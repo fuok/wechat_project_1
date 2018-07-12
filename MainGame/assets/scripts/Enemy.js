@@ -32,6 +32,14 @@ cc.Class({
 
     update (dt) {
         this.node.y -= this.fallingSpeed * dt * EnemyManager.instance.timeScale;
+        if (this.node.y < BrickManager.instance.groundPosY + 50 /* brick size */) {
+            this.onHitBrick();
+            let brickIndex = BrickManager.instance.getBrickIndexFromX(this.node.x);
+            let brick = BrickManager.instance.bricks[brickIndex];
+            if (!brick.isBroken) {
+                brick.break();
+            }
+        }
     },
     
     onCollisionEnter (other) {
@@ -40,8 +48,6 @@ cc.Class({
         }
         else if (other.node.group == 'player') {
             // 这里有待商榷，是让enemy简单消失还是子弹效果，之后再说
-            this.onHitBrick();
-        } else if (other.node.group == 'brick') {
             this.onHitBrick();
         }
     },

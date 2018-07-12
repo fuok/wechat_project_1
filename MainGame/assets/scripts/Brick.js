@@ -19,11 +19,11 @@ cc.Class({
         this._isBroken = false;
     },
 
-    start () {
-
+    initPos(x, y) {
+        this.node.x = x;
+        this.node.y = y;
+        this.initialPosY = y;
     },
-
-    // update (dt) {},
 
     addEnemy(enemy) {
         this.enemies.push(enemy);
@@ -36,19 +36,21 @@ cc.Class({
     },
     break () {
         // 粒子效果
-        ParticleManager.instance.createBrickHitFX(this.node.position);
+        if (!this.isBroken) {
+            ParticleManager.instance.createBrickHitFX(this.node.position);
 
-        this._isBroken = true;
-        this.node.active = false;
-        BrickManager.instance.checkAllBricksBroken();
-    },
-    onCollisionEnter: function(other) {
-        if (other.node.group == 'enemy') {
-            this.break();
+            this._isBroken = true;
+            this.node.active = false;
+            BrickManager.instance.checkAllBricksBroken();
         }
     },
 
     repair (playFX=true, force=false) {
+        // 干掉该列的敌人，这一步我们暂定不需要判断是否已经坏了，一律强制干掉敌人
+        while (this.enemies.length > 0) {
+            this.enemies[this.enemies.length - 1].onHitByBullet();
+        }
+
         if (this.isBroken == true || force) {
             this._isBroken = false;
             this.node.active = true;
@@ -56,11 +58,11 @@ cc.Class({
             if (playFX) {
                 this.node.getComponent(cc.Animation).play();
             }
-            // 干掉该列的敌人
-            while (this.enemies.length > 0) {
-                console.log('Enemy removed!');
-                this.enemies[this.enemies.length - 1].onHitByBullet();
-            }
         }
+    },
+
+    repairAnimComplete() {
+        this.node.y = this.initialPosY;
     }
+
 });
