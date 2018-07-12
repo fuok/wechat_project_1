@@ -59,5 +59,33 @@ cc.Class({
         self.btnShoot.node.on(cc.Node.EventType.TOUCH_START, function (event) {
             self.player.shoot();
         });
+
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, function (event){
+            switch(event.keyCode) {
+                case cc.KEY.a:
+                    self.btnDirection.node.scaleX = -1;
+                    self.player.moveLeft();
+                    break;
+                case cc.KEY.d:
+                    self.btnDirection.node.scaleX = 1;
+                    self.player.moveRight();
+                    break;
+                case cc.KEY.j:
+                    self.player.shoot();
+                    break;
+            }
+        });
+
+        // 松开按键时，停止向该方向的加速
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, function (event){
+            switch(event.keyCode) {
+                case cc.KEY.a:
+                    self.player.stopMove();
+                    break;
+                case cc.KEY.d:
+                    self.player.stopMove();
+                    break;
+            }
+        });
     },
 });
