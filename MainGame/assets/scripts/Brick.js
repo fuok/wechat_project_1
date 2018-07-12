@@ -54,7 +54,7 @@ cc.Class({
             this.node.active = true;
             // 播放修复砖块的特效
             if (playFX) {
-                ParticleManager.instance.createBrickRepairFX(this.node.position);
+                this.node.getComponent(cc.Animation).play();
             }
             // 干掉该列的敌人
             while (this.enemies.length > 0) {

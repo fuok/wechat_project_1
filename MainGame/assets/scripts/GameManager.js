@@ -101,7 +101,8 @@ let GameManager = cc.Class({
         this.player.getComponent('Player').enableInput();
         BrickManager.instance.resetAllBricks();
         EnemyManager.instance.clearAllEnemies();
-        this.curLevelIndex = 0;
+        // 测试用，调成1
+        this.curLevelIndex = 1;
         BarrageManager.instance.setTutorialBarrages();
         this.nextLevelAnimDone();
         this.gamepadNode.active = true;

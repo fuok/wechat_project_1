@@ -26,11 +26,7 @@ let ParticleManager = cc.Class({
         brickHitFXPrefab: {
             default: null,
             type: cc.Prefab
-        },
-        brickRepairFXPrefab: {
-            default: null,
-            type: cc.Prefab
-        },
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -42,7 +38,6 @@ let ParticleManager = cc.Class({
         this.enemyHitFX2Pool = new cc.NodePool();
         this.enemyHitFX3Pool = new cc.NodePool();
         this.brickHitFXPool = new cc.NodePool();
-        this.brickRepairFXPool = new cc.NodePool();
     },
 
     start () {
@@ -86,9 +81,5 @@ let ParticleManager = cc.Class({
 
     createBrickHitFX (pos) {
         this.createFX(pos, this.brickHitFXPool, this.brickHitFXPrefab);
-    },
-
-    createBrickRepairFX (pos) {
-        this.createFX(pos, this.brickRepairFXPool, this.brickRepairFXPrefab);
     },
 });

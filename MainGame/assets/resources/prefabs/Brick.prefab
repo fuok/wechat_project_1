@@ -25,10 +25,13 @@
       },
       {
         "__id__": 4
+      },
+      {
+        "__id__": 5
       }
     ],
     "_prefab": {
-      "__id__": 5
+      "__id__": 6
     },
     "_id": "",
     "_opacity": 255,
@@ -113,13 +116,32 @@
     }
   },
   {
+    "__type__": "cc.Animation",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_defaultClip": {
+      "__uuid__": "6ad776d4-9b2d-44fd-8bf4-5513b2769c0c"
+    },
+    "_clips": [
+      {
+        "__uuid__": "6ad776d4-9b2d-44fd-8bf4-5513b2769c0c"
+      }
+    ],
+    "playOnLoad": false
+  },
+  {
     "__type__": "4c50cGK0ahLS4w6B0u6kEru",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
-    "_enabled": true
+    "_enabled": true,
+    "enemies": []
   },
   {
     "__type__": "cc.PrefabInfo",
