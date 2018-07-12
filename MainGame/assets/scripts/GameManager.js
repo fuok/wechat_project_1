@@ -15,7 +15,6 @@ let initLevel = {
         normalEnemyInterval: 1.2,
         singleRecoveryInterval: 6,
         fullRecoveryInterval: 20,
-        fullRecoveryInterval: 8,
         minSpeed: 150,
         maxSpeed: 250,
         //TODO
@@ -102,8 +101,7 @@ let GameManager = cc.Class({
         this.player.getComponent('Player').enableInput();
         BrickManager.instance.resetAllBricks();
         EnemyManager.instance.clearAllEnemies();
-        // 测试用，调成1
-        this.curLevelIndex = 1;
+        this.curLevelIndex = 0;
         BarrageManager.instance.setTutorialBarrages();
         this.nextLevelAnimDone();
         this.gamepadNode.active = true;
