@@ -214,8 +214,6 @@ cc.Class({
         }
         // 计算分数
         if (hitEnemies.length > 0) {
-            let singleEnemyScore = hitEnemies.length * 10;
-            ScoreManager.instance.gainScore(hitEnemies.length * singleEnemyScore);
             if (hitEnemies.length >= 2) {
                 this.doubleKillCount += 1;
                 this.comboCount += hitEnemies.length;
@@ -232,6 +230,9 @@ cc.Class({
                 this.comboCount = 0;
                 this.onFire = false;
             }
+            // let singleEnemyScore = hitEnemies.length * 10;
+            let singleEnemyScore = hitEnemies.length >= 2 ? this.comboCount * 10 : 10;
+            ScoreManager.instance.gainScore(hitEnemies.length * singleEnemyScore);
             if (this.doubleKillCount >= 2) {
                 EnemyManager.instance.slowMotion();
             }
