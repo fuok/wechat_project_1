@@ -8,8 +8,6 @@ cc.Class({
     // name: "RankingListView",
     properties: {
         rankingLabel: cc.Label,
-        backButton: cc.Node,
-        shareButton: cc.Node,
         subDomainCanvas: cc.Sprite,//显示排行榜
         shareTicket: null,
     },
@@ -51,15 +49,9 @@ cc.Class({
         }, 100);
     },
 
-    backButtonFunc: function (event) {
-        SubDomainManager.instance.removeRankData();
-        if (CC_WECHATGAME) {
-            window.wx.postMessage({// 发消息给子域
-                messageType: 4,
-                MAIN_MENU_NUM: GameConfig.MAIN_MENU_NUM,
-            });
-        }
+    restartButtonFunc: function (event) {
         this.node.destroy();
+        GameManager.instance.gameStart();
     },
 
     // 刷新子域的纹理

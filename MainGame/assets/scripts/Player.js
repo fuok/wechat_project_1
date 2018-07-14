@@ -57,11 +57,6 @@ cc.Class({
                 }
             }
         },
-        maxAmmo: 0.0,
-        currentAmmo: 0.0,
-        ammoConsumption: 0.0,
-        idleAmmoSpeed: 0.0,
-        runningAmmoSpeed: 0.0,
         state: {
             get () {
                 return this.playerState;
@@ -94,10 +89,6 @@ cc.Class({
             default: null,
             type: cc.Animation
         },
-        ammoBar: {
-            default: null,
-            type: cc.ProgressBar
-        },
         ammoLabel: {
             default: null,
             type: cc.Label
@@ -123,7 +114,6 @@ cc.Class({
         this.playerArmatureDisplay = this.node.getChildByName('Player Animation').getComponent(dragonBones.ArmatureDisplay);
         this.playerArmatureDisplay.addEventListener(dragonBones.EventObject.COMPLETE, this.playerAnimComplete, this);
         this.inputEnabled = false;
-        this.maxAmmoCount = Math.floor(this.maxAmmo / this.ammoConsumption);
     },
 
     updatePlayerPos(dt) {
@@ -151,23 +141,6 @@ cc.Class({
         if (this.state != PlayerState.Shooting) {
             this.updatePlayerPos(dt);
         }
-
-        this.updateAmmo(dt);
-    },
-
-    updateAmmo (dt) {
-        // 更新当前子弹
-        if (this.state == PlayerState.Running) {
-            this.currentAmmo += this.runningAmmoSpeed * dt;
-        } else {
-            this.currentAmmo += this.idleAmmoSpeed * dt;
-        }
-        if (this.currentAmmo > this.maxAmmo) {
-            this.currentAmmo = this.maxAmmo;
-        }
-        this.ammoBar.progress = this.currentAmmo / this.maxAmmo;
-        this.currentAmmoCount = Math.floor(this.currentAmmo / this.ammoConsumption);
-        this.ammoLabel.string = this.currentAmmoCount + ' / ' + this.maxAmmoCount;
     },
 
     reset () {
@@ -177,12 +150,18 @@ cc.Class({
         this.direction = PlayerDirection.Left;
         this.node.position.x = 0;
         // 初始化键盘输入监听
-        this.currentAmmo = 100;
         this.inputEnabled = false;
         this.doubleKillCount = 0;
         this.comboCount = 0;
         this.directionKeyState = DirectionKeyState.Idle;
         this.onFire = false;
+        this.bulletCount = 0;
+    },
+
+    resetLevel () {
+        this.moveSpeed = GameManager.instance.curLevel.playerMoveSpeed;
+        this.bulletCount = GameManager.instance.curLevel.bulletCount;
+        this.ammoLabel.string = this.bulletCount;
     },
 
     die () {
@@ -191,7 +170,15 @@ cc.Class({
         this.state = PlayerState.Dead;
         this.onFire = false;
         GameManager.instance.gameOver();
-        this.scheduleOnce(this.dieAnimComplete, 0.5);
+        this.scheduleOnce(this.dieAnimComplete, 1);
+    },
+
+    outOfAmmo () {
+        this.stopMove();
+        this.disableInput();
+        this.state = PlayerState.NoAmmo;
+        this.onFire = false;
+        GameManager.instance.gameOver();
     },
 
     shoot () {
@@ -199,15 +186,11 @@ cc.Class({
             return;
         }
 
-        if (this.currentAmmo < this.ammoConsumption) {
-            this.state = PlayerState.NoAmmo;
-            return;
-        }
-        
         // 先把状态设置成shooting
         this.state = PlayerState.Shooting;
         // 减少弹药
-        this.currentAmmo -= this.ammoConsumption;
+        this.bulletCount -= 1;
+        this.ammoLabel.string = this.bulletCount;
         // 播放弹道动画
         this.bulletTraceAnim.play();
 
@@ -250,7 +233,6 @@ cc.Class({
                 this.onFire = false;
             }
             if (this.doubleKillCount >= 2) {
-                this.currentAmmo += this.ammoConsumption * 0.7;
                 EnemyManager.instance.slowMotion();
             }
             for (let i = 0; i < hitEnemies.length; i++) {
@@ -262,6 +244,10 @@ cc.Class({
             this.comboCount = 0;
             this.onFire = false;
         }
+
+        if (this.bulletCount <= 0) {
+            this.outOfAmmo();
+        }
     },
 
     playerAnimComplete() {
@@ -272,6 +258,9 @@ cc.Class({
             case PlayerState.Dead:
                 // 因为当前死亡动画是循环的，就不调用这个
                 //this.dieAnimComplete();
+                break;
+            case PlayerState.NoAmmo:
+                this.noAmmoComplete();
                 break;
         }
     },
@@ -288,6 +277,10 @@ cc.Class({
     },
 
     dieAnimComplete () {
+        GameManager.instance.showGameOverPanel();
+    },
+
+    noAmmoComplete () {
         GameManager.instance.showGameOverPanel();
     },
 

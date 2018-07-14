@@ -17,6 +17,7 @@ let initLevel = {
         fullRecoveryInterval: 20,
         minSpeed: 150,
         maxSpeed: 250,
+        bulletCount: 20,
         //TODO
         burstNumber: 5,
 };
@@ -46,10 +47,6 @@ let GameManager = cc.Class({
             default: null,
             type: cc.Node
         },
-        ground: {
-            default: null,
-            type: cc.Node
-        },
         // player 节点，用于获取主角弹跳的高度，和控制主角行动开关
         player: {
             default: null,
@@ -62,6 +59,7 @@ let GameManager = cc.Class({
         groundPosY: 0,
         curLevelIndex: 0,
         levelCount: 999,
+        startingLevel: 0,
         gameState: {
             get () {
                 return this._gameState;
@@ -101,7 +99,8 @@ let GameManager = cc.Class({
         this.player.getComponent('Player').enableInput();
         BrickManager.instance.resetAllBricks();
         EnemyManager.instance.clearAllEnemies();
-        this.curLevelIndex = 0;
+        // 调试用
+        this.curLevelIndex = this.startingLevel;
         BarrageManager.instance.setTutorialBarrages();
         this.nextLevelAnimDone();
         this.gamepadNode.active = true;
@@ -148,15 +147,19 @@ let GameManager = cc.Class({
         this.generateCurLevel(this.curLevelIndex);
         EnemyManager.instance.resetLevel();
         ScoreManager.instance.resetLevel(this.curLevelIndex, this.curLevel.scoreLimit);
-        this.player.getComponent('Player').moveSpeed = this.curLevel.playerMoveSpeed;
+        this.player.getComponent('Player').resetLevel();
     },
 
     showGameOverPanel () {
         this.loadPanel('prefabs/panels/GameOverPanel');
     },
 
-    showWechatRankingPanel () {
-        this.loadPanel('prefabs/panels/WechatRankingPanel');
+    showRankingPanel () {
+        this.loadPanel('prefabs/panels/RankingPanel');
+    },
+
+    showTotalRankingPanel () {
+        this.loadPanel('prefabs/panels/TotalRankingPanel');
     },
 
     loadPanel(panelName) {//加载图层
@@ -183,6 +186,7 @@ let GameManager = cc.Class({
             this.curLevel.fullRecoveryInterval = this.previousLevel.fullRecoveryInterval * 0.95;
             this.curLevel.minSpeed = this.previousLevel.minSpeed * 1.05;
             this.curLevel.maxSpeed = this.previousLevel.maxSpeed * 1.05;
+            this.curLevel.bulletCount = Math.floor(this.previousLevel.bulletCount * 1.2);
             this.curLevel.burstNumber = this.previousLevel.burstNumber * 1.1;
         }
     }
