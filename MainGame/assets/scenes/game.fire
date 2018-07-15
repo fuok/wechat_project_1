@@ -436,7 +436,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 900
+      "y": 821
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -488,7 +488,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -444,
-      "y": 2
+      "y": 69
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -569,7 +569,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": -168,
       "y": 0
     },
     "_skewX": 0,
@@ -607,12 +607,12 @@
     "_cascadeOpacityEnabled": true,
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 720,
+      "width": 700,
       "height": 50
     },
     "_rotationX": 0,
@@ -621,7 +621,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": -359,
       "y": 0
     },
     "_skewX": 0,
@@ -736,9 +736,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 245,
-      "b": 255,
+      "r": 255,
+      "g": 184,
+      "b": 0,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -749,7 +749,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 350,
+      "width": 680,
       "height": 30
     },
     "_rotationX": 0,
@@ -801,10 +801,8 @@
     "node": {
       "__id__": 14
     },
-    "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "88e79fd5-96b4-4a77-a1f4-312467171014"
-    },
+    "_enabled": false,
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -828,12 +826,12 @@
       "__id__": 14
     },
     "_enabled": true,
-    "_N$totalLength": 700,
+    "_N$totalLength": 680,
     "_N$barSprite": {
       "__id__": 16
     },
     "_N$mode": 0,
-    "_N$progress": 0.5,
+    "_N$progress": 1,
     "_N$reverse": false
   },
   {
@@ -2325,7 +2323,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -5,
+      "x": -5.000000000000057,
       "y": -57
     },
     "_skewX": 0,
@@ -3398,7 +3396,8 @@
     },
     "barrageFXPrefab": {
       "__uuid__": "64206a63-6d39-4a70-a50a-389a0b98c76a"
-    }
+    },
+    "curRow": 0
   },
   {
     "__type__": "cc.Node",

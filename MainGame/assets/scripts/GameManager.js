@@ -11,7 +11,7 @@ const GameState = {
 
 let initLevel = {
         scoreLimit: 400,
-        playerMoveSpeed: 400,
+        playerMoveSpeed: 500,
         normalEnemyInterval: 1.2,
         singleRecoveryInterval: 6,
         fullRecoveryInterval: 20,
@@ -179,8 +179,9 @@ let GameManager = cc.Class({
             this.curLevel = Object.assign({}, initLevel);
         } else {
             this.previousLevel = Object.assign({}, this.curLevel);
-            this.curLevel.scoreLimit = Math.floor(this.previousLevel.scoreLimit + 100 * this.curLevelIndex);
-            this.curLevel.playerMoveSpeed = this.previousLevel.playerMoveSpeed * 1.1;
+            // this.curLevel.scoreLimit = Math.floor(this.previousLevel.scoreLimit + 100 * this.curLevelIndex);
+            this.curLevel.scoreLimit = this.previousLevel.scoreLimit + 100;
+            this.curLevel.playerMoveSpeed = this.previousLevel.playerMoveSpeed * 1.05;
             this.curLevel.normalEnemyInterval = this.previousLevel.normalEnemyInterval * 0.9;
             this.curLevel.singleRecoveryInterval = this.previousLevel.singleRecoveryInterval * 0.9;
             this.curLevel.fullRecoveryInterval = this.previousLevel.fullRecoveryInterval * 0.95;

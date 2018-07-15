@@ -3,20 +3,28 @@
   "_name": "flashLabel",
   "_objFlags": 0,
   "_rawFiles": null,
-  "_duration": 0.08333333333333333,
-  "sample": 60,
+  "_duration": 0.25,
+  "sample": 20,
   "speed": 1,
   "wrapMode": "22",
   "curveData": {
     "props": {
-      "opacity": [
+      "scale": [
         {
           "frame": 0,
-          "value": 255
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 1,
+            "y": 1
+          }
         },
         {
-          "frame": 0.08333333333333333,
-          "value": 0
+          "frame": 0.25,
+          "value": {
+            "__type__": "cc.Vec2",
+            "x": 0,
+            "y": 0
+          }
         }
       ]
     }

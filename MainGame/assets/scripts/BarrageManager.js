@@ -71,6 +71,7 @@ let BarrageManager = cc.Class({
             default: null,
             type: cc.Prefab
         },
+        curRow: 0,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -130,8 +131,9 @@ let BarrageManager = cc.Class({
         }
         this.barrages.push(fxNode);
         // pos参数是相对于rootNode的pos
-        let row = Math.floor(Math.random() * 3);
-        let y = 800 - row * 70;
+        var nextRow = Math.floor(Math.random() * 2 + 1) + this.curRow;
+        this.curRow = nextRow > 2 ? nextRow - 3 : nextRow
+        let y = 750 - this.curRow * 70;
         fxNode.position = cc.v2(1000, y);
         fxNode.speed = 700 + Math.random() * 200;
         fxNode.color = barrageColors[Math.floor(Math.random() * barrageColors.length)];
