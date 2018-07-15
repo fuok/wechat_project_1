@@ -141,6 +141,7 @@ cc.Class({
         if (this.state != PlayerState.Shooting) {
             this.updatePlayerPos(dt);
         }
+        this.updateAmmoLabelPos();
     },
 
     reset () {
@@ -173,6 +174,11 @@ cc.Class({
         this.scheduleOnce(this.dieAnimComplete, 1);
     },
 
+    updateAmmoLabelPos () {
+        this.ammoLabel.node.x = this.node.x;
+        this.ammoLabel.node.y = this.node.y + 150;
+    },
+
     outOfAmmo () {
         this.stopMove();
         this.disableInput();
@@ -185,6 +191,8 @@ cc.Class({
         if (!this.inputEnabled) {
             return;
         }
+
+        let levelComplete = false;
 
         // 先把状态设置成shooting
         this.state = PlayerState.Shooting;
@@ -232,7 +240,7 @@ cc.Class({
             }
             // let singleEnemyScore = hitEnemies.length * 10;
             let singleEnemyScore = hitEnemies.length >= 2 ? this.comboCount * 10 : 10;
-            ScoreManager.instance.gainScore(hitEnemies.length * singleEnemyScore);
+            levelComplete = ScoreManager.instance.gainScore(hitEnemies.length * singleEnemyScore);
             if (this.doubleKillCount >= 2) {
                 EnemyManager.instance.slowMotion();
             }
@@ -246,7 +254,7 @@ cc.Class({
             this.onFire = false;
         }
 
-        if (this.bulletCount <= 0) {
+        if (this.bulletCount <= 0 && !levelComplete) {
             this.outOfAmmo();
         }
     },

@@ -124,6 +124,9 @@ let ScoreManager = cc.Class({
         this.updateScoreBar();
         if (this.currentScore >= this.levelMaxScore) {
             this.GameManager.instance.nextLevel();
+            return true;
         }
+
+        return false;
     }
 });
