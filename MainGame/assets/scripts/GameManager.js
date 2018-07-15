@@ -17,7 +17,7 @@ let initLevel = {
         fullRecoveryInterval: 20,
         minSpeed: 150,
         maxSpeed: 250,
-        bulletCount: 20,
+        bulletCount: 16,
         //TODO
         burstNumber: 5,
 };
@@ -180,14 +180,16 @@ let GameManager = cc.Class({
         } else {
             this.previousLevel = Object.assign({}, this.curLevel);
             // this.curLevel.scoreLimit = Math.floor(this.previousLevel.scoreLimit + 100 * this.curLevelIndex);
-            this.curLevel.scoreLimit = this.previousLevel.scoreLimit + 100;
-            this.curLevel.playerMoveSpeed = this.previousLevel.playerMoveSpeed * 1.05;
-            this.curLevel.normalEnemyInterval = this.previousLevel.normalEnemyInterval * 0.9;
+            this.curLevel.scoreLimit = this.previousLevel.scoreLimit + 200;
+            this.curLevel.playerMoveSpeed = this.previousLevel.playerMoveSpeed * 1.03;
+            // this.curLevel.normalEnemyInterval = this.previousLevel.normalEnemyInterval * 0.9;
+            this.curLevel.normalEnemyInterval = this.previousLevel.normalEnemyInterval - 0.05;
             this.curLevel.singleRecoveryInterval = this.previousLevel.singleRecoveryInterval * 0.9;
             this.curLevel.fullRecoveryInterval = this.previousLevel.fullRecoveryInterval * 0.95;
-            this.curLevel.minSpeed = this.previousLevel.minSpeed * 1.05;
-            this.curLevel.maxSpeed = this.previousLevel.maxSpeed * 1.05;
-            this.curLevel.bulletCount = Math.floor(this.previousLevel.bulletCount * 1.2);
+            this.curLevel.minSpeed = this.previousLevel.minSpeed * 1.04;
+            this.curLevel.maxSpeed = this.previousLevel.maxSpeed * 1.04;
+            // this.curLevel.bulletCount = Math.floor(this.previousLevel.bulletCount * 1.2);
+            this.curLevel.bulletCount = Math.floor(this.previousLevel.bulletCount + 4);
             this.curLevel.burstNumber = this.previousLevel.burstNumber * 1.1;
         }
     }
