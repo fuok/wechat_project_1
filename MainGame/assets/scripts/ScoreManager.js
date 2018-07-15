@@ -105,6 +105,7 @@ let ScoreManager = cc.Class({
         fxLabel.string = score;
         fxLabel.fontSize = scoreFXParams[paramIndex].size;
         this.rootNode.addChild(fxNode);
+        fxNode.getComponent(cc.Animation).play();
         fxNode.getComponent(cc.Animation).scheduleOnce(this.destroyFX.bind(this, fxNode), 2);
     },
 
