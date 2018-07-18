@@ -10,16 +10,16 @@ const GameState = {
 };
 
 let initLevel = {
-        scoreLimit: 400,
-        playerMoveSpeed: 500,
-        normalEnemyInterval: 1.2,
-        singleRecoveryInterval: 6,
-        fullRecoveryInterval: 20,
-        minSpeed: 150,
-        maxSpeed: 250,
-        bulletCount: 16,
-        //TODO
-        burstNumber: 5,
+    scoreLimit: 200,
+    playerMoveSpeed: 500,
+    normalEnemyInterval: 2,
+    singleRecoveryInterval: 7,
+    fullRecoveryInterval: 25,
+    minSpeed: 100,
+    maxSpeed: 200,
+    bulletCount: 16,
+    //TODO
+    burstNumber: 5,
 };
 
 let GameManager = cc.Class({
@@ -171,12 +171,14 @@ let GameManager = cc.Class({
         });
     },
 
-    generateCurLevel (index) {
+    generateCurLevel(index) {
         if (index == 0) {
             this.curLevel = Object.assign({}, initLevel);
             this.curLevel.scoreLimit = 100;
         } else if (index == 1) {
             this.curLevel = Object.assign({}, initLevel);
+            this.curLevel.minSpeed = 120;
+            this.curLevel.maxSpeed = 220;
         } else {
             this.previousLevel = Object.assign({}, this.curLevel);
             // this.curLevel.scoreLimit = Math.floor(this.previousLevel.scoreLimit + 100 * this.curLevelIndex);
