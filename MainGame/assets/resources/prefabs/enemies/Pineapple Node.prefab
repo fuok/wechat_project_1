@@ -68,7 +68,7 @@
     "_localZOrder": 0,
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
-    "groupIndex": 0
+    "groupIndex": 3
   },
   {
     "__type__": "cc.Node",
@@ -156,7 +156,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "81228969-1bdc-49cf-9ef7-93566da88890"
     },
     "fileId": "9dDiGMGX1KArQtan9TlQcE",
     "sync": false
@@ -268,7 +268,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "81228969-1bdc-49cf-9ef7-93566da88890"
     },
     "fileId": "a0Lld4TiVEU65NEfV1bgTm",
     "sync": false
@@ -309,7 +309,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "81228969-1bdc-49cf-9ef7-93566da88890"
     },
     "fileId": "28S9VNAdxAh6Ma1sCD74AL",
     "sync": false

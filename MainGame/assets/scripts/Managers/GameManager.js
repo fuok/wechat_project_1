@@ -1,3 +1,4 @@
+let BackgroundManager = require('BackgroundManager');
 let ScoreManager = require('ScoreManager');
 let BrickManager = require('BrickManager');
 let EnemyManager = require('EnemyManager');
@@ -107,6 +108,7 @@ let GameManager = cc.Class({
         this._gameState = GameState.GameOver;
         this.player.getComponent('Player').disableInput();
         EnemyManager.instance.clearAllEnemies();
+        BackgroundManager.instance.stageClose();
         this.cameraNode.getComponent('CameraController').moveCameraToTarget();
     },
 
@@ -141,6 +143,7 @@ let GameManager = cc.Class({
         // 这个函数是真正的初始化当前level的地方
         this.nextLevelLabel.active = false;
         this.generateCurLevel(this.curLevelIndex);
+        BackgroundManager.instance.stageOpen();
         EnemyManager.instance.resetLevel();
         ScoreManager.instance.resetLevel(this.curLevelIndex, this.curLevel.scoreLimit);
         this.player.getComponent('Player').resetLevel();
