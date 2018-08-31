@@ -25,7 +25,7 @@ let ScoreManager = cc.Class({
     },
 
     properties: {
-        rootNode: {
+        gameCanvasNode: {
             default: null,
             type: cc.Node
         },
@@ -98,13 +98,13 @@ let ScoreManager = cc.Class({
             paramIndex = 3;
         }
 
-        // pos参数是相对于rootNode的pos
+        // pos参数是相对于gameCanvasNode
         fxNode.position = pos;
         fxNode.color = fxNode.color.fromHEX(scoreFXParams[paramIndex].color);
         let fxLabel = fxNode.getComponent(cc.Label);
         fxLabel.string = score;
         fxLabel.fontSize = scoreFXParams[paramIndex].size;
-        this.rootNode.addChild(fxNode);
+        this.gameCanvasNode.addChild(fxNode);
         fxNode.getComponent(cc.Animation).play();
         fxNode.getComponent(cc.Animation).scheduleOnce(this.destroyFX.bind(this, fxNode), 1);
     },

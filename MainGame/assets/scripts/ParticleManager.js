@@ -7,7 +7,7 @@ let ParticleManager = cc.Class({
     },
 
     properties: {
-        rootNode: {
+        gameCanvasNode: {
             default: null,
             type: cc.Node
         },
@@ -53,7 +53,7 @@ let ParticleManager = cc.Class({
             fxNode = cc.instantiate(FXPrefab);
         }
         fxNode.getComponent(cc.ParticleSystem).scheduleOnce(this.destroyFX.bind(this, fxNode, nodePool), 2);
-        this.rootNode.addChild(fxNode);
+        this.gameCanvasNode.addChild(fxNode);
         // pos参数是相对于rootNode的pos
         fxNode.position = pos;
         if (direction == 0 /* left */) {

@@ -12,7 +12,7 @@ let BrickManager = cc.Class({
             default: null,
             type:cc.Prefab
         },
-        rootNode: {
+        gameCanvasNode: {
             default: null,
             type:cc.Node
         },
@@ -37,7 +37,7 @@ let BrickManager = cc.Class({
         // create all bricks from the prefab
         for (let i = 0; i < this.brickCount; i++) {
             let newBrick = cc.instantiate(this.brickPrefab);
-            this.rootNode.addChild(newBrick);
+            this.gameCanvasNode.addChild(newBrick);
             // set brick's position, brick size 36, totally 30 bricks
             let newBrickX = -(this.canvasWidth - this.brickSize) / 2  + i * this.brickSize;
             let newBrickY = this.groundPosY;

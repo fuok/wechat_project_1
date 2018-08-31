@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "630a06ea-f8e4-471b-a5b0-47610df916d0",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "01_btn_paihang": {
+      "ver": "1.0.3",
+      "uuid": "d2241bc3-342d-4824-bcf1-e1eeea4876e7",
+      "rawTextureUuid": "630a06ea-f8e4-471b-a5b0-47610df916d0",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 175,
+      "height": 175,
+      "rawWidth": 175,
+      "rawHeight": 175,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

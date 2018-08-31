@@ -31,10 +31,6 @@ let GameManager = cc.Class({
 
     properties: {
         // 地面节点，用于确定星星生成的高度
-        rootNode: {
-            default: null,
-            type: cc.Node
-        },
         cameraNode: {
             default: null,
             type: cc.Node

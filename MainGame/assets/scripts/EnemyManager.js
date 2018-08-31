@@ -12,7 +12,7 @@ let EnemyManager = cc.Class({
         enemyWaveInterval: 0,
         enemyBreakInterval: 0,
         enemyGenerationY: 1100,
-        rootNode: {
+        gameCanvasNode: {
             default: null,
             type: cc.Node
         },
@@ -144,7 +144,7 @@ let EnemyManager = cc.Class({
 
     addEnemy (enemyNode) {
         let enemy = enemyNode.getComponent('Enemy');
-        this.rootNode.addChild(enemyNode);
+        this.gameCanvasNode.addChild(enemyNode);
         this.enemies.push(enemy);
         BrickManager.instance.getBrick(enemy.brickIndex).addEnemy(enemy);
     },
@@ -227,7 +227,7 @@ let EnemyManager = cc.Class({
     killNormalEnemy (enemyNode) {
         //显示击中得分
         var getScoreLabel=cc.instantiate(this.getScoreLabelPrefab);
-        this.rootNode.addChild(getScoreLabel);
+        this.gameCanvasNode.addChild(getScoreLabel);
         getScoreLabel.setPosition(enemyNode);
         //延迟销毁
         setTimeout(function () {

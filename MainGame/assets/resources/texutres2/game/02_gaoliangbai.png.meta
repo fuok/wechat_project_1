@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "72ce92fb-0c96-43ae-b74b-26ce52ab381c",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "02_gaoliangbai": {
+      "ver": "1.0.3",
+      "uuid": "468848a8-ff85-446a-a93a-815cb130cf4c",
+      "rawTextureUuid": "72ce92fb-0c96-43ae-b74b-26ce52ab381c",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 128,
+      "height": 128,
+      "rawWidth": 128,
+      "rawHeight": 128,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
