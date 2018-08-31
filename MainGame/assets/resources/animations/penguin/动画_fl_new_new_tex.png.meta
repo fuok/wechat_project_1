@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "56e0d0a8-a92c-4a14-9ddf-16a515c35455",
+  "uuid": "7ab1f4c4-9178-4b69-bf7c-90fffd3b68cc",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "fl__tex": {
+    "动画_fl_new_new_tex": {
       "ver": "1.0.3",
-      "uuid": "66a3aaca-a665-4b91-a79c-d7644a6f323f",
-      "rawTextureUuid": "56e0d0a8-a92c-4a14-9ddf-16a515c35455",
+      "uuid": "917bdcbb-8418-4d3d-8e62-0f4374c9e4ef",
+      "rawTextureUuid": "7ab1f4c4-9178-4b69-bf7c-90fffd3b68cc",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

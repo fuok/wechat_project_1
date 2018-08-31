@@ -2036,17 +2036,17 @@
       "__id__": 48
     },
     "_enabled": true,
-    "_armatureName": "qie",
-    "_animationName": "idle",
+    "_armatureName": "all",
+    "_animationName": "",
     "playTimes": -1,
     "_N$dragonAsset": {
-      "__uuid__": "51ea6c0f-c9c3-46c5-b05b-66669a5769c6"
+      "__uuid__": "301b31ee-53af-4544-bbdb-9f14858ace64"
     },
     "_N$dragonAtlasAsset": {
-      "__uuid__": "075d2d70-20ce-480f-bd62-dc6a834b5e61"
+      "__uuid__": "ed4b8c66-222f-4ebd-a04f-7d6ef2ca3ccd"
     },
     "_N$_defaultArmatureIndex": 0,
-    "_N$_animationIndex": 1,
+    "_N$_animationIndex": 0,
     "_N$timeScale": 1,
     "_N$debugBones": false
   },
