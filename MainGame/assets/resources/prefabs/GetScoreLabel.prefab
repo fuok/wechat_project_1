@@ -22,10 +22,13 @@
       },
       {
         "__id__": 3
+      },
+      {
+        "__id__": 4
       }
     ],
     "_prefab": {
-      "__id__": 4
+      "__id__": 5
     },
     "_id": "",
     "_opacity": 255,
@@ -44,7 +47,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 44,
+      "width": 50,
       "height": 70
     },
     "_rotationX": 0,
@@ -53,7 +56,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 181,
+      "x": 455,
       "y": 1259
     },
     "_skewX": 0,
@@ -102,6 +105,23 @@
       }
     ],
     "playOnLoad": true
+  },
+  {
+    "__type__": "cc.LabelOutline",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 53,
+      "g": 53,
+      "b": 53,
+      "a": 255
+    },
+    "_width": 3
   },
   {
     "__type__": "cc.PrefabInfo",
