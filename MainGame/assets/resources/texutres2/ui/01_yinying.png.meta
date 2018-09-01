@@ -2,7 +2,7 @@
   "ver": "1.0.0",
   "uuid": "0c739b1c-da12-4b85-9ae5-be4adf9c07a6",
   "type": "sprite",
-  "wrapMode": "clamp",
+  "wrapMode": "repeat",
   "filterMode": "bilinear",
   "subMetas": {
     "01_yinying": {
