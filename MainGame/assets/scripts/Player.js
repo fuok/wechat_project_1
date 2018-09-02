@@ -129,10 +129,9 @@ cc.Class({
 
         // 根据当前速度更新主角的位置
         let newPosX = this.node.x + speed * dt;
-        let halfBrickSize = BrickManager.instance.brickSize / 2;
         // 判断地板砖块是否允许移动
-        if (BrickManager.instance.isPosXWalkable(newPosX + halfBrickSize) &&
-            BrickManager.instance.isPosXWalkable(newPosX - halfBrickSize)) {
+        if (BrickManager.instance.isPosXWalkable(newPosX) &&
+            BrickManager.instance.isPosXWalkable(newPosX)) {
             this.node.x = newPosX;
         }
     },

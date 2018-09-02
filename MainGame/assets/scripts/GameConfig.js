@@ -1,6 +1,8 @@
 var GameConfig = {
     DEVICE_WIDTH: 1080, // 屏幕宽度
     DEVICE_HEIGHT: 1920,
+    GAME_CANVAS_WIDTH: 1030, // 游戏区域的宽度
+    GAME_CANVAS_HEIGHT: 1900, // 游戏区域的高度（不准）
 
     MAIN_MENU_NUM: "Classic",// 主选择菜单
 

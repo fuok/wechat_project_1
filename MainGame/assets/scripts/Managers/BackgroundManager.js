@@ -70,7 +70,7 @@ let BackgroundManager = cc.Class({
     },
 
     immediateStageOpen() {
-        let mountain1Pos = new cc.Vec2(-213, 572);
+        let mountain1Pos = new cc.Vec2(-223, 572);
         let mountain2Pos = new cc.Vec2(334, 516);
         let cloud1Pos = new cc.Vec2(-331, 503);
         let cloud2Pos = new cc.Vec2(278, 432);

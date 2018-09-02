@@ -105,6 +105,13 @@ let EnemyManager = cc.Class({
         }
 
         this.curWaveGeneratedNormalEnemyCount += 1;
+
+        // ---------- 调试用，可以在这里使用固定的index ------------
+        //let enemyPos = cc.v2(BrickManager.instance.getBrickPosX(1), 1000);
+        //let speed = this.randomSpeed();
+        //this.createNewNormalEnemy(enemyPos, speed);
+        // ------------------ 调试区域结束 ----------------------
+
         this.createOneOrTwoEnemies();
         if (this.curWaveGeneratedNormalEnemyCount > this.curLevelEnemyCountPerWave) {
             this.curWaveGeneratedNormalEnemyCount = -1;

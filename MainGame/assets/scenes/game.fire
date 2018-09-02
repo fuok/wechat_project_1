@@ -235,8 +235,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 665,
-      "height": 429
+      "width": 663,
+      "height": 425
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -3180,7 +3180,7 @@
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 36,
+      "width": 34,
       "height": 108
     }
   },
@@ -3439,8 +3439,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 525,
-      "height": 168
+      "width": 523,
+      "height": 167
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -3654,7 +3654,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 66,
-      "height": 651
+      "height": 649
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -3946,7 +3946,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 66,
-      "height": 651
+      "height": 649
     },
     "_rotationX": 180,
     "_rotationY": 180,
@@ -4400,8 +4400,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1101,
-      "height": 182
+      "width": 1099,
+      "height": 181
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -5686,8 +5686,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 295,
-      "height": 198
+      "width": 294,
+      "height": 195
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -5882,7 +5882,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 387,
-      "height": 316
+      "height": 312
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -6202,8 +6202,8 @@
     "playerNode": {
       "__id__": 52
     },
-    "brickSize": 36,
-    "brickCount": 30,
+    "brickSize": 36.8,
+    "brickCount": 28,
     "groundPosY": -238
   },
   {

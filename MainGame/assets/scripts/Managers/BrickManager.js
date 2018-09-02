@@ -21,7 +21,7 @@ let BrickManager = cc.Class({
             type:cc.Node
         },
         brickSize: 36,
-        brickCount: 30,
+        brickCount: 28,
         groundPosY: 0
     },
 
@@ -31,14 +31,14 @@ let BrickManager = cc.Class({
         BrickManager.instance = this;
         this.EnemyManager = require('EnemyManager');
 
-        this.canvasWidth = GameConfig.DEVICE_WIDTH;
+        this.canvasWidth = GameConfig.GAME_CANVAS_WIDTH;
         this.bricks = [];
 
         // create all bricks from the prefab
         for (let i = 0; i < this.brickCount; i++) {
             let newBrick = cc.instantiate(this.brickPrefab);
             this.gameCanvasNode.addChild(newBrick);
-            // set brick's position, brick size 36, totally 30 bricks
+            // set brick's position, brick size 36, totally 28 bricks
             let newBrickX = -(this.canvasWidth - this.brickSize) / 2  + i * this.brickSize;
             let newBrickY = this.groundPosY;
             newBrick.getComponent('Brick').initPos(newBrickX, newBrickY);
@@ -61,7 +61,7 @@ let BrickManager = cc.Class({
     },
 
     getRandomPosX () {
-        let randIndex = Math.floor(Math.random() * 30);
+        let randIndex = Math.floor(Math.random() * this.brickSize);
         return this.bricks[randIndex].node.x;
     },
 
