@@ -1,4 +1,5 @@
 let ScoreManager = require('ScoreManager');
+let AudioManager = require('AudioManager');
 let BarrageManager = require('BarrageManager');
 let GameManager = require('GameManager')
 let EnemyManager = require('EnemyManager')
@@ -200,6 +201,8 @@ cc.Class({
         this.ammoLabel.string = this.bulletCount;
         // 播放弹道动画
         this.bulletTraceAnim.play();
+        // 播放音效
+        AudioManager.instance.playShoot();
 
         let enemies = EnemyManager.instance.getAllEnemies();
         let hitCount = 0;

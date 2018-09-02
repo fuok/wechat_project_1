@@ -17,7 +17,7 @@
         "__id__": 2
       },
       {
-        "__id__": 166
+        "__id__": 168
       },
       {
         "__id__": 9
@@ -84,6 +84,9 @@
       },
       {
         "__id__": 164
+      },
+      {
+        "__id__": 166
       }
     ],
     "_tag": -1,
@@ -6490,6 +6493,88 @@
       "__uuid__": "64206a63-6d39-4a70-a50a-389a0b98c76a"
     },
     "curRow": 0
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "AudioManager",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_tag": -1,
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 167
+      }
+    ],
+    "_prefab": null,
+    "_id": "14emeyNelKzbQ/qbiC2l5V",
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_opacityModifyRGB": false,
+    "groupIndex": 0
+  },
+  {
+    "__type__": "6d49dBM7QxAWbmMsgSMuPGL",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 166
+    },
+    "_enabled": true,
+    "shoot": {
+      "__uuid__": "486acdf0-e2b0-424a-bed9-a287cd76a637"
+    },
+    "breakFloor": {
+      "__uuid__": "f9a844bb-6736-432a-9790-6033e797e614"
+    },
+    "singleRecovery": {
+      "__uuid__": "81e8e5f1-ad07-4243-84fe-9c1e63b6546b"
+    },
+    "fullRecovery": {
+      "__uuid__": "cf705ece-0d43-4bfe-b610-fd54ebe1a48c"
+    },
+    "gameStart": {
+      "__uuid__": "c42e8fa7-63d6-4eb9-a669-84f2d10568b5"
+    },
+    "gameOver": {
+      "__uuid__": "93cb0055-ba4a-4640-9666-f2129a0fdcba"
+    },
+    "levelUp": {
+      "__uuid__": "ea1a2895-fa7a-4375-a6f3-63e04e43a153"
+    }
   },
   {
     "__type__": "cc.Node",

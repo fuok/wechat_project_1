@@ -1,4 +1,5 @@
 let BackgroundManager = require('BackgroundManager');
+let AudioManager = require('AudioManager');
 let ScoreManager = require('ScoreManager');
 let BrickManager = require('BrickManager');
 let EnemyManager = require('EnemyManager');
@@ -102,6 +103,7 @@ let GameManager = cc.Class({
         this.nextLevelAnimDone();
         this.gamepadNode.active = true;
         this.cameraNode.getComponent('CameraController').moveCameraToCenter();
+        AudioManager.instance.playGameStart();  // 音效
     },
 
     gameOver () {
@@ -110,6 +112,7 @@ let GameManager = cc.Class({
         EnemyManager.instance.clearAllEnemies();
         BackgroundManager.instance.stageClose();
         this.cameraNode.getComponent('CameraController').moveCameraToTarget();
+        AudioManager.instance.playGameOver();  // 音效
     },
 
     setNextLevelLabel () {
@@ -129,6 +132,7 @@ let GameManager = cc.Class({
         this.generateNextLevelBarrages();
         this.curLevelIndex += 1;
         this.scheduleOnce(this.nextLevelAnimDone, 3);
+        AudioManager.instance.playLevelUp();  // 音效
     },
 
     generateNextLevelBarrages() {

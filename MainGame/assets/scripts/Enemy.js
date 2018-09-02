@@ -1,4 +1,5 @@
 let ParticleManager = require('ParticleManager');
+let AudioManager = require('AudioManager');
 let BrickManager = require('BrickManager');
 let EnemyManager = require('EnemyManager')
 let GameManager = require('GameManager');
@@ -71,13 +72,14 @@ cc.Class({
         ParticleManager.instance.createEnemyHitFX2(this.node.position, direction);
         ParticleManager.instance.createEnemyHitFX3(this.node.position, direction);
 
-
         if (this.enemyType == EnemyType.SingleRecovery) {
             EnemyManager.instance.destroyRecovery(this.node);
             BrickManager.instance.repairOneBrick();
+            AudioManager.instance.playSingleRecovery();  // 音效
         } else if (this.enemyType == EnemyType.FullRecovery) {
             EnemyManager.instance.destroyRecovery(this.node);
             BrickManager.instance.repairAllBrokenBricks();
+            AudioManager.instance.playFullRecovery();  // 音效
         } else if (this.enemyType == EnemyType.Normal) {
             EnemyManager.instance.destroyNormalEnemy(this.node);
         }

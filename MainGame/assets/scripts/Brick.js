@@ -1,4 +1,5 @@
 let BrickManager = require('BrickManager');
+let AudioManager = require('AudioManager');
 let ParticleManager = require('ParticleManager');
 
 cc.Class({
@@ -42,6 +43,7 @@ cc.Class({
             this._isBroken = true;
             this.node.active = false;
             BrickManager.instance.checkAllBricksBroken();
+            AudioManager.instance.playBreakFloor();  // 音效
         }
     },
 
