@@ -61,7 +61,7 @@ let BrickManager = cc.Class({
     },
 
     getRandomPosX () {
-        let randIndex = Math.floor(Math.random() * this.brickSize);
+        let randIndex = Math.floor(Math.random() * this.brickCount);
         return this.bricks[randIndex].node.x;
     },
 
