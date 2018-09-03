@@ -129,8 +129,11 @@ cc.Class({
         } else if (this.directionKeyState == DirectionKeyState.Right) {
             speed = this.moveSpeed;
         } else {
+            AudioManager.instance.stopFootstep();
             return;
         }
+        // 播放走路的循环音效
+        AudioManager.instance.playFootstep();
 
         // 根据当前速度更新主角的位置
         let newPosX = this.node.x + speed * dt;
@@ -238,6 +241,9 @@ cc.Class({
         }
         // 计算分数
         if (hitEnemies.length > 0) {
+            // 先播放打碎水果的音效
+            AudioManager.instance.playSquashFruit();
+
             if (hitEnemies.length >= 2) {
                 this.doubleKillCount += 1;
                 this.comboCount += hitEnemies.length;

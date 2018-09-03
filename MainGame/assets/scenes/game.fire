@@ -6581,6 +6581,12 @@
     "shoot": {
       "__uuid__": "486acdf0-e2b0-424a-bed9-a287cd76a637"
     },
+    "footstep": {
+      "__uuid__": "e59cc88c-9703-4df8-9014-2db25f5de57c"
+    },
+    "squashFruit": {
+      "__uuid__": "2b6d0b46-d423-4d9c-817e-4cf2610c2517"
+    },
     "breakFloor": {
       "__uuid__": "f9a844bb-6736-432a-9790-6033e797e614"
     },

@@ -10,6 +10,14 @@ let AudioManager = cc.Class({
             default: null,
             url: cc.AudioClip,
         },
+        footstep: {
+            default: null,
+            url: cc.AudioClip,
+        },
+        squashFruit: {
+            default: null,
+            url: cc.AudioClip,
+        },
         breakFloor: {
             default: null,
             url: cc.AudioClip,
@@ -55,10 +63,28 @@ let AudioManager = cc.Class({
 
     onLoad () {
         AudioManager.instance = this;
+        this.footstepID = -1;
     },
 
     playShoot () {
         cc.audioEngine.play(this.shoot);
+    },
+
+    playFootstep () {
+        if (this.footstepID == -1) {
+            this.footstepID = cc.audioEngine.play(this.footstep, true);
+        }
+    },
+
+    stopFootstep () {
+        if (this.footstepID != -1) {
+            cc.audioEngine.stop(this.footstepID);
+            this.footstepID = -1;
+        }
+    },
+
+    playSquashFruit () {
+        cc.audioEngine.play(this.squashFruit);
     },
 
     playBreakFloor () {
