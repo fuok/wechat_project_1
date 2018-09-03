@@ -94,6 +94,10 @@ cc.Class({
             default: null,
             type: cc.Label
         },
+        ammoLabelAnim: {
+            default: null,
+            type: cc.Animation
+        },
         comboNode: {
             default: null,
             type: cc.Node
@@ -161,10 +165,21 @@ cc.Class({
 
     resetLevel () {
         this.moveSpeed = GameManager.instance.curLevel.playerMoveSpeed;
-        this.bulletCount = GameManager.instance.curLevel.bulletCount;
-        this.ammoLabel.string = this.bulletCount;
+        this.setBulletCount(GameManager.instance.curLevel.bulletCount, true);
     },
 
+    setBulletCount(newCount, reset=false) {
+        this.bulletCount = newCount;
+        this.ammoLabel.string = newCount;
+        if (reset) {
+            this.ammoLabelAnim.stop();
+            this.ammoLabel.node.scaleX = 1;
+            this.ammoLabel.node.scaleY = 1;
+            this.ammoLabel.node.color = cc.Color.WHITE;
+        } else if (this.bulletCount == 5) {
+            this.ammoLabelAnim.play();
+        }
+    },
     die () {
         this.stopMove();
         this.disableInput();
@@ -197,8 +212,7 @@ cc.Class({
         // 先把状态设置成shooting
         this.state = PlayerState.Shooting;
         // 减少弹药
-        this.bulletCount -= 1;
-        this.ammoLabel.string = this.bulletCount;
+        this.setBulletCount(this.bulletCount - 1);
         // 播放弹道动画
         this.bulletTraceAnim.play();
         // 播放音效
