@@ -2325,7 +2325,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 54.44,
+      "width": 0,
       "height": 44.44
     },
     "_rotationX": 0,
@@ -2362,7 +2362,7 @@
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
-    "_N$string": "99",
+    "_N$string": "",
     "_N$horizontalAlign": 0,
     "_N$verticalAlign": 0,
     "_N$fontFamily": "Arial",
