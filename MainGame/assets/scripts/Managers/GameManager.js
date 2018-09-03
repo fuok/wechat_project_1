@@ -131,7 +131,7 @@ let GameManager = cc.Class({
         this.setNextLevelLabel();
         this.generateNextLevelBarrages();
         this.curLevelIndex += 1;
-        this.scheduleOnce(this.nextLevelAnimDone, 3);
+        this.scheduleOnce(this.nextLevelAnimDone, 1);
         AudioManager.instance.playLevelUp();  // 音效
     },
 
