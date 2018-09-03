@@ -88,7 +88,7 @@ let AudioManager = cc.Class({
     },
 
     playBreakFloor () {
-        cc.audioEngine.play(this.breakFloor);
+        cc.audioEngine.play(this.breakFloor, false, 0.3);
     },
 
     playSingleRecovery () {

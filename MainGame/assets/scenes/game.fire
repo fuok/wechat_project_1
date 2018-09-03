@@ -6579,13 +6579,13 @@
     },
     "_enabled": true,
     "shoot": {
-      "__uuid__": "486acdf0-e2b0-424a-bed9-a287cd76a637"
+      "__uuid__": "27482cc6-3bfa-4ab3-8a88-d68685c56aab"
     },
     "footstep": {
-      "__uuid__": "e59cc88c-9703-4df8-9014-2db25f5de57c"
+      "__uuid__": "21c411d9-9f0c-4fe3-83c0-6f0f2e3a0f93"
     },
     "squashFruit": {
-      "__uuid__": "2b6d0b46-d423-4d9c-817e-4cf2610c2517"
+      "__uuid__": "cce34556-cfb2-45ab-8ca5-a60065b5238f"
     },
     "breakFloor": {
       "__uuid__": "f9a844bb-6736-432a-9790-6033e797e614"
