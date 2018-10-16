@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Total Ranking Panel",
+    "_name": "TotalRankingPanel",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -69,8 +69,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 3021,
+      "y": 783
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -362,7 +362,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -169,
+      "x": -170,
       "y": -198
     },
     "_skewX": 0,
@@ -1066,8 +1066,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 720,
-      "height": 1100
+      "width": 10,
+      "height": 10
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -1076,7 +1076,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 67
+      "y": 0
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1216,7 +1216,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 930,
+      "width": 900,
       "height": 65
     },
     "_rotationX": 0,
@@ -1307,11 +1307,11 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 933,
+      "width": 910,
       "height": 55
     },
-    "_rotationX": 0,
-    "_rotationY": 0,
+    "_rotationX": 180,
+    "_rotationY": 180,
     "_scaleX": 1,
     "_scaleY": 1,
     "_position": {

@@ -170,6 +170,7 @@ let GameManager = cc.Class({
             if (!err) {
                 let node = cc.instantiate(prefab);
                 this.uiNode.addChild(node);
+                node.position=cc.v2(0,0);
             }
         });
     },

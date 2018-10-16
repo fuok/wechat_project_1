@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Game Over Panel",
+    "_name": "GameOverPanel",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -66,8 +66,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 93
+      "x": 4020,
+      "y": 838
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -324,7 +324,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 13
@@ -350,7 +350,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 195,
+      "width": 194,
       "height": 223
     },
     "_rotationX": 0,
@@ -603,7 +603,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 26
@@ -978,7 +978,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 7,
+      "x": -170,
       "y": -198
     },
     "_skewX": 0,
@@ -1318,7 +1318,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 264,
+      "x": 170,
       "y": -198
     },
     "_skewX": 0,
@@ -1730,7 +1730,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 930,
+      "width": 900,
       "height": 65
     },
     "_rotationX": 0,
@@ -1821,11 +1821,11 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 933,
+      "width": 910,
       "height": 55
     },
-    "_rotationX": 0,
-    "_rotationY": 0,
+    "_rotationX": 180,
+    "_rotationY": 180,
     "_scaleX": 1,
     "_scaleY": 1,
     "_position": {
@@ -1884,7 +1884,7 @@
     "node": {
       "__id__": 50
     },
-    "_enabled": true,
+    "_enabled": false,
     "_spriteFrame": {
       "__uuid__": "8cdb44ac-a3f6-449f-b354-7cd48cf84061"
     },
