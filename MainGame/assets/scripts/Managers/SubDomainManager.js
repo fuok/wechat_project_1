@@ -36,7 +36,7 @@ let SubDomainManager = cc.Class({
                     destWidth: 500,
                     destHeight: 400
                 }),
-                // imageUrl:'res/raw-assets/resources/texutres2/poster.png',//如果是本地加载可以用绝对路径
+                // imageUrl:'res/raw-assets/resources/texture/poster.png',//如果是本地加载可以用绝对路径
                 success: (res) => {
                     if (res.shareTickets != undefined && res.shareTickets.length > 0) {
                         if ("shareTicket" == pictureName) {
@@ -64,7 +64,7 @@ let SubDomainManager = cc.Class({
         }
         if (CC_WECHATGAME) {
 
-            cc.loader.loadRes('texutres2/poster', function (err, data) {
+            cc.loader.loadRes('texture/poster', function (err, data) {
                 window.wx.shareAppMessage({
                     title: titleStr,
                     query: "x=" + GameConfig.MAIN_MENU_NUM,
