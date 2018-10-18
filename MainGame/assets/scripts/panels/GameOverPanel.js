@@ -1,4 +1,5 @@
 let GameManager = require('GameManager')
+let SubDomainManager = require('SubDomainManager');
 
 cc.Class({
     extends: cc.Component,
@@ -20,5 +21,9 @@ cc.Class({
     onSkipButtonPressed () {
         this.node.destroy();
         GameManager.instance.showRankingPanel();
+    },
+
+    onShareButtonPressed () {
+        SubDomainManager.instance.sharePoster(String(GameManager.instance.curLevelIndex));
     }
 });

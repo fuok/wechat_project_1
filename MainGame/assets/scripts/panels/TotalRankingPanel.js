@@ -45,7 +45,7 @@ cc.Class({
 
     shareButtonFunc: function (event) {
         setTimeout(() => {
-            SubDomainManager.instance.sharePicture("shareTicket");
+            SubDomainManager.instance.sharePoster("shareTicket");
         }, 100);
     },
 

@@ -43,7 +43,7 @@ cc.Class({
     },
 
     onShareButtonPressed(event) {
-        SubDomainManager.instance.sharePicture();
+        SubDomainManager.instance.sharePoster();
     },
 
     // 刷新子域的纹理
